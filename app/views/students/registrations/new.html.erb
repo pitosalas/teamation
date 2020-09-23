@@ -1,0 +1,62 @@
+<h1 id="signup-title">New Account</h1>
+
+<div class="row" id="signup-row" >
+  <div id="signup-form-content">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+      <%= form.error_notification %>
+
+      <div class="form-inputs">
+        <%= form.label :First_name , class:'signup-label' %>
+        <%= form.text_field :firstname, class: 'form-control signup-input'%>
+        
+        <%= form.label :Last_name , class:'signup-label'%>
+        <%= form.text_field :lastname, class: 'form-control signup-input'%>
+
+        <%= form.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" }%>
+        <%= form.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= form.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Create Student Account", class: "btn btn-outline-primary", id:"signup-Button" %>
+      </div>
+
+    <% end %>
+    <%= render "students/shared/links" %>
+
+  </div>
+</div>
+
+<!-- <h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "students/shared/links" %> -->

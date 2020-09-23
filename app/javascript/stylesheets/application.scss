@@ -1,0 +1,195 @@
+// @import '@fullcalendar/core/main.css';
+// @import '@fullcalendar/daygrid/main.css';
+// @import '@fullcalendar/timegrid/main.css';
+@import './bootstrap_custom.scss';
+
+
+
+html,
+body,
+.view1, .view2, .view3, .view4{
+  height: 100%;
+}
+.view4{
+  height: 200%;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  .view1, .view2, .view3, .view4{
+    height: 100vh;
+  }
+}
+
+
+/* head */
+.navbar-custom{
+  background-color: rgb(0,52,120); 
+}
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+  
+#logo:hover {
+    color: lightgray;
+    text-decoration: none;
+  }
+
+.nav-link{
+  font-weight: bold;
+}
+
+.nav-link:hover{
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Sign Up Page */
+.view3{
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url("https://www.brandeis.edu/humanresources/jobs/images/Pond-Cropped-B.jpg") ;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-size: cover;
+  background-position: center;
+}
+#signup-container{
+  padding-top: 50px;
+}
+.signup-form{
+  width: 500px;
+  min-height: 580px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+  border-radius: 10px;
+  overflow: hidden;  
+  margin: auto;
+}
+#signup-title{
+  margin-top: 30px; 
+  color: rgb(0,52,120); 
+  margin-left: 120px
+}
+#signup-row{
+  margin: 0px; 
+  margin-bottom: 10px
+}
+#signup-form-content{
+  padding-left: 100px; 
+  padding-right: 100px;
+  width: 600px
+}
+
+.signup-label{
+  margin-bottom: 0px;
+}
+.signup-input{
+  margin-bottom: 10px;
+}
+
+#signup-Button{
+  color: rgb(0,52,120);
+  border: 1.5px solid rgb(0,52,120);
+  font-weight: bold;
+  width:300px;
+}
+
+#signup-Button:hover{
+  color: white;
+  font-weight: bold;
+  background-color: rgb(0,52,120);
+}
+#signup-back-path{
+  margin-top: 10px;
+  float: right; 
+  margin-right: 100px;
+}
+
+
+/* login page */
+.view2{
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url('https://www.brandeis.edu/admissions/images/images-dec-2017/2.linderpix-brandeis-4897.jpg') ;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#login-container{
+padding-top: 100px;
+}
+.form-wrap{
+width: 500px;
+height: 500px;
+background: linear-gradient(to left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7));
+border-radius: 10px;
+overflow: hidden;
+margin-left: 20px;
+}
+
+.login-title{
+margin-top: 30px; 
+margin-left:80px; 
+color: rgb(0,52,120);
+}
+#login-row{
+margin-left: 50px; 
+margin-right: 50px;
+}
+
+#login-input{
+width: 350px;
+padding-left: 40px;
+padding-right: 40px;
+}
+
+.form-icon{
+color: darkgrey; 
+position: absolute; 
+z-index: 1; 
+padding: 10px; 
+padding-top:12px;
+float: right;
+}
+
+#btn-custom{
+  border: 1.5px solid    rgb(0,52,120);
+  font-weight: bold;
+  color: rgb(0,52,120);
+  margin-left:295px;
+}
+
+#btn-custom:hover{
+  color: #fff;
+  border: 1.5px solid    rgb(0,52,120);
+  background-color:    rgb(0,52,120);
+  transition-delay: 0.1s;
+}
+.login-back-path{
+padding-left: 200px; 
+width:500px;
+}
+
+/* Homepage */
+@import './pages.scss';
+// /* Professor signup page*/
+// @import './signup.scss';
+
+
+// /* login page */
+// @import './sessions.scss';
+
+// /* Professor profile page */
+// @import './professors.scss';
+
+// /* Student profile page */
+// @import './students.scss';
+
+
+// /*course file page */
+// @import './courses.scss';
+
+// @import './preferences.scss';

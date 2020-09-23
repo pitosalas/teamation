@@ -1,0 +1,28 @@
+<body class='view1'>
+    <div class="mask rgba-black-light align-items-center">
+    <div class='container'>
+        <div class='main_text'>
+            <% if notice %>
+                <div class="alert alert-info">
+                    <%= notice %>
+                </div>
+            <% end %>
+            <% if alert %>
+                <div class="alert alert-info">
+                    <%= alert %>
+                </div>
+            <% end %>
+            <h1 class='main-title'>Welcome to Teamation</h1>
+            <br>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <div class='signin-row'>
+                <%= link_to "Student Sign In", new_student_session_path, class: 'btn btn-primary', id:"signin-button" %>
+                <%= link_to "Professor Sign In", new_professor_session_path, class:'btn btn-outline-primary', id:"signin-button"%>
+            </div>
+        </div>   
+    </div>
+    </div>
+</body>
+
+
