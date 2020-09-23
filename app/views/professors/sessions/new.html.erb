@@ -1,20 +1,32 @@
-<h2>Log in</h2>
+<div class='view2'>
+  <div class='container' id='login-container'>
+    <div class='form-wrap'>
+        <h1 class="login-title"> Professor Log In</h1>
+        <div class="row" id="login-row">
+          <div class="col-md-6 col-md-offset-3">
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-group form-icons">
+                <span class="fas fa-envelope fa-lg form-icon" ></span>
+                <%= f.text_field :email, required: true, class: 'form-control', placeholder: "Email", id: "login-input" %>              
+              </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+              <div class="form-group form-icons">
+                <span class="fas fa-key fa-lg form-icon" ></span>    
+                <%= f.password_field :password, required: true, class: 'form-control', placeholder: "Password", id: "login-input" %>
+              </div>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              <br>
+              <%= f.submit "Log in", class: "btn btn-outline-primary", id:"btn-custom" %>
+              <br><br>
+            <% end %>
+            <p id="notice"><%= notice %></p>
+            <p class="login-back-path">New user? <%= link_to "Sign up now!", new_professor_registration_path, class:"signup-link" %></p>
+          </div>
+        </div>
+        <%= render "professors/shared/links" %>
 
-<%= render "professors/shared/links" %>
+    </div>
+
+</div>
+
