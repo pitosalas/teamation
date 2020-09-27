@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :courses
   devise_for :students, path: 'students', controllers: {
     registrations: "students/registrations",
     sessions: "students/sessions"
@@ -8,6 +10,8 @@ Rails.application.routes.draw do
     sessions: "professors/sessions"
   }
 
+  resources :students
+  resources :professors
   get 'pages/home'
 
   root 'pages#home'

@@ -1,0 +1,238 @@
+// Place all the styles related to the Courses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#course-info-box{
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-height: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px; 
+}  
+
+.course-profile-column{
+  padding: 40px;
+  padding-left: 60px;
+  font-size: 25px;
+  .course-title{
+    font-size: 35px;
+  }
+  .secondary-title{
+    font-size: 18px;
+  }
+}
+.course-button-column{
+  padding: 40px;
+}
+.course-button-column-stu{
+  padding: 60px;
+}
+
+.modal-content{
+  padding-left: 30px;
+}
+
+#exampleModalLabel{
+  >span{
+    color:rgb(77, 131, 203);
+  }
+}
+.modal-label{
+  font-size:22px;
+}
+.modal-button{
+  margin-left: 80px; 
+  margin-bottom: 50px;
+  .createButton{
+    width:250px;
+    font-weight: bold;
+  }
+}
+
+#course-info-col{
+  padding: 40px; 
+  padding-top: 20px; 
+}
+
+  #course-nav{
+    .nav-link{
+      color: rgb(77, 131, 203);
+    }
+    .nav-link:hover{
+      color: white;
+      background-color: #007bff;
+    }
+    .active{
+      color: black;
+    }
+  }
+  
+  .students-container{
+    margin-top: 10px;
+    width:100%
+  }
+  
+  #students-table{
+    font-size: 14px;
+  }
+
+  .single-project-container:hover{
+    .project-name{
+      color: black;
+    }
+    text-decoration: none ;
+  }
+  
+  #course-group-info-row{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+  }
+  .course-group-box{
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    box-sizing: border-box;
+    width: 300px;
+    min-height: 200px;
+    margin:20px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    
+    > h4 {
+        font-size:bold;
+    }
+    > p{
+      margin-top: 20px; 
+      margin-left: 6px;
+    }
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+  }
+
+  .course-group-container{
+    font-size: 11px;
+  }
+
+  .course-back-path{
+    float: right; 
+    margin-right: 5px; 
+    margin-top: 10px;
+  }
+
+  .projects-row{
+    margin: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    
+  }
+  .projects-box{
+    background: rgb(193, 213, 250);
+    border-radius: 3px;
+    min-height: 300px;
+    white-space: normal;
+    padding-bottom: 15px;
+    display: flex;
+
+  }
+
+  .single-project-container-stu{
+    background: white; 
+    border-radius: 3px;
+    margin: 5px;
+    margin-bottom: 40px;
+    min-height: 30px;
+    align-items: center;
+    text-decoration: none;
+    
+  }
+  .editbox-stu{
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-top:0px;
+    min-height: 50px;
+    width:auto;
+  }
+  .project-name-text{
+    padding-top: 10px; 
+    padding-left: 3px;
+  }
+  .project-description-text{
+    padding-left: 5px;
+  }
+
+  .vote-buttons{
+    float:right;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  .addProjectBtn{
+    width: 100%;
+    border: 1.5px solid rgb(193, 213, 250);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    opacity: 0.8;
+  }
+  .addProjectBtn:hover{
+    background-color:rgb(193, 213, 250) ;
+    color: black;
+  }
+ 
+
+  .project-title{
+      text-align: center; 
+      margin-top: 10px;
+  }
+  .voteBtn{
+      float:right;
+      margin-left: 5px;
+      width: 110px;
+  } 
+
+  .vote-buttons{
+    position: relative;
+    right: 5px;
+  }
+  .editbox-input{
+    padding-top: 15px;
+  }
+  .project-container-input{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .editbox-name{
+    width: 100%;
+    margin-bottom: 5px;
+   
+  }
+  .editbox-description{
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  #middle-col{
+    width: 100px;
+    display: flex;
+    align-items: center;
+  }
+  .drag-text{
+    margin-left: 15px;
+  }
+
+  .monospace {
+    font-family: "Lucida Console", Courier, monospace;
+  }
+
+  .warning{
+    font-size: 110%;
+    display: inline;
+  }
+
+  .status{
+    font-size: 110%;
+
+    font-style: italic;
+  }
