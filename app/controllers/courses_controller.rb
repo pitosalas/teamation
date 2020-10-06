@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  # before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -15,6 +15,9 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+    # respond_to do |format|
+    #   format.js {render layout: false}
+    # end
   end
 
   # GET /courses/1/edit
@@ -26,6 +29,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.pin = (SecureRandom.random_number(9e5) + 1e5).to_i
+    @course.professor_id = current_user.id
 
     respond_to do |format|
       if @course.save
@@ -37,6 +41,7 @@ class CoursesController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
