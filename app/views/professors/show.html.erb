@@ -30,7 +30,7 @@
         </div>
         <div class='col profile-button-column'>
           <% add_course_path = @user.id.to_s+ "/add_course" %>
-          <div id="add-course-button">
+          <div id="add-course-button-p">
             <%= link_to add_course_path, remote: true do %>
               <button class="btn btn-outline-primary addButton"><i class="fas fa-plus"></i> Add new course</button>
             <% end %>

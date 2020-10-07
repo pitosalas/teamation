@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   end
 
   resources :students
-  resources :professors
+  resources :professors do
+    member do
+      get 'add_course'
+      post 'create_course'
+    end
+  end
   get 'pages/home'
 
   root 'pages#home'

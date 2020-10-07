@@ -1,6 +1,5 @@
 class Course < ApplicationRecord
     belongs_to :professor
-    has_many :groups
     has_many :preferences
     has_many :projects, dependent: :destroy
     has_many :takings
