@@ -1,0 +1,13 @@
+<div class='col course-profile-column'>
+  <div id="drop-course-button">
+    <%= link_to fill_question_course_path(@course) do%>
+      <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Create Groups with Project</button>
+    <% end %>
+  </div>
+
+  <div id="drop-course-button">
+    <%= link_to fill_question_course_path(@course) do%>
+      <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Create Groups without Project</button>
+    <% end %>
+  </div>
+</div>

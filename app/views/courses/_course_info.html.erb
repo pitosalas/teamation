@@ -1,0 +1,18 @@
+<div class='row profile-row'>
+  <div class='col course-profile-column'>
+    <p class="course-title">
+      <strong><%= @course.name %></strong>
+    </p>
+
+    <p class="secondary-title">
+      <strong>Pin:</strong>
+      <%= @course.pin %>
+    </p>
+
+    <p class="secondary-title">
+      <strong>Professor:</strong>
+      <% professor = @course.professor %>
+      <%= professor.firstname + ' '+ professor.lastname  %>
+    </p>
+  </div>
+</div>

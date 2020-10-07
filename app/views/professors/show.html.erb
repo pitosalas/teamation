@@ -5,6 +5,13 @@
         <%= notice %>
       </div>
     <% end %>
+
+    <% if flash[:success]%>
+      <div class="alert alert-success">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+
       <div class='row profile-row'>
         <div class='col profile-column'>
           <div class='row'>
@@ -17,7 +24,7 @@
             <div class='column'>
               <p class='profile-name'><%= @user.firstname%> <%= @user.lastname %></p>
               <p class='profile-email'><%= @user.email %></p>
-              <%= link_to 'Edit Account', edit_student_path(@user) %>
+              <%= link_to 'Edit Account', edit_professor_path(@user) %>
             </div>
           </div>
         </div>
@@ -30,10 +37,12 @@
           </div>
         </div>
       </div>
-
       <hr/>
-
-      <div>
+      <div class="title" style="text-align: center">
+        <h3>Your Course List</h3>
+      </div>
+      <div class = "courses-info-row" id="professor-course-info-row">
+        <%= render partial: "course", collection: Course.where(professor_id: @user.id) %>
       </div>
   </div>
 </body>

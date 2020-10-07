@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :takings
-  resources :votes
-  resources :preferences
-  resources :projects
-  resources :groups
-  resources :courses
   devise_for :students, path: 'students', controllers: {
     registrations: "students/registrations",
     sessions: "students/sessions"
@@ -14,6 +8,17 @@ Rails.application.routes.draw do
     registrations: "professors/registrations",
     sessions: "professors/sessions"
   }
+  resources :takings
+  resources :votes
+  resources :preferences
+  resources :groups
+  resources :courses do
+    member do
+      get "fill_question"
+      get "project_brainstorm"
+    end
+    resources :projects
+  end
 
   resources :students
   resources :professors

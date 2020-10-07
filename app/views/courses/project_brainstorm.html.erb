@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+<body class='view4'>
+  <div class='container profile-container' id="classroom" >
+    <%= render partial: "course_info" %>
+    <div class="col-md-6 col-md-offset-3">
+      <div class>
+        <%= form_for [@course, @project], data: {'project-form' => true} do |form| %>
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Project Name</h2>
+            <%= form.text_field :project_name %>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Description</h2>
+            <%= form.text_area :description, :cols => "20", :rows => "10" %>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <%= submit_tag("Add") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id = "content">
+        <div class="col-md-6 col-md-offset-3">
+          <h1>Project List</h1>
+          <% @projects.each do |project| %>
+            <%= project.project_name %>
+            <%= project.description %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

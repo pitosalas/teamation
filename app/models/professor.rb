@@ -4,4 +4,5 @@ class Professor < User
     # , :confirmable
     devise  :database_authenticatable, :registerable,
             :recoverable, :rememberable, :validatable
+    has_many :courses
 end

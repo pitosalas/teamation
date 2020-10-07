@@ -27,8 +27,8 @@ end
 end
 
 #Create an admin student for development use
-admin_student = User.create(firstname: "admin", lastname: "admin",
-                               email: "admin@admin.com",
+admin_student = User.create(firstname: "student_admin", lastname: "admin",
+                               email: "student_admin@admin.com",
                                password: "password",
                                type: "Student")
 

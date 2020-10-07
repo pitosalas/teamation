@@ -17,8 +17,23 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
 
+  # GET /courses/:id/fill_question
+  def fill_question
+    @course = Course.find(params[:id])
+  end
+
   # GET /courses/1/edit
   def edit
+  end
+
+  def project_brainstorm
+    respond_to do |format|
+      if @course.update(course_params)
+        format.json { render :show, status: :ok, location: @course }
+      else
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /courses
@@ -42,7 +57,9 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1.json
   def update
     respond_to do |format|
-      if @course.update(course_params)
+      if @course.update(group_params)
+        format.html { redirect_to project_brainstorm_course_path, notice: 'Form Submitted'}
+      elsif @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
@@ -68,8 +85,11 @@ class CoursesController < ApplicationController
       @course = Course.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    def group_params
+      params.require(:course).permit(:maximum_group_member, :minimum_group_member)
+    end
+      # Only allow a list of trusted parameters through.
     def course_params
-      params.fetch(:course, {})
+      params.require(:course).permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)
     end
 end

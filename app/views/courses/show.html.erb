@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+
+<body class='view4'>
+  <div class='container profile-container' id="classroom" >
+    <%= render partial: "course_info" %>
+    <%#= render partial: "choose_mode"%>
+  </div>
+  <%# if current_user_type == "professor" && get_professor_id(@course) == current_user.id%>
+  <%= tag.div id: :boards, data:{projects: @course.projects.to_json, course: @course.to_json}%>
+  <%# else %>
+    <%#= tag.div id: :stuboards, data:{projects: @course.projects.to_json,course:@course.to_json, student: Student.find(current_user.id).to_json, taking: Taking.find_by(student_id:current_user.id, course_id:@course.id).to_json}%>
+  <%#end%>
+</body>
+
+<script>
+</script>
