@@ -7,6 +7,21 @@
         <div class='course-pin-div'>Course Pin: <%= course.pin %></div>
     </div>
     
+    <% if course.students.size == 0 %>  
+        <div class='not-assigned-text-professor'>
+            <h6>No Student Enrolled</h6>
+        </div>
+    <% elsif  findGroup(course.students[0], course).nil?%>
+        <div class='not-assigned-text-professor'>
+            <h6>No Groups Created Yet</h6>
+        </div>        
+    <% else %>
+        
+        <div class='assigned-text-professor'>
+            <img src="/assets/green_check.jpg" height="22" width="22"> 
+            <body>&nbsp;&nbsp;Group Created</body>
+        </div>    
+    <% end %>
     
 
     <div class='row course-drop-row'>
