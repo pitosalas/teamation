@@ -8,9 +8,9 @@ class Students::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    redirect_to student_path(current_student)
+  end
 
 
 

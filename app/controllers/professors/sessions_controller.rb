@@ -9,9 +9,9 @@ class Professors::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    redirect_to professor_path(current_professor)
+  end
 
   # DELETE /resource/sign_out
   # def destroy
