@@ -15,7 +15,8 @@ class Professors::RegistrationsController < Devise::RegistrationsController
     @professor = Professor.new(professor_params)
     respond_to do |format|
       if @professor.save
-        format.html { redirect_to root_url}
+        sign_in(@professor)
+        format.html { redirect_to professor_path(@professor)}
         format.json { render :show, status: :created, location: @professor }
       else
         format.html { render :new }
@@ -67,7 +68,6 @@ class Professors::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
-  #   professor_path
   # end
 
   # The path used after sign up for inactive accounts.

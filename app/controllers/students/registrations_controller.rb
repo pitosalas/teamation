@@ -15,7 +15,8 @@ class Students::RegistrationsController < Devise::RegistrationsController
     @student = Student.new(student_params)
     respond_to do |format|
       if @student.save
-        format.html { redirect_to root_url}
+        sign_in(@student)
+        format.html { redirect_to student_path(@student)}
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
