@@ -5,10 +5,10 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
-    <%#= render partial: "choose_mode"%>
+    <%= render partial: "choose_mode"%>
   </div>
   <%# if current_user_type == "professor" && get_professor_id(@course) == current_user.id%>
-  <%= tag.div id: :boards, data:{projects: @course.projects.to_json, course: @course.to_json}%>
+    <%#= tag.div id: :boards, data:{projects: @course.projects.to_json, course: @course.to_json}%>
   <%# else %>
     <%#= tag.div id: :stuboards, data:{projects: @course.projects.to_json,course:@course.to_json, student: Student.find(current_user.id).to_json, taking: Taking.find_by(student_id:current_user.id, course_id:@course.id).to_json}%>
   <%#end%>

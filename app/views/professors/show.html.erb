@@ -42,7 +42,7 @@
         <h3>Your Course List</h3>
       </div>
       <div class = "courses-info-row" id="professor-course-info-row">
-        <%= render partial: "course", collection: Course.where(professor_id: @user.id) %>
+        <%= render partial: "course", collection: @courses %>
       </div>
   </div>
 </body>

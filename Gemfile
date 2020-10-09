@@ -65,3 +65,4 @@ gem 'simple_form'
 
 gem 'acts_as_list'
 gem 'devise'
+gem "bootstrap_form", "~> 4.0"

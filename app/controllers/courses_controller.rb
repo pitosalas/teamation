@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @course = Course.find(params[:id])
   end
 
   # GET /courses/new
@@ -23,6 +24,8 @@ class CoursesController < ApplicationController
   # GET /courses/:id/fill_question
   def fill_question
     @course = Course.find(params[:id])
+    @course.has_project = params[:has_project]
+    @course.save
   end
 
   # GET /courses/1/edit
@@ -61,9 +64,12 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    @course = Course.where(id: params[:id])
     respond_to do |format|
-      if @course.update(group_params)
-        format.html { redirect_to project_brainstorm_course_path, notice: 'Form Submitted'}
+      if @course.update(course_params)
+        if @course.has_project
+          format.html { redirect_to project_brainstorm_course_path, notice: 'Form Submitted'}
+        end
       elsif @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
@@ -90,9 +96,6 @@ class CoursesController < ApplicationController
       @course = Course.find(params[:id])
     end
 
-    def group_params
-      params.require(:course).permit(:maximum_group_member, :minimum_group_member)
-    end
       # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)

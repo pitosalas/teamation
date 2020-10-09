@@ -1,13 +1,13 @@
 <div class='col course-profile-column'>
-  <div id="drop-course-button">
-    <%= link_to fill_question_course_path(@course) do%>
-      <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Create Groups with Project</button>
+  <div id="choose-mode">
+    <%= link_to fill_question_course_path(@course, has_project: TRUE) do%>
+      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>
     <% end %>
   </div>
 
-  <div id="drop-course-button">
-    <%= link_to fill_question_course_path(@course) do%>
-      <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Create Groups without Project</button>
+  <div id="choose-mode">
+    <%= link_to fill_question_course_path(@course, has_project: FALSE) do%>
+      <button class="btn btn-primary"><i class="fas fa-users"></i> Create Groups without Project</button>
     <% end %>
   </div>
 </div>
