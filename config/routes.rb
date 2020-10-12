@@ -2,12 +2,14 @@ Rails.application.routes.draw do
 
   devise_for :students, path: 'students', controllers: {
     registrations: "students/registrations",
-    sessions: "students/sessions"
+    sessions: "students/sessions",
+  
   }
   devise_for :professors, path: 'professors', controllers: {
     registrations: "professors/registrations",
     sessions: "professors/sessions"
   }
+
   resources :takings
   resources :votes
   resources :preferences
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
     resources :projects
   end
 
+
   resources :students
   resources :professors do
     member do
@@ -27,6 +30,8 @@ Rails.application.routes.draw do
       post 'create_course'
     end
   end
+
+
   get 'pages/home'
 
   root 'pages#home'
