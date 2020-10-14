@@ -5,4 +5,5 @@ class Student < User
     devise  :database_authenticatable, :registerable,
             :recoverable, :rememberable, :validatable
     has_many :takings
+    has_many :courses, through: :takings
 end

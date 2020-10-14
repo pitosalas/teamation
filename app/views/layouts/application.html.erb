@@ -21,10 +21,10 @@
               <li><%= link_to "Student Sign Up", new_student_registration_path, class: "nav-link" %></li>
               <li><%= link_to "Professor Sign Up", new_professor_registration_path, class: "nav-link" %></li>
             <% elsif current_student %>
-              <li><%= link_to "Profile", current_student, class: "nav-link" %></li>
+              <li><%= link_to "Student Profile", current_student, class: "nav-link" %></li>
               <li><%= link_to "Sign Out", destroy_student_session_path, method: :delete, class: "nav-link" %></li>
             <% elsif current_professor %>
-              <li><%= link_to "Profile", current_professor, class: "nav-link" %></li>
+              <li><%= link_to "Professor Profile", current_professor, class: "nav-link" %></li>
               <li><%= link_to "Sign Out", destroy_professor_session_path, method: :delete, class: "nav-link" %></li>
             <% end %>
           </ul>

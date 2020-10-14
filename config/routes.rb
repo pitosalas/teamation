@@ -23,7 +23,14 @@ Rails.application.routes.draw do
   end
 
 
-  resources :students
+  resources :students do
+    member do 
+      get 'add_course'
+      post 'enroll_course'
+      delete 'drop_course'
+    end
+  end
+
   resources :professors do
     member do
       get 'add_course'
