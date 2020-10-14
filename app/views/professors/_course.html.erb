@@ -24,7 +24,7 @@
           <% end %>
         </div>
         <div id="drop-course-button">
-          <%= link_to course, method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
+          <%= link_to course_path(course), method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
             <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Delete course</button>
           <% end %>
         </div>
