@@ -1,0 +1,20 @@
+<div class = "wrapper overflow projects-container" id="project-brainstorm">
+  <div class="row project-row">
+    <div class="col projects-box">
+      <h5 class='project-title'>
+        Add a New Project
+      </h5>
+      <div class = 'add-project-container'>
+        <div class= 'container project-container project-container-input'>
+          <%= render 'projects/form', project: @course.projects.build %>
+        </div>
+      </div>
+    </div>
+    <div class="col projects-box">
+      <h5 class='project-title'>
+        Projects List
+      </h5>
+      <%= render 'projects/projects'%>
+    </div>
+  </div>
+</div>

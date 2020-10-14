@@ -61,8 +61,11 @@ gem 'hirb'
 gem 'activerecord-reset-pk-sequence'
 gem 'bootstrap-sass'
 gem 'bootstrap'
+gem 'popper_js'
 gem 'simple_form'
+gem 'kaminari'
 
 gem 'acts_as_list'
 gem 'devise'
 gem "bootstrap_form", "~> 4.0"
+gem "view_component", require: "view_component/engine"
