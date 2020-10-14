@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :set_course, only: [ :destroy]
   # before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
@@ -83,7 +84,7 @@ class CoursesController < ApplicationController
   def destroy
     @course.destroy
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -97,5 +98,6 @@ class CoursesController < ApplicationController
       # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes])
+      # params.permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)
     end
 end

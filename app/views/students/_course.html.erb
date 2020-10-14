@@ -1,0 +1,28 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+<%= @courses.each do |course| %>
+    <div class="container course-column-box">
+        <div class='row course-name-row'>
+            <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+        </div>
+        
+        <div class='not-assigned-text-professor'>
+            <h6>No Student Enrolled</h6>
+        
+        </div>
+        
+        <div class='row course-drop-row'>
+            <div id="course-drop-button">
+            <%= link_to drop_course_student_path(student_id: @user.id, course_id: course.id), method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
+            <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Drop course</button>
+            <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<script>
+
+    
+</script>
