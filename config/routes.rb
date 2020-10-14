@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     member do
       get "fill_question"
       get "project_brainstorm"
+      get "project_voting"
     end
     resources :projects
   end

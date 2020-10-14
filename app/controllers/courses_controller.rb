@@ -41,6 +41,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
+  def project_voting
+    @course = Course.find(params[:id])
+  end
+
   # POST /courses
   # POST /courses.json
   def create

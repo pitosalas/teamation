@@ -1,0 +1,24 @@
+<div class = "wrapper overflow projects-container" id="project-brainstorm">
+  <div class="row project-row">
+    <div class="col projects-box">
+      <h5 class='project-title'>
+        Active Projects
+      </h5>
+      <div class = 'add-project-container'>
+        <% @course.projects.active.each do |project|%>
+          <%= render 'single_project', project: project %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col projects-box">
+      <h5 class='project-title'>
+        On-hold Projects
+      </h5>
+      <div class = 'add-project-container'>
+        <% @course.projects.onhold.each do |project|%>
+          <%= render 'single_project', project: project %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

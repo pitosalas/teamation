@@ -5,7 +5,12 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
+    <%# if @course.has_project.nil? %>
     <%= render partial: "choose_mode"%>
+    <%# elsif @course.has_Project %>
+      <%#=  %>
+    <%# else %>
+    <%# end %>
   </div>
   <%# if current_user_type == "professor" && get_professor_id(@course) == current_user.id%>
     <%#= tag.div id: :boards, data:{projects: @course.projects.to_json, course: @course.to_json}%>

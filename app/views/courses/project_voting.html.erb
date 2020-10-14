@@ -1,0 +1,12 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+<body class='view4'>
+<div class='container profile-container' id="classroom" >
+  <%= render partial: "course_info" %>
+</div>
+<div id="projects-list">
+  <%= render partial: "project_voting", course:@course %>
+</div>
+</body>

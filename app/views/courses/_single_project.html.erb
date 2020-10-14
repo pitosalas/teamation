@@ -1,0 +1,15 @@
+<% if !project.id.nil? %>
+  <div class="card project-card" style="width: 25rem; height: 15rem; margin-top: 10px;">
+    <div class="card-body">
+      <h4 class='project-name-text'>
+        <%= project.project_name %>
+      </h4>
+      <div class='form-control project-description-text'>
+        <p><%= project.description %></p>
+      </div>
+<!--              <div class ="col" id="like-project">-->
+<!--                <i class="fas fa-heart"></i>-->
+<!--              </div>-->
+      </div>
+    </div>
+<% end %>
