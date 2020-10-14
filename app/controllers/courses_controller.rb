@@ -64,7 +64,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
-    @course = Course.where(id: params[:id])
+    @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
         if @course.has_project
