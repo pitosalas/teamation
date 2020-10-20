@@ -28,7 +28,8 @@ class PreferencesController < ApplicationController
 
     respond_to do |format|
       if @preference.save
-        format.html { redirect_to @preference, notice: 'Preference was successfully created.' }
+        format.html {redirect_to course_path(Course.find_by_id(@preference.course_id)), notice: 'Preference was successfully created.'}
+        # format.html { redirect_to @preference, notice: 'Preference was successfully created.' }
         format.json { render :show, status: :created, location: @preference }
       else
         format.html { render :new }
