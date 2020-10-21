@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get "project_brainstorm"
     end
     resources :projects
+    resources :preferences
   end
 
 
