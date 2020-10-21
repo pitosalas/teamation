@@ -5,19 +5,67 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
-    <%# if @course.has_project.nil? %>
-    <%= render partial: "choose_mode"%>
-    <%# elsif @course.has_Project %>
-      <%#=  %>
-    <%# else %>
-    <%# end %>
-  </div>
-  <%# if current_user_type == "professor" && get_professor_id(@course) == current_user.id%>
-    <%#= tag.div id: :boards, data:{projects: @course.projects.to_json, course: @course.to_json}%>
-  <%# else %>
-    <%#= tag.div id: :stuboards, data:{projects: @course.projects.to_json,course:@course.to_json, student: Student.find(current_user.id).to_json, taking: Taking.find_by(student_id:current_user.id, course_id:@course.id).to_json}%>
-  <%#end%>
-</body>
 
-<script>
-</script>
+    <% if current_user.type == 'Professor' %>
+      <%= render partial: "choose_mode"%>
+    <% end %>
+    
+  </div>
+
+  <div class='container profile-container'>
+    <div class='row profile-row'>
+      <div class='col'>
+        <ul class="nav nav-tabs" id="course-nav">
+          <% if Preference.find_by(student_id: current_user.id, course_id: @course.id).nil? %>
+          <li class="nav-item">
+            <a href="#preference_form" class="nav-link tab-projects active" data-toggle="tab" >Preference Form</a>
+          </li>
+
+          <% else %>
+          <li class="nav-item">
+            <a href="#students" class="nav-link tab-students active" data-toggle="tab" >Students</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#groups" class="nav-link tab-groups" data-toggle="tab" >Groups</a>
+          </li>
+
+          <% end %>
+        </ul> 
+      
+        <div class="tab-content">
+
+          <% if Preference.find_by(student_id: current_user.id, course_id: @course.id).nil? %>
+          <div class="tab-pane fade show active" id="preference_form">
+            <div class="container projects-box">
+              <%= render "preferences/form", preference: @preference, locals: { course: @course} %>
+            </div>
+            <!-- <div class="container projects-box">
+              <%= render 'preference_form', collection: @preference, locals: {course: @course} %>
+            </div> -->
+          </div>
+
+          <% else %>
+          <div class="tab-pane fade show active" id="students">
+            <div class="container projects-box">
+              <p>Test2</p>
+              <p>Another line</p>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="groups">
+            <div class="container projects-box">
+              <p>Test3</p>   
+            </div>
+          </div>
+
+          <% end %>
+
+        </div>
+      </div> 
+    
+    </div>
+
+
+  </div>
+</body>

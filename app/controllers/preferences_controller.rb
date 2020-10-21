@@ -24,11 +24,12 @@ class PreferencesController < ApplicationController
   # POST /preferences
   # POST /preferences.json
   def create
-    @preference = Preference.new(preference_params)
+    @preference = Preference.new(preference_params.except(:mondayD, :mondayN, :tuesdayD, :tuesdayN, :wednesdayD, :wednesdayN, :thursdayD, :thursdayN, :fridayD, :fridayN, :saturdayD, :saturdayN, :sundayD, :sundayN))
 
     respond_to do |format|
       if @preference.save
-        format.html { redirect_to @preference, notice: 'Preference was successfully created.' }
+        format.html {redirect_to course_path(Course.find_by_id(@preference.course_id)), notice: 'Preference was successfully created.'}
+        # format.html { redirect_to @preference, notice: 'Preference was successfully created.' }
         format.json { render :show, status: :created, location: @preference }
       else
         format.html { render :new }
@@ -69,6 +70,7 @@ class PreferencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def preference_params
-      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, :dream_partner, :schedule)
+      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, :dream_partner, schedule: [])
+                                        #  :mondayD, :mondayN, :tuesdayD, :tuesdayN, :wednesdayD, :wednesdayN, :thursdayD, :thursdayN, :fridayD, :fridayN, :saturdayD, :saturdayN, :sundayD, :sundayN
     end
 end

@@ -6,4 +6,8 @@ class Student < User
             :recoverable, :rememberable, :validatable
     has_many :takings
     has_many :courses, through: :takings
+
+    def full_name
+        firstname.capitalize() + " " + lastname.capitalize()
+    end
 end

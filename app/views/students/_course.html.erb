@@ -4,8 +4,8 @@
 <%= @courses.each do |course| %>
     <div class="container course-column-box">
         <div class='row course-name-row'>
-            <div id="course-name"><%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %></div>
-            <!-- <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div> -->
+            <!-- <div id="course-name"><%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %></div> -->
+            <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
         </div>
         
         <div class='not-assigned-text-professor'>
