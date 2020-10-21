@@ -9,7 +9,4 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default'],
   Rails: '@rails/ujs'
 }))
-
-environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
-environment.loaders.prepend('vue', vue)
 module.exports = environment

@@ -2,6 +2,7 @@
 // @import '@fullcalendar/daygrid/main.css';
 // @import '@fullcalendar/timegrid/main.css';
 @import './bootstrap_custom.scss';
+//@import 'jquery.mCustomScrollbar';
 
 
 
@@ -188,7 +189,7 @@ width:500px;
 /* Student profile page */
 @import './students.scss';
 
-
+@import './groups.scss';
 /*course file page */
 @import './courses.scss';
 

@@ -20,6 +20,9 @@
       <% if controller_name == 'courses' and action_name == 'project_brainstorm' %>
         <%= link_to "Start Project Voting", project_voting_course_path(@course), class: "btn btn-outline-primary"%>
       <% end %>
+      <% if controller_name == 'courses' and action_name == 'project_voting' %>
+        <%= link_to "Finish Voting", grouping_course_path(@course), class: "btn btn-outline-primary"%>
+      <% end %>
     </div>
   </div>
 </div>

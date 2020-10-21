@@ -1,30 +1,34 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  # before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_course
 
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups ||= @course.groups
+    @group ||= @course.groups.first
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @group = @course.groups.find(params[:id])
   end
 
   # GET /groups/new
   def new
-    @group = Group.new
+    @group = Course.groups.build
   end
 
   # GET /groups/1/edit
   def edit
+    @group = Course.groups.find(params[:id])
   end
 
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(group_params)
+    @group = Course.groups.new(group_params)
 
     respond_to do |format|
       if @group.save
@@ -40,6 +44,7 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+    @group = Course.groups.new(group_params)
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -54,6 +59,7 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    @group = @course.groups.find(params[:id])
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
@@ -63,9 +69,14 @@ class GroupsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
+  #
+    def set_course
+      @course = Course.find(params[:course_id])
     end
+
+    # def set_group
+    #   @group = Group.find(params[:id])
+    # end
 
     # Only allow a list of trusted parameters through.
     def group_params

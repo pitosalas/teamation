@@ -1,33 +1,31 @@
 <p id="notice"><%= notice %></p>
+<div class="group">
+  <% if @groups.size > 0 %>
+      <div class="group" style="margin-left: 50px;">
+        <h1>Groups</h1>
+      </div>
+    <div class="group" style="margin-left: 50px; margin-top: 50px;">
+      <div class="group" style="width:20%">
+        <%= select_tag :group,
+                       options_for_select(@groups.map{|group| [group.group_name, group.id]}),
+                       class: "form-control form-control-lg",
+                       data: { reflex: "change->GroupReflex#switch" } %>
+      </div>
+      <div class="group" style="width:80%; margin-top:50px; text-align: center">
+        <%= render partial: 'single_group', group: @group %>
+      </div>
+    </div>
+  <% else %>
+    <div class="group" style="margin-left: 50px; margin-top: 50px;">
+      <%= render partial: 'no_group' %>
+    </div>
+  <% end %>
+</div>
 
-<h1>Groups</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Course</th>
-      <th>Project</th>
-      <th>Group name</th>
-      <th>Students</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.course_id %></td>
-        <td><%= group.project_id %></td>
-        <td><%= group.group_name %></td>
-        <td><%= group.students_id %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+<script>
+</script>
+
+<%#= link_to 'New Group', new_group_path %>

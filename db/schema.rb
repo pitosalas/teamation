@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 2020_10_14_002131) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.integer "pin", null: false
-    t.integer "professor_id", null: false
-    t.boolean "has_project", default: false
+    t.integer "pin"
+    t.integer "professor_id"
+    t.boolean "has_project"
     t.integer "maximum_group_member"
     t.integer "minimum_group_member"
-    t.boolean "has_group", default: false
-    t.boolean "is_voting", default: false
+    t.boolean "has_group"
+    t.boolean "is_voting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

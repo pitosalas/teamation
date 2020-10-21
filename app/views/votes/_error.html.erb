@@ -1,0 +1,10 @@
+<% if @course.votes.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@course.votes.errors.count, "error") %></h2>
+    <ul>
+      <% @course.votes.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -3,13 +3,16 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-require("@rails/ujs").start()
+// require("@rails/ujs").start()
+require("@rails/ujs")
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
 require("jquery")
 require("moment")
+
+// require("jquery.mCustomScrollbar")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -20,12 +23,6 @@ require("moment")
 // const imagePath = (name) => images(name, true)
 import "bootstrap"
 import "../stylesheets/application"
-
-import Vue from 'vue/dist/vue.esm'
-import Vuex from 'vuex'
-import App from '../src/app.vue'
-import stuApp from '../src/stuApp.vue'
-import TurbolinksAdapter from 'vue-turbolinks'
 import Rails from "@rails/ujs"
 
 // window.Calendar = require("@fullcalendar/core").Calendar;
@@ -35,17 +32,8 @@ import Rails from "@rails/ujs"
 // window.interactionPlugin = require("@fullcalendar/interaction").default;
 // window.bootstrapPlugin = require("@fullcalendar/bootstrap").default;
 
-Vue.use(Vuex)
-Vue.use(TurbolinksAdapter)
 
-window.Vue = Vue;
-window.App = App;
-window.stuApp = stuApp;
-
-window.Vuex = Vuex;
 window.Rails = Rails;
 Rails.start();
 
-// require('packs/student')
-// require('packs/preference')
-require('packs/course')
+import "controllers"

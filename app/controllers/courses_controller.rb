@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [ :destroy]
+  # before_action :authenticate_user!
   # before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
@@ -31,6 +32,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    @course = Course.find(params[:id])
     respond_to do |format|
       format.html
       format.js
@@ -42,9 +44,13 @@ class CoursesController < ApplicationController
   end
 
   def project_voting
-    @course = Course.find(params[:id])
+    @course ||= Course.find(params[:id])
+    @current_user_vote = @course.votes.where(student_id: current_user.id).first.nil? ? nil : @course.votes.where(student_id: current_user.id).first
   end
 
+  def grouping
+    @course = Course.find(params[:id])
+  end
   # POST /courses
   # POST /courses.json
   def create
@@ -101,7 +107,7 @@ class CoursesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes])
+      params.require(:course).permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes], votes_attributes:[:student_id, :course_id, :vote_first, :vote_second, :vote_third])
       # params.permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)
     end
 end
