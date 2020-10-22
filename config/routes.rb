@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :takings
   resources :votes
-  resources :preferences
+  # resources :preferences
   resources :groups
   resources :courses do
     member do

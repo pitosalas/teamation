@@ -1,4 +1,4 @@
-<%= simple_form_for [@course, preference] do |form| %>
+<%= simple_form_for @perference do |form| %>
     <%= form.error_notification %>
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
@@ -14,12 +14,11 @@
   <%= form.label 'Select Your Prefered Time for Group Meeting'%>
 
   <div>
-    <!-- <%= form.input :schedule, label: false, as: :check_boxes, collection: [['Monday Morning', 'mondayM'], ['Monday Night', 'mondayN'], ['Tuesday Morning', 'tuesdayM'], ['Tuesday Night', 'tuesdayN'], ], :include_hidden => false, :multiple => true %> -->
-    <%= form.input :schedule, label: false, as: :check_boxes, collection: Preference::TIME_SLOT, :include_hidden => false, :multiple => true %>
+    <%= form.input :schedule, label: false, as: :check_boxes, collection: [['Monday Morning', 'mondayM'], ['Monday Night', 'mondayN'], ['Tuesday Morning', 'tuesdayM'], ['Tuesday Night', 'tuesdayN'], ], :include_hidden => false, :multiple => true %>
+    <!-- <%= form.input :schedule, label: false, as: :check_boxes, collection: Preference::TIME_SLOT, :include_hidden => false, :multiple => true %> -->
   </div>
 
-
   <div class="form-actions">
-    <%= form.button :submit, class: "btn btn-primary" %>
+    <%= form.button :submit, label: "Update Preference", class: "btn btn-primary" %>
   </div>
 <% end %>
