@@ -1,31 +1,33 @@
 class VotesController < ApplicationController
-  before_action :set_vote, only: [:show, :edit, :update, :destroy]
+  # before_action :set_vote, only: [:show, :edit, :update, :destroy]
+  before_action :set_course
 
   # GET /votes
   # GET /votes.json
   def index
-    @votes = Vote.all
+    @votes = @course.votes
   end
 
   # GET /votes/1
   # GET /votes/1.json
   def show
+    @vote = @course.votes.find(params[:id])
   end
 
   # GET /votes/new
   def new
-    @vote = Vote.new
+    @vote = @course.votes.build
   end
 
   # GET /votes/1/edit
   def edit
+    @vote = @course.votes.find(params[:id])
   end
 
   # POST /votes
   # POST /votes.json
   def create
-    @vote = Vote.new(vote_params)
-
+    @vote = @course.votes.new(vote_params)
     respond_to do |format|
       if @vote.save
         format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
@@ -40,6 +42,7 @@ class VotesController < ApplicationController
   # PATCH/PUT /votes/1
   # PATCH/PUT /votes/1.json
   def update
+    @vote = @course.votes.find(params[:id])
     respond_to do |format|
       if @vote.update(vote_params)
         format.html { redirect_to @vote, notice: 'Vote was successfully updated.' }
@@ -54,6 +57,7 @@ class VotesController < ApplicationController
   # DELETE /votes/1
   # DELETE /votes/1.json
   def destroy
+    @vote = @course.votes.find(params[:id])
     @vote.destroy
     respond_to do |format|
       format.html { redirect_to votes_url, notice: 'Vote was successfully destroyed.' }
@@ -63,6 +67,10 @@ class VotesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_course
+      @course = Course.find(params[:course_id])
+    end
+
     def set_vote
       @vote = Vote.find(params[:id])
     end

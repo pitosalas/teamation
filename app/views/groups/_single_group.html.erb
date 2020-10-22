@@ -1,0 +1,35 @@
+<div id="group-table" style="margin-top: 20px;">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% count = 1 %>
+    <% @group.students_id.each do |s| %>
+      <tr>
+        <% student = Student.find_by_id(s) %>
+        <th scope="row"><%= count %></th>
+        <td><%= student.firstname %></td>
+        <td><%= student.lastname %></td>
+        <td><%= student.email %></td>
+        <td><%#= select_tag :single_group, options_for_select(@groups.map{|group| [group.group_name, group.id]}),
+                                   class: "form-control form-control-sm",
+                              data: { reflex: "change->GroupReflex#moveMember", student_id: s, group_id: @group.id } %>
+        <td><button class="btn btn-outline-secondary" data-reflex="click->GroupReflex#deleteMember" data-group-id="<%= @group.id %>" data-student-id="<%= s %>"
+        ><i class="fas fa-user-minus"></i></button></td>
+        <% count +=  1 %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="dismiss-group" style="text-align: center; margin-top: 20px;">
+  <button class="btn btn-outline-primary" data-reflex="click->GroupReflex#dismissGroup" data-group-id="<%= @group.id %>">Dimiss this Group</button>
+</div>

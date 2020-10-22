@@ -1,0 +1,129 @@
+<div class = "wrapper overflow projects-container" id="project-brainstorm">
+  <div class="row project-row">
+    <div class="col projects-box">
+      <h5 class='project-title' style="text-align: left">
+        Active Projects
+      </h5>
+      <div class="error_message">
+          <% if @course.errors.any? %>
+            <% @course.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          <% end %>
+      </div>
+      <div class="project-voting" style="margin-bottom: 15px;">
+          <% @course.projects.active.each do |project|%>
+            <%#= render 'single_project', project: project %>
+            <% if !project.id.nil? %>
+              <div class="card project-card-active" style="width: 25rem; height: 20rem; margin-top: 10px;">
+                <div class="card-body">
+                  <div class="archive-button" style="text-align: right">
+                    <%= label_tag do %>
+                    <%= check_box_tag nil, nil, project.is_active, data: { reflex: "click->ProjectReflex#archive", course_id: @course.id, user_id: current_user.id, project_id: project.id } %>
+                    active
+                    <% end %>
+                  </div>
+                  <h4 class='project-name-text'>
+                    <%= project.project_name%>
+                  </h4>
+                  <div class='form-control project-description-text'>
+                    <p><%= project.description %></p>
+                  </div>
+                  <!--              <div class ="col" id="like-project">-->
+                  <!--                <i class="fas fa-heart"></i>-->
+                  <!--              </div>-->
+                </div>
+                <div id="vote-buttons" class="row vote-button-rows" style="margin-left: 5px; margin-bottom: 10px; margin-right: 5px;">
+                  <div class="col-lg-4 vote-button">
+                    <% if !@current_user_vote.nil? and @current_user_vote.vote_first == project.id %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteFirst", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+
+
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id %>
+                        <% end %>
+                        <%= form.submit "First #{Vote.with_course(@course.id).with_project_as_first(project.id).count}", class: "btn btn-primary btn-unvote" %>
+                      <% end %>
+                    <% else %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#voteFirst", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+
+
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id %>
+                        <% end %>
+                          <%= form.submit "First #{Vote.with_course(@course.id).with_project_as_first(project.id).count}", class: "btn btn-outline-primary btn-vote", id: "first-"+"#{project.id}" %>
+                        <% end %>
+                    <% end %>
+                  </div>
+                  <div class="col-lg-4 vote-button">
+                    <% if !@current_user_vote.nil? and @current_user_vote.vote_second == project.id %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteSecond", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id, data: { reflex_dataset: "combined" } %>
+                        <% end %>
+                        <%= form.submit "Second #{Vote.with_course(@course.id).with_project_as_second(project.id).count}", class: "btn btn-success btn-unvote"%>
+
+                      <% end %>
+                    <% else %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#voteSecond", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id, data: { reflex_dataset: "combined" } %>
+                        <% end %>
+                        <%= form.submit "Second #{Vote.with_course(@course.id).with_project_as_second(project.id).count}", class: "btn btn-outline-success btn-vote"%>
+
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class="col-lg-4 vote-button">
+                    <% if !@current_user_vote.nil? and @current_user_vote.vote_third == project.id %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteThird", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id, data: { reflex_dataset: "combined" } %>
+                        <% end %>
+                        <%= form.submit "Third #{Vote.with_course(@course.id).with_project_as_third(project.id).count}", class: "btn btn-info btn-unvote" %>
+                      <% end %>
+                    <% else %>
+                      <%= form_with model: @course, data: { reflex: "submit->CourseReflex#voteThird", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
+                        <%= form.fields_for :votes, @course.votes do |vote_form| %>
+                          <%= vote_form.hidden_field :id, data: { reflex_dataset: "combined" } %>
+                        <% end %>
+                          <%= form.submit "Third #{Vote.with_course(@course.id).with_project_as_third(project.id).count}", class: "btn btn-outline-info btn-vote", id: "third-"+"#{project.id}" %>
+                      <% end %>
+                    <% end %>
+                </div>
+              </div>
+              </div>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+    <div class="col projects-box">
+      <h5 class='project-title' style="text-align: left">
+        On-hold Projects
+      </h5>
+      <% @course.projects.onhold.each do |project|%>
+        <% if !project.id.nil? %>
+          <div class="card project-card-archive">
+            <div class="card-body">
+              <div class="archive-button" style="text-align: right">
+                <%= label_tag do %>
+                  <%= check_box_tag nil, nil, project.is_active, data: { reflex: "click->ProjectReflex#unarchive", course_id: @course.id, user_id: current_user.id, project_id: project.id } %>
+                  active
+                <% end %>
+              </div>
+              <h4 class='project-name-text'>
+                <%= project.project_name%>
+              </h4>
+              <div class='form-control project-description-text'>
+                <p><%= project.description %></p>
+              </div>
+              <!--              <div class ="col" id="like-project">-->
+              <!--                <i class="fas fa-heart"></i>-->
+              <!--              </div>-->
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

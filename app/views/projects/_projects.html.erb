@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-<div id="project-stats" style="text-align: center">
-  <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
-</div>
+<!--<p id="notice"><%#= notice %></p>-->
+<%#= link_to "active projects only" %>
+<%#= link_to "on-hold projects only" %>
 <% if @course.projects.any? %>
   <% @course.projects.each do |project| %>
     <% if !project.id.nil? %>

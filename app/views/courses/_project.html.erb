@@ -14,6 +14,9 @@
       <h5 class='project-title'>
         Projects List
       </h5>
+      <div id="project-stats" style="text-align: center">
+        <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
+      </div>
       <%= render 'projects/projects'%>
     </div>
   </div>

@@ -15,4 +15,14 @@
       <%= professor.firstname + ' '+ professor.lastname  %>
     </p>
   </div>
+  <div class='col course-profile-column'>
+    <div id="start-voting" style="text-align: center; margin-left:20px; margin-top: 50px">
+      <% if controller_name == 'courses' and action_name == 'project_brainstorm' %>
+        <%= link_to "Start Project Voting", project_voting_course_path(@course), class: "btn btn-outline-primary"%>
+      <% end %>
+      <% if controller_name == 'courses' and action_name == 'project_voting' %>
+        <%= link_to "Finish Voting", grouping_course_path(@course), class: "btn btn-outline-primary"%>
+      <% end %>
+    </div>
+  </div>
 </div>

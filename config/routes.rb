@@ -11,15 +11,16 @@ Rails.application.routes.draw do
   }
 
   resources :takings
-  resources :votes
-  # resources :preferences
-  resources :groups
   resources :courses do
     member do
       get "fill_question"
       get "project_brainstorm"
+      get "project_voting"
+      get "grouping"
     end
     resources :projects
+    resources :votes
+    resources :groups
     resources :preferences
   end
 

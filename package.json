@@ -10,9 +10,12 @@
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "stimulus": "^1.1.1",
+    "stimulus_reflex": "3.3.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-turbolinks": "^2.1.0",
+    "vuedraggable": "^2.24.2",
     "vuetify": "^2.3.13",
     "vuex": "^3.5.1"
   },
