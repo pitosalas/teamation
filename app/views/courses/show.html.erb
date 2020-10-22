@@ -12,6 +12,8 @@
     
   </div>
 
+  <% if current_user.type == 'Student' %>
+
   <div class='container profile-container'>
     <div class='row profile-row'>
       <div class='col'>
@@ -68,4 +70,5 @@
 
 
   </div>
+  <% end %>
 </body>
