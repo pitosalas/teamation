@@ -1,7 +1,7 @@
 class Course < ApplicationRecord
     attr_reader :has_project
     belongs_to :professor
-    has_many :preferences
+    has_many :preferences, dependent: :destroy
     has_many :projects, dependent: :destroy
     accepts_nested_attributes_for :projects
     has_many :votes

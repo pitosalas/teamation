@@ -13,6 +13,11 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    if Preference.find_by(student_id: current_user.id, course_id: @course.id).nil?
+      @preference = @course.preferences.build
+    else
+      @preference = @course.preferences.find_by(course_id:params[:id])
+    end
   end
 
   # GET /courses/new
