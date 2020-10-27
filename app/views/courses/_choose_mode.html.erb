@@ -1,13 +1,17 @@
 <div class='col course-profile-column'>
   <div id="choose-mode">
-    <%= link_to fill_question_course_path(@course, has_project: TRUE) do%>
-      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>
+    <%= form_for @course, method: :put do |form|%>
+      <%= form.hidden_field :withProject, value: true %>
+      <%= form.submit "Create Groups with Project", class: "btn btn-primary"%>
+<!--      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>-->
     <% end %>
   </div>
 
   <div id="choose-mode">
-    <%= link_to fill_question_course_path(@course, has_project: FALSE) do%>
-      <button class="btn btn-primary"><i class="fas fa-users"></i> Create Groups without Project</button>
+    <%= form_for @course, method: :put do |form|%>
+      <%= form.hidden_field :withProject, value: true %>
+      <%= form.submit "Create Groups without Project", class: "btn btn-primary"%>
+      <!--      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>-->
     <% end %>
   </div>
 </div>

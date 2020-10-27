@@ -10,7 +10,6 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/4f7943abdb.js" crossorigin="anonymous"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>-->
   </head>
 
   <body>
@@ -23,10 +22,30 @@
               <li><%= link_to "Student Sign Up", new_student_registration_path, class: "nav-link" %></li>
               <li><%= link_to "Professor Sign Up", new_professor_registration_path, class: "nav-link" %></li>
             <% elsif current_student %>
-              <li><%= link_to "Student Profile", current_student, class: "nav-link" %></li>
+              <li><%= link_to "Manage Course", current_student, class: "nav-link" %></li>
               <li><%= link_to "Sign Out", destroy_student_session_path, method: :delete, class: "nav-link" %></li>
             <% elsif current_professor %>
-              <li><%= link_to "Professor Profile", current_professor, class: "nav-link" %></li>
+              <%# course = Course.find_by(id: current_user.current_course_id) %>
+<!--              <h1><%#= course.name %></h1>-->
+<!--              <p>Professor <%#= Professor.find_by(id: course.professor_id).lastname %></p>-->
+<!--              <p><%#= course.pin %></p>-->
+<!--              <p><%#= course.state %></p>-->
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <% if current_user.current_course_id.nil? %>
+                    View all courses
+                  <% else %>
+                    <% course = Course.find_by(id: current_professor.current_course_id) %>
+                    <%= course.name %>
+                  <% end %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <% Course.where(professor_id: current_professor.id).each do |course| %>
+                    <li><%= link_to "#{course.name}", course_path(course), class: "dropdown-item" %></li>
+                  <% end %>
+                </div>
+              </div>
+              <li><%= link_to "Manage Course", current_professor, class: "nav-link" %></li>
               <li><%= link_to "Sign Out", destroy_professor_session_path, method: :delete, class: "nav-link" %></li>
             <% end %>
           </ul>

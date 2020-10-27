@@ -4,13 +4,27 @@
 <%= @courses.each do |course| %>
     <div class="container course-column-box">
         <div class='row course-name-row'>
-            <!-- <div id="course-name"><%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %></div> -->
-            <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+            <div id="course-name">
+              <% if current_user.type == "Professor" %>
+                <% if course.state == "fill_question" %>
+                  <%= link_to course.name, fill_question_course_path(course), class:'btn course-name-button' %>
+                <% elsif course.state == "project_brainstorm" %>
+                  <%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %>
+                <% elsif course.state == "project_voting" %>
+                  <%= link_to course.name, project_voting_course_path(course), class:'btn course-name-button' %>
+                <% elsif course.state == "choose_algo" %>
+                  <%= link_to course.name, grouping_course_path(course), class:'btn course-name-button' %>
+                <% else %>
+                  <%= link_to course.name, course_path(course), class:'btn course-name-button' %>
+                <% end %>
+              <% else %>
+                <%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %>
+              <% end %>
+            </div>
         </div>
         
         <div class='not-assigned-text-professor'>
             <h6>No Student Enrolled</h6>
-        
         </div>
         
         <div class='row course-drop-row'>

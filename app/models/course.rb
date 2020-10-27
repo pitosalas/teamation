@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-    attr_reader :has_project
+    attr_accessor :has_project
     belongs_to :professor
     has_many :preferences, dependent: :destroy
     has_many :projects, dependent: :destroy
