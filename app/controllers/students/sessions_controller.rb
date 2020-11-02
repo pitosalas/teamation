@@ -9,7 +9,20 @@ class Students::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    redirect_to student_path(current_student)
+    if student_signed_in?
+      redirect_to student_path(current_student), notice: "Signed In Successfully."
+    else
+      redirect_to root_path, notice: 'Invalid Login Information Entered.'
+    end
+    # self.resource = warden.authenticate!(auth_options)
+    # set_flash_message(:notice, :signed_in) if is_navigational_format?
+    # if sign_in(resource_name, resource)
+    #   redirect_to student_path(current_student)
+    # else
+    #   respond_to do |format|
+    #     format.html { redirect_to root_path, notice: 'Class was dropped.' }
+    #   end
+    # end
   end
 
 

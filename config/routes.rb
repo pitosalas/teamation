@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :students, path: 'students', controllers: {
     registrations: "students/registrations",
-    sessions: "students/sessions",
-  
+    sessions: "students/sessions"
   }
   devise_for :professors, path: 'professors', controllers: {
     registrations: "professors/registrations",

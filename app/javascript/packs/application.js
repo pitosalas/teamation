@@ -10,7 +10,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("jquery")
-require("moment")
+// require("moment")
 
 // require("jquery.mCustomScrollbar")
 
