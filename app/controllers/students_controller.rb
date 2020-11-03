@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController  
     before_action :authenticate_student!
+    
     def show
         puts current_user.nil?
         @user = User.find(params[:id])

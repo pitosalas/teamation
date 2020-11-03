@@ -81,7 +81,7 @@ class PreferencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def preference_params
-      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, :dream_partner, schedule: [])
+      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, dream_partner: [], schedule: [])
                                         #  :mondayD, :mondayN, :tuesdayD, :tuesdayN, :wednesdayD, :wednesdayN, :thursdayD, :thursdayN, :fridayD, :fridayN, :saturdayD, :saturdayN, :sundayD, :sundayN
     end
 end
