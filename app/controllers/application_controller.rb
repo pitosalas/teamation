@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
     devise_group :user, contains: [:student, :professor]
 
-    protect_from_forgery 
+    protect_from_forgery
     
     # around_action :set_time_zone, if: :current_user
 

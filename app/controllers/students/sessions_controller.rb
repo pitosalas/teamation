@@ -9,6 +9,7 @@ class Students::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    # redirect_to student_path(current_student)
     if student_signed_in?
       redirect_to student_path(current_student), notice: "Signed In Successfully."
     else
