@@ -7,6 +7,11 @@ class GroupsController < ApplicationController
   def index
     @groups ||= @course.groups
     @group ||= @course.groups.first
+
+    respond_to do |format|
+      format.html
+      format.csv {send_data @groups.to_csv, filename: "groups-#{Date.today}.csv"}
+    end
   end
 
   # GET /groups/1

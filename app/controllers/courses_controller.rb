@@ -77,6 +77,7 @@ class CoursesController < ApplicationController
     @course.state = 'choose_algo'
     @course.save
   end
+  
   # POST /courses
   # POST /courses.json
   def create
