@@ -27,12 +27,21 @@ class Students::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   # def edit
-  #   super
+  #   # @student = Student.find(current_student.id)
   # end
 
   # PUT /resource
   # def update
-  #   super
+  #   respond_to do |format|
+  #     if @student.update(student_params)
+  #       sign_in(@student)
+  #       format.html { redirect_to student_path(@student), notice: 'Student was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @student }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @student.errors, status: :unprocessable_entity }
+  #     end
+  #   end
   # end
 
   # DELETE /resource

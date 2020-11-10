@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   # before_action :set_course
   # before_action :authenticate_user!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  # before_action :set_course, only: [ :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -80,6 +81,7 @@ class CoursesController < ApplicationController
       current_user.save
     end
   end
+  
   # POST /courses
   # POST /courses.json
   def create

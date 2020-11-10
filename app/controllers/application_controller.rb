@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
     devise_group :user, contains: [:student, :professor]
 
+    protect_from_forgery
+    
     # around_action :set_time_zone, if: :current_user
 
     protected
@@ -12,6 +14,5 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :email, :password, :password_confirmation])
     end
-
 
 end

@@ -21,6 +21,10 @@ class GroupsController < ApplicationController
       current_user.current_course_id = @course.id
       current_user.save
     end
+    respond_to do |format|
+      format.html
+      format.csv {send_data @groups.to_csv, filename: "groups-#{Date.today}.csv"}
+    end
   end
 
   # GET /groups/1

@@ -12,4 +12,8 @@ class Student < User
     def full_name
         firstname.capitalize() + " " + lastname.capitalize()
     end
+
+    def to_s
+        firstname.capitalize() + " " + lastname.capitalize()
+    end
 end

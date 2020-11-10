@@ -8,8 +8,10 @@
 
   <%= form.input :time_zone, label: "Time Zone", required: true %>
 
-  <%= form.label 'Dream Partner' %>
-  <%= form.collection_select :dream_partner, @course.students.order(firstname: :asc, lastname: :asc), :id, :full_name, {:include_blank => true} %>
+  <!-- <%= form.label 'Dream Partner' %> -->
+  <!-- <%= form.collection_select :dream_partner, @course.students.order(firstname: :asc, lastname: :asc), :id, :full_name, {:include_blank => true} %> -->
+  <% all_classmates = @course.students.order(lastname: :asc, firstname: :asc).reject {|stu| stu.id == current_student.id } %>
+  <%= form.input :dream_partner, label: "Dream Partner", as: :check_boxes, collection: all_classmates, include_hidden: false, input_html: {mutiple: true, include_blank: true} %>
   <br>
   <%= form.label 'Select Your Prefered Time for Group Meeting'%>
 

@@ -22,7 +22,8 @@
 
 <p>
   <strong>Dream partner:</strong>
-  <%= @preference.dream_partner %>
+  <% name_array = @preference.dream_partner.map{|id| User.find(id).full_name } %>
+  <%= name_array.join(", ") %>
 </p>
 
 <p>
@@ -30,4 +31,4 @@
   <%= @preference.schedule %>
 </p>
 
-<%= link_to 'Edit', edit_preference_path(@preference) %> |
+<%= link_to 'Edit', edit_course_preference_path(@preference) %> 
