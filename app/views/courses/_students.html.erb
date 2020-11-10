@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="row">No.</th>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Email</td>
+    <td>Group</td>
+    <td>Current Status</td>
+  </tr>
+  </thead>
+  <tbody>
+    <% count = 1 %>
+    <% @course.students.each do |s| %>
+      <tr>
+        <th scope="row"><%= count %></th>
+        <td><%= s.firstname %></td>
+        <td><%= s.lastname %></td>
+        <td><%= s.email %></td>
+        <% assigned_group_id = find_student_assigned_group(@course.groups, s.id) %>
+        <% if assigned_group_id.nil? %>
+          <td>unassigned</td>
+        <% else %>
+          <td><%= @course.groups.find(assigned_group_id).group_name%></td>
+        <% end %>
+        <% count += 1 %>
+        <td><%= get_status_with_state(s.takings.where(course_id: @course.id).first.state) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

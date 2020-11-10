@@ -17,7 +17,7 @@
           <div class='column'>
             <p class='profile-name'><%= @user.firstname%> <%= @user.lastname %></p>
             <p class='profile-email'><%= @user.email %></p>
-            <%= link_to 'Edit Account', edit_student_path(@user) %>
+            <%#= link_to 'Edit Account', edit_student_path(@user) %>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
 
     <hr/>
     <div class = "courses-info-row" id="students-course-info-row">
-      <%= render partial: 'course', collection: @courses %>
+      <%= render partial: 'course', course: @courses %>
     </div>
 
   </div>

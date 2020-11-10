@@ -5,14 +5,20 @@
 
 .add-course-button-p{
     position: absolute;
-    left: 230px;
+    left: 150px;
   }
+
+.add-course-field {
+  width: 260px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
 
 .course-column-box-professor{
     background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
     box-sizing: border-box;
-    width: 350px;
-    min-height: 200px;
+    width: 320px;
+    min-height: 220px;
     margin-top: 0px;
     margin-bottom: 10px;
     > h4 {
@@ -20,33 +26,51 @@
     }
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
-    #view-course-button {
-      margin-left: 20px;
-      height:20px;
-    }
 
     #drop-course-button {
-      height:20px;
+      height:10px;
       margin-left: 10px;
     }
 }
-  
+
+
+.add-course-column-box{
+  box-sizing: border-box;
+  width: 320px;
+  min-height: 220px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  > h4 {
+    font-size: bold;
+  }
+}
+
 .course-column-box-professor:hover{
     box-shadow: 0px 4px 8px 0 rgb(77, 131, 203), 0px 6px 15px 0 rgb(77, 131, 203);
 }
 
 .not-assigned-text-professor{
-  height: 80px; 
-  display: flex; 
+  height: 80px;
+  margin-top: 20px;
+  margin-left: 15px;
+  //display: flex;
   align-items: center; 
-  margin-left: 35px; 
+  //margin-left: 10px;
   color:grey;
+  #course-status-prof {
+    color: darkgrey;
+  }
 }
 
 .assigned-text-professor{
-  height: 80px; 
-  display: flex; 
+  height: 80px;
+  margin-top: 20px;
+  margin-left: 15px;
+  //display: flex;
   align-items: center; 
-  margin-left: 35px; 
+  //margin-left: 10px;
   color:black;
+  #course-status-prof {
+    color: darkgrey;
+  }
 }

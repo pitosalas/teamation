@@ -1,27 +1,51 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
 <% @courses.each do |course| %>
   <div class="container course-column-box-professor">
     <div class='row course-name-row' >
-      <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+      <% if has_project? course %>
+        <% if at_fill_question? course %>
+          <div id="course-name"><%= link_to course.name, fill_question_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif at_project_brainstorm? course %>
+          <div id="course-name"><%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif at_project_voting? course %>
+          <div id="course-name"><%= link_to course.name, project_voting_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif at_choose_algo? course %>
+          <div id="course-name"><%= link_to course.name, grouping_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif at_view_groups? course %>
+          <div id="course-name"><%= link_to course.name, course_groups_path(course), class:'btn course-name-button' %></div>
+        <% else %>
+          <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+        <% end %>
+      <% else %>
+        <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+      <% end %>
     </div>
-
-    <% if course.students.size==0 %>
+    <% if course.students.size == 0 || course.groups.size == 0 %>
       <div class='not-assigned-text-professor'>
-        <h6>No Student Enrolled</h6>
+        <% if course.students.size == 0 %>
+          <h6>No Student Enrolled</h6>
+        <% else %>
+          <h6>Total Students: <%= course.students.size %></h6>
+          <h6>No Groups Created Yet</h6>
+        <% end %>
+        <div class="course-status-professor" style="margin-top: 20px;">
+          <p>Status: <%= get_status_with_state(course.state) %></p>
+        </div>
       </div>
     <% else %>
-      <div class='not-assigned-text-professor'>
-        <h6>No Groups Created Yet</h6>
+      <div class='assigned-text-professor'>
+        <h6>Total Students: <%= course.students.size %></h6>
+        <h6>Total Groups: <%= course.groups.size %></h6>
+        <div class="course-status-professor" style="margin-top: 20px;">
+          <p>Status: <%= get_status_with_state(course.state) %></p>
+        </div>
       </div>
     <% end %>
+
     <div class='row course-button-row'>
       <div id="course-button">
-<!--        <div id="view-course-button">-->
-          <%#= link_to course_path(course) do %>
-<!--            <button class="btn btn-outline-primary viewButton"><i class="fas fa-eye"></i> View Course</button>-->
-          <%# end %>
-<!--        </div>-->
         <div id="drop-course-button">
           <%= link_to course_path(course), method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
             <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Delete course</button>
@@ -31,3 +55,13 @@
     </div>
   </div>
 <% end %>
+
+
+<div class="container add-course-column-box">
+  <% add_course_path = @user.id.to_s+ "/add_course" %>
+  <div id="add-course-button-p" style="text-align: center; margin-top: 100px;">
+    <%= link_to add_course_path, remote: true do %>
+      <button class="btn btn-primary addButton"><i class="fas fa-plus"></i> Add new course</button>
+    <% end %>
+  </div>
+</div>

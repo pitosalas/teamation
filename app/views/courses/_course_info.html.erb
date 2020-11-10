@@ -19,9 +19,9 @@
       <strong>Status:</strong>
       <% if current_user.type == 'Student' %>
         <% course = current_student.takings.find_by(course_id: @course.id) %>
-        <%= course.state %>
+        <%= get_status_with_state(course.state)%>
       <% else %>
-        <%= @course.state %>
+        <%= get_status_with_state(@course.state)%>
       <% end %>
     </p>
   </div>

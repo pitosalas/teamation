@@ -6,6 +6,8 @@ class Student < User
             :recoverable, :rememberable, :validatable
     has_many :takings
     has_many :courses, through: :takings
+    has_many :in_groups
+    # has_many :groups, through: :in_groups
 
     def full_name
         firstname.capitalize() + " " + lastname.capitalize()

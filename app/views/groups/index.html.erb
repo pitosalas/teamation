@@ -1,31 +1,109 @@
 <p id="notice"><%= notice %></p>
-<div class="group">
-  <% if @groups.size > 0 %>
-      <div class="group" style="margin-left: 50px;">
-        <h1>Groups</h1>
-      </div>
-    <div class="group" style="margin-left: 50px; margin-top: 50px;">
-      <div class="group" style="width:20%">
-        <%= select_tag :group,
-                       options_for_select(@groups.map{|group| [group.group_name, group.id]}),
-                       class: "form-control form-control-lg",
-                       data: { reflex: "change->GroupReflex#switch" } %>
-      </div>
-      <div class="group" style="width:80%; margin-top:50px; text-align: center">
-        <%= render partial: 'single_group', group: @group %>
-      </div>
+
+<body class='view4'>
+<div class='container profile-container' id="classroom" >
+  <%= render partial: "courses/course_info" %>
+  <div class='container profile-container'>
+    <div class='row profile-row'>
+      <div class='col'>
+        <ul class="nav nav-tabs" id="course-nav">
+          <li class="nav-item">
+            <a href="#group_info" class="nav-link tab-groups" data-toggle="tab" >Group Info</a>
+          </li>
+          <li class="nav-item">
+            <a href="#groups" class="nav-link tab-groups" data-toggle="tab">Groups</a>
+          </li>
+          <li class="nav-item">
+            <a href="#students" class="nav-link tab-students" data-toggle="tab" >Students</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+
+          <div class="tab-pane fade" id="group_info">
+            <div class="container projects-box">
+              <div class="group">
+                <% if @groups.size > 0 %>
+                  <div class="group" style="margin-left: 80px; margin-top: 50px; margin-bottom: 50px;">
+                    <div class="dismiss_button" style="text-align: right; margin-right: 50px">
+                      <%= link_to "Dismiss all Groups", destroy_all_course_groups_path(@course), method: :delete, class:"btn btn-outline-primary" %>
+                    </div>
+                    <div class="group" style="margin-top:50px; text-align: center">
+                      <table class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th scope="col">No.</th>
+                          <th scope="col">Group Name</th>
+                          <th scope="col">Project Name</th>
+                          <th scope="col">Project Description</th>
+                          <th scope="col">Number of Students</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                        </tr>
+                        </thead>
+                      <tbody>
+                        <% count = 1 %>
+                        <% @groups.each do |group| %>
+                          <tr>
+                            <th scope="row"><%= count %></th>
+                            <td><%= group.group_name %></td>
+                            <% project = Project.find(group.project_id) %>
+                            <td><%= project.project_name %></td>
+                            <td><%= project.description %></td>
+                            <td><%= group.students_id.size %></td>
+                            <% count +=  1 %>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                      </table>
+                  </div>
+                  </div>
+                <% else %>
+                  <div class="group" style="margin-left: 150px; margin-top: 50px; margin-bottom: 50px;">
+                    <%= render partial: 'no_group' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade show active" id="groups">
+            <div class="container projects-box">
+              <div class="group">
+                <% if @groups.size > 0 %>
+                  <div class="group" style="margin-left: 150px; margin-top: 50px; margin-bottom: 50px;">
+                    <div class="group" style="width:20%">
+                      <%= select_tag :group,
+                                     options_for_select(@groups.map{|group| [group.group_name, group.id]}),
+                                     class: "form-control form-control-lg",
+                                     data: { reflex: "change->GroupReflex#switch" } %>
+                    </div>
+                    <div class="group" style="width:80%; margin-top:50px; text-align: center">
+                      <%= render partial: 'single_group', group: @group %>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="group" style="margin-left: 150px; margin-top: 50px; margin-bottom: 50px;">
+                    <%= render partial: 'no_group' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        <div class="tab-pane fade" id="students">
+          <div class="container projects-box">
+            <%= render partial: 'courses/students', course: @course %>
+          </div>
+        </div>
+
     </div>
-  <% else %>
-    <div class="group" style="margin-left: 50px; margin-top: 50px;">
-      <%= render partial: 'no_group' %>
+
+
+  </div>
     </div>
-  <% end %>
+
 </div>
+</div>
+</body>
 
-
-<br>
-
-<script>
-</script>
-
-<%#= link_to 'New Group', new_group_path %>

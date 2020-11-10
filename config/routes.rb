@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     end
     resources :projects
     resources :votes
-    resources :groups
+    resources :groups do
+      collection do
+        delete "destroy_all"
+      end
+    end
     resources :preferences
   end
 

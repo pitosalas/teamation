@@ -4,6 +4,10 @@
 @import './bootstrap_custom.scss';
 //@import 'jquery.mCustomScrollbar';
 
+$theme-colors: ( "bootstrap": #563d7c, "simpleform": #00617f );
+@import "bootstrap";
+// simple_form helpers
+@import "simple_form-bootstrap/simple_form-bootstrap";
 
 
 html,
@@ -28,6 +32,9 @@ body,
 .navbar-custom{
   background-color: rgb(0,52,120); 
 }
+.navbar-brand{
+  margin-left: 170px;
+}
 #logo {
     float: left;
     font-size: 1.7em;
@@ -51,10 +58,14 @@ body,
     font-weight: bold;
 }
 
+.sub-menu {
+  margin-top: 20px;
+  margin-left: 30px;
+}
 /* Sign Up Page */
 .view3{
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url("https://www.brandeis.edu/humanresources/jobs/images/Pond-Cropped-B.jpg") ;
-  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),url("https://www.brandeis.edu/humanresources/jobs/images/Pond-Cropped-B.jpg") ;
+  background-color: rgba(255, 255, 255, 0.1);
   background-size: cover;
   background-position: center;
 }
@@ -112,8 +123,8 @@ body,
 
 /* login page */
 .view2{
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url('https://www.brandeis.edu/admissions/images/images-dec-2017/2.linderpix-brandeis-4897.jpg') ;
-  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),url('https://www.brandeis.edu/admissions/images/images-dec-2017/2.linderpix-brandeis-4897.jpg') ;
+  background-color: rgba(255, 255, 255, 0.1);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

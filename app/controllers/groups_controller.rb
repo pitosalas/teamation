@@ -5,8 +5,22 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups ||= @course.groups
+    if @course.groups.size.zero?
+      if @course.students.size.positive? && @course.projects.size.positive?
+        group_service = GroupCreationManager::GroupMatcher.new
+        group_service.determine_algo_and_match(@course, params)
+        @course.update(has_group: true)
+      end
+    end
+    if @course.has_group && @course.state != "view_groups"
+      @course.update(state: "view_groups")
+    end
+    @groups = @course.groups
     @group ||= @course.groups.first
+    if current_user.type == 'Professor'
+      current_user.current_course_id = @course.id
+      current_user.save
+    end
   end
 
   # GET /groups/1
@@ -63,6 +77,17 @@ class GroupsController < ApplicationController
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # DELETE /groups
+  # DELETE /groups
+  def destroy_all
+    @course.groups.each(&:destroy)
+    @course.update(has_group: false, state: "choose_algo")
+    respond_to do |format|
+      format.html { redirect_to grouping_course_path(@course) }
       format.json { head :no_content }
     end
   end
