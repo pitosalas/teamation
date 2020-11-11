@@ -1,23 +1,32 @@
-<div class = "wrapper overflow projects-container" id="project-brainstorm">
-  <div class="row project-row">
-    <div class="col projects-box">
-      <h5 class='project-title'>
-        Add a New Project
-      </h5>
-      <div class = 'add-project-container'>
-        <div class= 'container project-container project-container-input'>
-          <%= render 'projects/form', project: @course.projects.build %>
-        </div>
-      </div>
-    </div>
-    <div class="col projects-box">
-      <h5 class='project-title'>
+<!--<div class="container course-column-box-professor">-->
+<!--  <div class='row course-name-row' >-->
+<!--    <div class="col projects-box">-->
+<!--      <h5 class='project-title'>-->
+<!--        Add a New Project-->
+<!--      </h5>-->
+<!--      <div class = 'add-project-container'>-->
+<!--        <div class= 'container project-container project-container-input'>-->
+          <%#= render 'projects/form', project: @course.projects.build %>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+      <h5 class='project-title' style="text-align: center">
         Projects List
       </h5>
       <div id="project-stats" style="text-align: center">
         <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
       </div>
       <%= render 'projects/projects'%>
-    </div>
-  </div>
-</div>
+      <div class="col project-card-archive">
+        <h5 class='project-title'>
+          Add a New Project
+        </h5>
+        <div class = 'add-project-container'>
+          <div class= 'container project-container project-container-input'>
+            <%= render 'projects/form', project: @course.projects.build %>
+          </div>
+        </div>
+      </div>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

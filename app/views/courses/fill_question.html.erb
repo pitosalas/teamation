@@ -5,11 +5,13 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
-    <div class="col-md-6 col-md-offset-3" style="margin-top: 30px">
+    <div class="col-md-6 col-md-offset-3" style="margin-left: 20px; margin-top: 30px">
         <%= simple_form_for @course, wrapper_mappings: { radio_buttons:  :vertical_collection } do |f| %>
           <%= f.error_notification %>
           <%= f.input :maximum_group_member, collection: (1..10).to_a %>
           <%= f.input :minimum_group_member, collection: (1..10).to_a %>
+          <br>
+          <p>How much weight would you like to assign to different preferences in grouping students? </p>
           <% @preference_weight = @course.preference_weight.nil? ? PreferenceWeight.new : @course.preference_weight %>
           <%= f.simple_fields_for :preference_weight, @preference_weight do |p| %>
             <%#= p.input :course_id, as: :hidden %>
@@ -17,6 +19,7 @@
             <%= p.input :dream_partner, as: :radio_buttons, collection: (0..5).to_a, required:true, wrapper: :vertical_collection_inline, input_html: { required:true } %>
             <%= p.input :time_zone, as: :radio_buttons, collection: (0..5).to_a, required:true, wrapper: :vertical_collection_inline, input_html: { required:true } %>
             <%= p.input :schedule, as: :radio_buttons, collection: (0..5).to_a, required:true, wrapper: :vertical_collection_inline, input_html: { required:true } %>
+            <%= p.input :project_voting, as: :radio_buttons, collection: (0..5).to_a, required:true, wrapper: :vertical_collection_inline, input_html: { required:true } %>
           <% end %>
           <%= f.button :submit, "Submit", class: "btn-primary" %>
         <% end %>

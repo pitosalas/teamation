@@ -25,77 +25,37 @@
           <% end %>
         <% end %>
       </div>
-          <ul class="navbar-nav mr-auto mt-4 mt-lg-4">
-            <% if !(current_student || current_professor) %>
-              <li><%= link_to "Student Sign Up", new_student_registration_path, class: "nav-link" %></li>
-              <li><%= link_to "Professor Sign Up", new_professor_registration_path, class: "nav-link" %></li>
-            <% else %>
-              <li>
-                <%= link_to current_user do %>
-                  <h2><i class="fas fa-home nav-link"></i></h2>
+        <ul class="navbar-nav mr-auto mt-4 mt-lg-4">
+          <% if !(current_student || current_professor) %>
+            <li><%= link_to "Student Sign Up", new_student_registration_path, class: "nav-link" %></li>
+            <li><%= link_to "Professor Sign Up", new_professor_registration_path, class: "nav-link" %></li>
+          <% else %>
+            <li>
+              <%= link_to current_user do %>
+                <h2><i class="fas fa-home nav-link"></i></h2>
+                <h6 style="color: lightgrey">Home</h6>
+              <% end %>
+            </li>
+            <li>
+              <% if current_user.type == "Professor" %>
+                <%= link_to edit_professor_path do %>
+                  <h2><i class="fas fa-user-edit nav-link"></i></h2>
+                  <h6 style="color: lightgrey">Edit Profile</h6>
                 <% end %>
-              </li>
-            <%# elsif current_student %>
-<!--              <li><%#= link_to "Manage Course", current_student, class: "nav-link" %></li>-->
-<!--              <li><%#= link_to "Sign Out", destroy_student_session_path, method: :delete, class: "nav-link" %></li>-->
-            <%# elsif current_professor %>
-              <%# course = Course.find_by(id: current_user.current_course_id) %>
-<!--              <h1><%#= course.name %></h1>-->
-<!--              <p>Professor <%#= Professor.find_by(id: course.professor_id).lastname %></p>-->
-<!--              <p><%#= course.pin %></p>-->
-<!--              <p><%#= course.state %></p>-->
-<!--              <div class="dropdown">-->
-<!--                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                  <%# if current_user.current_course_id.nil? %>
-<!--                    View all courses-->
-                  <%# else %>
-                    <%# course = Course.find_by(id: current_professor.current_course_id) %>
-                    <%#= course.name %>
-                  <%# end %>
-<!--                </button>-->
-<!--                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-                  <%# Course.where(professor_id: current_professor.id).each do |course| %>
-                    <%# if has_project? course %>
-                      <%# if at_fill_question? course %>
-<!--                        <li><%#= link_to "#{course.name}", fill_question_course_path(course), class: "dropdown-item" %></li>-->
-                      <%# elsif at_project_brainstorm? course %>
-<!--                        <li><%#= link_to "#{course.name}", project_brainstorm_course_path(course), class: "dropdown-item" %></li>-->
-                      <%# elsif at_project_voting? course %>
-<!--                        <li><%#= link_to "#{course.name}", project_voting_course_path(course), class: "dropdown-item" %></li>-->
-                      <%# elsif at_choose_algo? course %>
-<!--                        <li><%#= link_to "#{course.name}", grouping_course_path(course), class: "dropdown-item" %></li>-->
-                      <%# elsif at_view_groups? course %>
-<!--                        <li><%#= link_to "#{course.name}", course_groups_path(course), class: "dropdown-item" %></li>-->
-                      <%# else %>
-<!--                        <li><%#= link_to "#{course.name}", course_path(course), class: "dropdown-item" %></li>-->
-                      <%# end  %>
-                    <%# else %>
-<!--                      <li><%#= link_to "#{course.name}", course_path(course), class: "dropdown-item" %></li>-->
-                    <%# end %>
-                  <%# end %>
-<!--                </div>-->
-<!--              </div>-->
-              <li>
-                <% if current_user.type == "Professor" %>
-                  <%= link_to edit_professor_path do %>
-                    <h2><i class="fas fa-user-edit nav-link"></i></h2>
-                  <% end %>
-                <% else  %>
-                  <%= link_to edit_student_path do %>
-                    <h2><i class="fas fa-user-edit nav-link"></i></h2>
-                  <% end %>
+              <% else  %>
+                <%= link_to edit_student_path do %>
+                  <h2><i class="fas fa-user-edit nav-link"></i></h2>
+                  <h6>Edit Profile</h6>
                 <% end %>
-              </li>
-              </ul>
-              <div class="my-4 my-lg-4">
-                <%= link_to destroy_professor_session_path, method: :delete do %>
-                  <h2><i class="fas fa-sign-out-alt nav-link"></i></h2>
-                <% end %>
-              </div>
-<!--              <li><%#= link_to "<i class="fas fa-home"></i>", current_professor, class: "nav-link" %></li>-->
-<!--              <li><%#= link_to "Log Out", destroy_professor_session_path, method: :delete, class: "nav-link" %></li>-->
-            <% end %>
-<!--          </ul>-->
+              <% end %>
+            </li>
+            </ul>
+            <div class="my-4 my-lg-4">
+              <%= link_to destroy_professor_session_path, method: :delete do %>
+                <h2><i class="fas fa-sign-out-alt nav-link"></i></h2>
+              <% end %>
+            </div>
+          <% end %>
     </nav>
     <% if current_user %>
       <%= render 'layouts/path'%>

@@ -27,15 +27,16 @@ class PreferencesController < ApplicationController
   # POST /preferences
   # POST /preferences.json
   def create
-    @preference = @course.preferences.new(preference_params)
-    # @preference = Preference.new(preference_params.except(:mondayD, :mondayN, :tuesdayD, :tuesdayN, :wednesdayD, :wednesdayN, :thursdayD, :thursdayN, :fridayD, :fridayN, :saturdayD, :saturdayN, :sundayD, :sundayN))
-    
+    schedule_arr = []
+    Preference::TIME_SLOT.each do |t|
+      if !params[t].nil?
+        schedule_arr << t
+      end
+    end
+    schedule_j = schedule_arr.to_json
+    @preference = @course.preferences.new(preference_params.merge(schedule: schedule_j))
     respond_to do |format|
       if @preference.save
-        # format.html {redirect_to course_path(Course.find_by_id(@preference.course_id)), notice: 'Preference was successfully created.'}
-        # format.html { redirect_to @preference, notice: 'Preference was successfully created.' }
-        
-        # format.html { redirect_to student_path(current_student), notice: 'Preference was successfully created.' }
         format.html { redirect_to course_preference_path(@course.id), notice: 'Preference was successfully created.' }
         format.json { render :show, status: :created, location: @preference }
       else
@@ -49,9 +50,15 @@ class PreferencesController < ApplicationController
   # PATCH/PUT /preferences/1.json
   def update
     @preference = @course.preferences.find(params[:id])
+    schedule_arr = []
+    Preference::TIME_SLOT.each do |t|
+      if !params[t].nil?
+        schedule_arr << t
+      end
+    end
+    schedule_j = schedule_arr.to_json
     respond_to do |format|
-      if @preference.update(preference_params)
-        # format.html { redirect_to student_path(current_student), notice: 'Preference was successfully updated.' }
+      if @preference.update(preference_params.merge(schedule: schedule_j))
         format.html { redirect_to course_preference_path(@course.id), notice: 'Preference was successfully updated.' }
         format.json { render :show, status: :ok, location: @preference }
       else
@@ -74,7 +81,8 @@ class PreferencesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = params[:preference].nil? ? Course.find(params[:course_id]) : Course.find(params[:preference][:course_id])
+      # @course = params[:preference].nil? ? Course.find(params[:course_id]) : Course.find(params[:preference][:course_id])
+      @course = Course.find(params[:course_id])
     end
 
     def set_preference
@@ -83,7 +91,6 @@ class PreferencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def preference_params
-      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, dream_partner: [], schedule: [])
-                                        #  :mondayD, :mondayN, :tuesdayD, :tuesdayN, :wednesdayD, :wednesdayN, :thursdayD, :thursdayN, :fridayD, :fridayN, :saturdayD, :saturdayN, :sundayD, :sundayN
+      params.require(:preference).permit(:student_id, :course_id, :subject_matter_proficiency, :time_zone, :schedule, dream_partner: [])
     end
 end

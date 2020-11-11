@@ -22,9 +22,10 @@
             <% end %>
             <p id="notice"><%= notice %></p>
             <p class="login-back-path">New user? <%= link_to "Sign up now!", new_student_registration_path, class:"signup-link" %></p>
+            <%= render "students/shared/links" %>
           </div>
         </div>
-        <%= render "students/shared/links" %>
 
     </div>
+  </div>
 </div>

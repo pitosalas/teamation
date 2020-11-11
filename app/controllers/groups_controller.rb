@@ -5,12 +5,10 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    if @course.groups.size.zero?
-      if @course.students.size.positive? && @course.projects.size.positive?
-        group_service = GroupCreationManager::GroupMatcher.new
-        group_service.determine_algo_and_match(@course, params)
-        @course.update(has_group: true)
-      end
+    if @course.groups.size.zero? && @course.students.size.positive? && @course.projects.size.positive?
+      group_service = GroupCreationManager::GroupMatcher.new
+      group_service.determine_algo_and_match(@course, params)
+      @course.update(has_group: true)
     end
     if @course.has_group && @course.state != "view_groups"
       @course.update(state: "view_groups")

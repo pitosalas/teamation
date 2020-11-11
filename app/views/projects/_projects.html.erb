@@ -1,22 +1,21 @@
-<!--<p id="notice"><%#= notice %></p>-->
-<%#= link_to "active projects only" %>
-<%#= link_to "on-hold projects only" %>
 <% if @course.projects.any? %>
   <% @course.projects.each do |project| %>
     <% if !project.id.nil? %>
-    <div class = 'add-project-container'>
-      <div class="card project-card" style="width: 30rem; height: 20rem">
+<!--    <div class = 'add-project-container'>-->
+      <div class="card project-card-active" style="width: 320px; height: 220px;">
         <div class="card-body">
-          <div id="delete-project">
-            <%= link_to ('<i class="far fa-trash-alt"> </i>').html_safe, course_project_path(@course, project.id), :method => :delete %>
+          <div class="row">
+            <h4 class='col project-name-text'>
+              <%= project.project_name %>
+            </h4>
+            <div id="col delete-project">
+              <%= link_to ('<i class="far fa-trash-alt"> </i>').html_safe, course_project_path(@course, project.id), :method => :delete %>
+            </div>
           </div>
-          <h4 class='project-name-text'>
-            <%= project.project_name %>
-          </h4>
           <div class='form-control project-description-text'>
             <p><%= project.description %></p>
           </div>
-          <div class="row" id="project-list-buttons">
+          <div class="row" id="project-list-buttons" style="margin-top: 20px;">
             <div class ="col" id="edit-project">
               <%= link_to ('<i class="fas fa-edit"> </i>').html_safe, edit_course_project_path(@course, project), {:method => :get, :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#edit-project-modal'}  %>
               <div id="edit-project-modal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -25,24 +24,24 @@
                 </div>
               </div>
             </div>
-            <div class ="col" id="mark-project-active">
+            <div class ="col" id="mark-project-active" style="font-size: 8px;">
               <% if project.is_active %>
                 <div>
-                  <%= link_to "Remove from Active", course_project_path(@course, project, project: {is_active: false}), :method => :patch, class: "btn btn-primary btn-sm"%>
+                  <%= link_to "Not Active", course_project_path(@course, project, project: {is_active: false}), :method => :patch, class: "btn btn-primary btn-sm"%>
                 </div>
               <% else %>
-                <div v-else>
-                  <%= link_to "Mark as Active", course_project_path(@course, project, project: {is_active: true}), :method => :patch, class: "btn btn-primary btn-sm"%>
+                <div>
+                  <%= link_to "Mark Active", course_project_path(@course, project, project: {is_active: true}), :method => :patch, class: "btn btn-primary btn-sm"%>
                 </div>
               <% end %>
             </div>
-            <div class ="col" id="like-project">
+            <div class ="col" id="like-project" style="text-align: right">
               <i class="fas fa-heart"></i>
             </div>
           </div>
         </div>
       </div>
-    </div>
+<!--    </div>-->
     <% end %>
   <% end %>
 <% end %>

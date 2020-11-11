@@ -14,18 +14,14 @@
       <% professor = @course.professor %>
       <%= professor.firstname + ' '+ professor.lastname  %>
     </p>
-
     <p class="secondary-title">
-      <strong>Status:</strong>
-      <% if current_user.type == 'Student' %>
-        <% course = current_student.takings.find_by(course_id: @course.id) %>
-        <%= get_status_with_state(course.state)%>
-      <% else %>
-        <%= get_status_with_state(@course.state)%>
-      <% end %>
+      <strong>Course Status:</strong>
     </p>
+    <% unless controller_name == 'courses' && action_name == 'show' %>
+      <%=  render partial: 'layouts/prof_project_progress'  %>
+    <%  end %>
   </div>
-  <div class='col course-profile-column'>
+<!--  <div class='col course-profile-column'>-->
     <div id="start-voting" style="text-align: center; margin-left:20px; margin-top: 50px">
       <% if controller_name == 'courses' and action_name == 'project_brainstorm' %>
         <%= link_to "Start Project Voting", project_voting_course_path(@course), class: "btn btn-outline-primary"%>
@@ -34,5 +30,5 @@
         <%= link_to "Finish Voting", grouping_course_path(@course), class: "btn btn-outline-primary"%>
       <% end %>
     </div>
-  </div>
+<!--  </div>-->
 </div>

@@ -16,10 +16,24 @@
             <br>
             <p>&nbsp</p>
             <p>&nbsp</p>
-            <div class='signin-row'>
+            <div class='row signin'>
                 <% if !current_user %>
-                    <%= link_to "Student Sign In", new_student_session_path, class: 'btn btn-primary', id:"signin-button" %>
-                    <%= link_to "Professor Sign In", new_professor_session_path, class:'btn btn-outline-primary', id:"signin-button"%>
+                  <div class="col student-sign-in">
+                    <%= link_to new_student_session_path do %>
+                      <div style="text-align: center; color: rgb(0,52,120);">
+                        <h1 style="font-size: 75px;"><i class="fas fa-user-graduate"></i></h1>
+                        <h1>Student</h1>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col prof-sign-in">
+                    <%= link_to new_professor_session_path do %>
+                      <div style="text-align: center; color: rgb(0,52,120);">
+                        <h1 style="font-size: 75px;"><i class="fas fa-chalkboard-teacher"></i></h1>
+                        <h1>Professor</h1>
+                      </div>
+                    <% end %>
+                  </div>
                 <% end %>
             </div>
         </div>   

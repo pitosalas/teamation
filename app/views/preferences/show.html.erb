@@ -22,7 +22,7 @@
 
 <p>
   <strong>Dream partner:</strong>
-  <% name_array = @preference.dream_partner.map{|id| User.find(id).full_name } %>
+  <% name_array = @preference.dream_partner.map {|id| User.find(id).full_name if id.present? } %>
   <%= name_array.join(", ") %>
 </p>
 

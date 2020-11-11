@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_150853) do
+ActiveRecord::Schema.define(version: 2020_11_11_172642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_150853) do
     t.integer "schedule"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "project_voting"
   end
 
   create_table "preferences", force: :cascade do |t|
@@ -63,8 +64,8 @@ ActiveRecord::Schema.define(version: 2020_11_03_150853) do
     t.string "time_zone", default: "UTC"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "schedule", default: [], array: true
     t.integer "dream_partner", default: [], array: true
+    t.string "schedule"
   end
 
   create_table "projects", force: :cascade do |t|

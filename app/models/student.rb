@@ -7,6 +7,7 @@ class Student < User
     has_many :takings
     has_many :courses, through: :takings
     has_many :in_groups
+    scope :all_except, ->(user) { where.not(id: user) }
     # has_many :groups, through: :in_groups
 
     def full_name

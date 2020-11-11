@@ -1,26 +1,167 @@
-<%= simple_form_for [@course, preference] do |form| %>
-    <%= form.error_notification %>
+<%= simple_form_for [@course, preference], wrapper_mappings: { radio_buttons:  :vertical_collection }  do |form| %>
+  <%= form.error_notification %>
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
-  <%= form.input :subject_matter_proficiency, :label => "Subject Matter Proficiency: ",  as: :radio_buttons, collection: Preference::LEVELS, required: true %>
+  <%= form.input :subject_matter_proficiency, :label => "Subject Matter Proficiency: ",  as: :radio_buttons, collection: Preference::LEVELS, required: true, wrapper: :vertical_collection_inline %>
+
   <%= form.hidden_field :student_id, :value => current_user.id %>
   <%= form.hidden_field :course_id, :value => @course.id %>
 
   <%= form.input :time_zone, label: "Time Zone", required: true %>
 
-  <!-- <%= form.label 'Dream Partner' %> -->
-  <!-- <%= form.collection_select :dream_partner, @course.students.order(firstname: :asc, lastname: :asc), :id, :full_name, {:include_blank => true} %> -->
-  <% all_classmates = @course.students.order(lastname: :asc, firstname: :asc).reject {|stu| stu.id == current_student.id } %>
-  <%= form.input :dream_partner, label: "Dream Partner", as: :check_boxes, collection: all_classmates, include_hidden: false, input_html: {mutiple: true, include_blank: true} %>
-  <br>
-  <%= form.label 'Select Your Prefered Time for Group Meeting'%>
+  <%= form.input :dream_partner, collection: @course.students.all_except(current_user).order(firstname: :asc, lastname: :asc), include_blank: false, input_html: { multiple: true } %>
 
-  <div>
-    <!-- <%= form.input :schedule, label: false, as: :check_boxes, collection: [['Monday Morning', 'mondayM'], ['Monday Night', 'mondayN'], ['Tuesday Morning', 'tuesdayM'], ['Tuesday Night', 'tuesdayN'], ], :include_hidden => false, :multiple => true %> -->
-    <%= form.input :schedule, label: false, as: :check_boxes, collection: Preference::TIME_SLOT, :include_hidden => false, :multiple => true %>
+  <%= form.label 'Select Your Prefered Time for Group Meeting (Your Local Time)'%> <sup>*</sup>
+
+  <div class="field">
+
+    <table class="table table-condensed">
+
+      <thead>
+      <tr>
+        <th></th>
+        <th>Morning (8 am-12 am)</th>
+        <th>Afternoon (1 am-5 pm)</th>
+        <th>Evening (6 pm-10 pm)</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td> Monday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :mondayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :mondayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :mondayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Tuesday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :tuesdayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :tuesdayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :tuesdayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Wednesday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :wednesdayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :wednesdayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :wednesdayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Thursday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :thursdayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :thursdayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :thursdayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Friday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :fridayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :fridayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :fridayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Saturday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :saturdayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :saturdayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :saturdayE %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td> Sunday </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :sundayM %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :sundayA %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.input :schedule, :label => false do %>
+            <%= check_box_tag :sundayE %>
+          <% end %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-
-
   <div class="form-actions">
     <%= form.button :submit, class: "btn btn-primary" %>
   </div>
