@@ -5,6 +5,18 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
+
+    <div class='row profile-row'>
+      <div class='col course-profile-column'>
+
+      <%= form_for @course, :url => {:action => "parse_file"} do |form| %>
+        <%= form.label "Import Project Lists From The CSV File" %>
+        <%= form.file_field :file %>
+        <%= form.submit "Upload", class: "btn btn-primary" %>
+      <% end %>
+      </div>
+    </div>
+
   </div>
   <div id="projects-list">
     <%= render partial: "project", course:@course %>

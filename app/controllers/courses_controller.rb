@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   # before_action :set_course
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   # before_action :set_course, only: [ :destroy]
 
@@ -14,6 +14,8 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    puts @course.name
+    puts @course.file.nil?
     if current_user.type == 'Professor'
       current_user.current_course_id = @course.id
       current_user.save
@@ -23,6 +25,17 @@ class CoursesController < ApplicationController
     else
       @preference = @course.preferences.find_by(course_id:params[:id])
     end
+  end
+
+  def parse_file
+      @course = Course.find(params[:id])
+      file_path = params[:course][:file].path
+      puts file_path
+      CSV.foreach(file_path, :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+        row_hash = row.to_h
+        Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
+      end
+      redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
   end
 
   # GET /courses/new
@@ -154,7 +167,7 @@ class CoursesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:id, :name, :pin, :professor_id, :withProject, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes], preference_weight_attributes:[:id, :subject_proficiency, :dream_partner, :time_zone, :schedule], votes_attributes:[:student_id, :course_id, :vote_first, :vote_second, :vote_third])
+      params.require(:course).permit(:id, :name, :pin, :professor_id, :withProject, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, :file, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes], preference_weight_attributes:[:id, :subject_proficiency, :dream_partner, :time_zone, :schedule], votes_attributes:[:student_id, :course_id, :vote_first, :vote_second, :vote_third])
       # params.permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)
     end
 end

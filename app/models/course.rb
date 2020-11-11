@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
     attr_accessor :has_project
     belongs_to :professor
+    has_one_attached :file
     has_many :preferences, dependent: :destroy
     has_many :projects, dependent: :destroy
     accepts_nested_attributes_for :projects
