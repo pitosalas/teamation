@@ -38,12 +38,12 @@
             </li>
             <li>
               <% if current_user.type == "Professor" %>
-                <%= link_to edit_professor_path do %>
+                <%= link_to edit_professor_path(current_professor.id) do %>
                   <h2><i class="fas fa-user-edit nav-link"></i></h2>
                   <h6 style="color: lightgrey">Edit Profile</h6>
                 <% end %>
               <% else  %>
-                <%= link_to edit_student_path do %>
+                <%= link_to edit_student_path(current_student.id) do %>
                   <h2><i class="fas fa-user-edit nav-link"></i></h2>
                   <h6>Edit Profile</h6>
                 <% end %>

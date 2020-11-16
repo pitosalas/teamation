@@ -3,6 +3,17 @@ Rails.application.configure do
 
   config.session_store :cache_store
 
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "example.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["GMAIL_USERNAME"],
+    password:ENV["GMAIL_PASSWORD"]
+  }
+
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   
   # In the development environment your application's code is reloaded on
