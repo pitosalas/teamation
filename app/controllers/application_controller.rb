@@ -13,4 +13,7 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :email, :password, :password_confirmation])
     end
 
+    def authenticate_user!
+        redirect_to root_path, notice: "Please Log In First to Continue the Process." unless user_signed_in? 
+    end
 end
