@@ -44,9 +44,22 @@ module ApplicationHelper
     student.takings.where(course_id: course.id).first.state == "view_groups"
   end
 
+  def get_student_state student, course
+    return student.takings.where(course_id: course.id).first.state
+  end
+  
+  def find_student_group student, course
+    course.groups.each do |g|
+     if g.students_id.include? student.id
+       return g.group_name
+     end
+    end
+    return nil
+  end
+
   def get_status_with_state state
-    if state == "fill_question"
-      return "Fill Questionnaire"
+    if state == "fill_question" or state == "fill_preference"
+      return "Settings"
     elsif state == "project_brainstorm"
       return "Project Brainstorm"
     elsif state == "project_voting"

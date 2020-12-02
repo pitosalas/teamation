@@ -17,11 +17,11 @@
       <div class="navbar-brand">
         <% if current_user %>
           <%= link_to current_user do %>
-            <%= image_tag '/assets/logo.png', width: 130, height: 100%>
+            <%= image_tag 'logo.png', width: 130, height: 100%>
           <% end %>
         <% else %>
           <%= link_to "/" do %>
-            <%= image_tag '/assets/logo.png', width: 130, height: 100%>
+            <%= image_tag 'logo.png', width: 130, height: 100%>
           <% end %>
         <% end %>
       </div>
@@ -57,6 +57,7 @@
             </div>
           <% end %>
     </nav>
+    
     <% if current_user %>
       <%= render 'layouts/path'%>
     <% end %>

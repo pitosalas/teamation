@@ -1,8 +1,6 @@
 class CoursesController < ApplicationController
-  # before_action :set_course
   before_action :authenticate_user!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-  # before_action :set_course, only: [ :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -33,9 +31,19 @@ class CoursesController < ApplicationController
       puts file_path
       CSV.foreach(file_path, :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
         row_hash = row.to_h
-        Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
+        if !Project.find_by(project_name: row_hash["Project_Name"], course_id: @course.id).nil?
+          time = Time.now
+          project_name = row_hash["Project_Name"] + "_" + time.strftime("%Y%m%d%H%M%S")
+          Project.create(project_name: project_name, course_id: @course.id, description: row_hash["Description"], is_active: true)
+        else
+          Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
+        end
       end
       redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
+  end
+
+  def download
+    send_file 'public/sample.csv'
   end
 
   # GET /courses/new

@@ -16,27 +16,23 @@
           <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
         <% end %>
     </div>
-    <%# if course.students.size == 0 || course.groups.size == 0 %>
-<!--      <div class='not-assigned-text-professor'>-->
-        <%# if course.students.size == 0 %>
-<!--          <h6>No Student Enrolled</h6>-->
-        <%# else %>
-<!--          <h6>Total Students: <%#= course.students.size %></h6>-->
-<!--          <h6>No Groups Created Yet</h6>-->
-        <%# end %>
-<!--        <div class="course-status-professor" style="margin-top: 20px;">-->
-<!--          <p>Status: <%#= get_status_with_state(course.state) %></p>-->
-<!--        </div>-->
-<!--      </div>-->
-    <%# else %>
-<!--      <div class='assigned-text-professor'>-->
-<!--        <h6>Total Students: <%#= course.students.size %></h6>-->
-<!--        <h6>Total Groups: <%#= course.groups.size %></h6>-->
-<!--        <div class="course-status-professor" style="margin-top: 20px;">-->
-<!--          <p>Status: <%#= get_status_with_state(course.state) %></p>-->
-<!--        </div>-->
-<!--      </div>-->
-    <%# end %>
+    <% if course.groups.size == 0 %>
+      <div class='not-assigned-text-professor'>
+        <h6>No Groups Created Yet</h6>
+        <div class="course-status-professor" style="margin-top: 20px;">
+          <% state = get_student_state(current_user, course) %>
+          <p>Status: <%= get_status_with_state(state) %></p>
+        </div>
+      </div>
+    <% else %>
+      <div class='assigned-text-professor'>
+        <p> Your group: <%= find_student_group(current_user, course) %></p>
+        <div class="course-status-professor" style="margin-top: 20px;">
+          <% state = get_student_state(current_user, course) %>
+          <p>Status: <%= get_status_with_state(state) %></p>
+        </div>
+      </div>
+    <% end %>
 
     <div class='row course-button-row'>
       <div id="course-button">
