@@ -1,25 +1,11 @@
-<!--<div class="container course-column-box-professor">-->
-<!--  <div class='row course-name-row' >-->
-<!--    <div class="col projects-box">-->
-<!--      <h5 class='project-title'>-->
-<!--        Add a New Project-->
-<!--      </h5>-->
-<!--      <div class = 'add-project-container'>-->
-<!--        <div class= 'container project-container project-container-input'>-->
-          <%#= render 'projects/form', project: @course.projects.build %>
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-    <div class="project-cards">
-        <%= render 'projects/projects'%>
-        <div class = 'add-project-container'>
-          <div class= "new-project-input">
-            <h5 class='project-title'>
-              Add a New Project
-            </h5>
-            <%= render 'projects/form', project: @course.projects.build %>
-          </div>
-        </div>
+<div class="project-cards">
+    <%= render 'projects/projects'%>
+    <div class = 'add-project-container'>
+      <div class= "new-project-input">
+        <h5 class='project-title'>
+          Add a New Project
+        </h5>
+        <%= render 'projects/form', project: @course.projects.build %>
+      </div>
     </div>
-<!--  </div>-->
-<!--</div>-->
+</div>
