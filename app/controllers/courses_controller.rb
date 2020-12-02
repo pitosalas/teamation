@@ -42,8 +42,12 @@ class CoursesController < ApplicationController
       redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
   end
 
-  def download
-    send_file 'public/sample.csv'
+  def project_download
+    send_file 'public/project_sample.csv'
+  end
+
+  def student_download
+    send_file "public/student_sample.csv"
   end
 
   # GET /courses/new

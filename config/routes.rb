@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  match 'download', to: 'courses#download', as: 'download', via: :get
+  match 'project_download', to: 'courses#project_download', as: 'download_project_list', via: :get
+  match 'student_download', to: 'courses#student_download', as: 'download_student_list', via: :get
   devise_for :students, path: 'students', controllers: {
     registrations: "students/registrations",
     sessions: "students/sessions"
