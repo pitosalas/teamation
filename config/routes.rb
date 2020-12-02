@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get "project_brainstorm"
       get "project_voting"
       get "grouping"
+      patch "update_mode"
       patch "parse_file"
     end
     resources :projects

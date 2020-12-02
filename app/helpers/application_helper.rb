@@ -29,19 +29,19 @@ module ApplicationHelper
   end
 
   def student_at_fill_preference? student, course
-    student.takings.find(course.id).state == "fill_preference"
+    student.takings.where(course_id: course.id).first.state == "fill_preference"
   end
 
   def student_at_project_brainstorm? student, course
-    student.takings.find(course.id).state == "project_brainstorm"
+    student.takings.where(course_id: course.id).first.state == "project_brainstorm"
   end
 
   def student_at_project_voting? student, course
-    student.takings.find(course.id).state == "project_voting"
+    student.takings.where(course_id: course.id).first.state == "project_voting"
   end
 
   def student_at_view_groups? student, course
-    student.takings.find(course.id).state == "view_groups"
+    student.takings.where(course_id: course.id).first.state == "view_groups"
   end
 
   def get_status_with_state state

@@ -2,42 +2,60 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 <% @courses.each do |course| %>
-    <div class="container course-column-box">
-        <div class='row course-name-row'>
-            <div id="course-name">
-              <% if current_user.type == "Professor" %>
-                <% if course.state == "fill_question" %>
-                  <%= link_to course.name, fill_question_course_path(course), class:'btn course-name-button' %>
-                <% elsif course.state == "project_brainstorm" %>
-                  <%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %>
-                <% elsif course.state == "project_voting" %>
-                  <%= link_to course.name, project_voting_course_path(course), class:'btn course-name-button' %>
-                <% elsif course.state == "choose_algo" %>
-                  <%= link_to course.name, grouping_course_path(course), class:'btn course-name-button' %>
-                <% else %>
-                  <%= link_to course.name, course_path(course), class:'btn course-name-button' %>
-                <% end %>
-              <% else %>
-                <%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %>
-              <% end %>
-            </div>
-        </div>
-        
-        <div class='not-assigned-text-professor'>
-            <h6>No Student Enrolled</h6>
-        </div>
-        
-        <div class='row course-drop-row'>
-            <div id="course-drop-button">
-            <%= link_to drop_course_student_path(student_id: @user.id, course_id: course.id), method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
-            <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Drop course</button>
-            <% end %>
-            </div>
-        </div>
+  <div class="container course-column-box-professor">
+    <div class='row course-name-row' >
+        <% if student_at_fill_preference? @user, course %>
+        <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+        <% elsif student_at_project_brainstorm? @user, course %>
+          <div id="course-name"><%= link_to course.name, project_brainstorm_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif student_at_project_voting? @user, course %>
+          <div id="course-name"><%= link_to course.name, project_voting_course_path(course), class:'btn course-name-button' %></div>
+        <% elsif student_at_view_groups? @user, course %>
+          <div id="course-name"><%= link_to course.name, course_groups_path(course), class:'btn course-name-button' %></div>
+        <% else %>
+          <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
+        <% end %>
     </div>
+    <%# if course.students.size == 0 || course.groups.size == 0 %>
+<!--      <div class='not-assigned-text-professor'>-->
+        <%# if course.students.size == 0 %>
+<!--          <h6>No Student Enrolled</h6>-->
+        <%# else %>
+<!--          <h6>Total Students: <%#= course.students.size %></h6>-->
+<!--          <h6>No Groups Created Yet</h6>-->
+        <%# end %>
+<!--        <div class="course-status-professor" style="margin-top: 20px;">-->
+<!--          <p>Status: <%#= get_status_with_state(course.state) %></p>-->
+<!--        </div>-->
+<!--      </div>-->
+    <%# else %>
+<!--      <div class='assigned-text-professor'>-->
+<!--        <h6>Total Students: <%#= course.students.size %></h6>-->
+<!--        <h6>Total Groups: <%#= course.groups.size %></h6>-->
+<!--        <div class="course-status-professor" style="margin-top: 20px;">-->
+<!--          <p>Status: <%#= get_status_with_state(course.state) %></p>-->
+<!--        </div>-->
+<!--      </div>-->
+    <%# end %>
+
+    <div class='row course-button-row'>
+      <div id="course-button">
+        <div id="drop-course-button">
+          <%= link_to course_path(course), method: :delete, data: { confirm: 'Are you sure you want to drop this course?' } do %>
+            <button class="btn btn-outline-primary dropButton"><i class="fas fa-minus-circle"></i> Delete course</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 
-<script>
 
-    
-</script>
+<div class="container add-course-column-box">
+  <% add_course_path = @user.id.to_s+ "/add_course" %>
+  <div id="add-course-button" style="text-align: center; margin-top: 100px;">
+    <%= link_to add_course_path, remote: true do %>
+      <button class="btn btn-primary addButton"><i class="fas fa-plus"></i> Add new course</button>
+    <% end %>
+  </div>
+</div>

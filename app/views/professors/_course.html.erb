@@ -4,7 +4,6 @@
 <% @courses.each do |course| %>
   <div class="container course-column-box-professor">
     <div class='row course-name-row' >
-      <% if has_project? course %>
         <% if at_fill_question? course %>
           <div id="course-name"><%= link_to course.name, fill_question_course_path(course), class:'btn course-name-button' %></div>
         <% elsif at_project_brainstorm? course %>
@@ -18,9 +17,6 @@
         <% else %>
           <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
         <% end %>
-      <% else %>
-        <div id="course-name"><%= link_to course.name, course_path(course), class:'btn course-name-button' %></div>
-      <% end %>
     </div>
     <% if course.students.size == 0 || course.groups.size == 0 %>
       <div class='not-assigned-text-professor'>

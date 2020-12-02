@@ -23,7 +23,7 @@ class ProfessorsController < ApplicationController
     # GET /professors/1.json
     def show
         @user = User.find(params[:id])
-        @courses = @user.courses
+        @courses = @user.courses.order('created_at ASC')
     end
 
     #GET /professors/1/add_course

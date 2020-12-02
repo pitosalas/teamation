@@ -1,6 +1,8 @@
-<%= bootstrap_form_with model: [@course, project], remote: true do |f| %>
-  <%= f.text_field :project_name, hide_label: true, placeholder: "Project Name", required:true%>
-  <%= f.text_area :description, hide_label: true, rows:"8", placeholder: "Description", required:true %>
+<%= simple_form_for @course, remote: true do |f| %>
+  <%= simple_fields_for :project do |p| %>
+    <%= p.input :project_name, label: false, placeholder: "Project Name", required: true %>
+    <%= p.input :description, as: :text, label: false, placeholder: "Description", required: true%>
+  <% end %>
   <div class="container add-projects-button">
     <%= f.submit "Add", class: "btn btn-primary addButton addProjectBtn" %>
   </div>
