@@ -5,29 +5,34 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
-
-    <div class='row profile-row'>
-      <div class='col course-profile-column'>
-
-      <p class="secondary-title">
-        <strong>Import Project Lists From The CSV File</strong>
-        <p>Please download the sample csv <%= link_to "Sample CSV", download_path, target: "_blank" %></p>
-      </p>
-      <%= form_for @course, :url => {:action => "parse_file"} do |form| %>
-        <span><i class="far fa-arrow-alt-circle-up"></i></span>
-        <!-- <%= form.label "Import Project Lists From The CSV File" %> -->
-        <%= form.file_field :file %>
-        <%= form.submit "Upload", class: "btn btn-primary" %>
-      <% end %>
-
-
-
-
+  </div>
+  <div class="projects-list">
+    <% if current_user.type == 'Professor' %>
+      <div class="row project-row">
+        <div>
+          <h5>Import Project Lists From CSV</h5>
+          <p>* Please download the <%= link_to "Sample CSV", download_path, target: "_blank" %> for format</p>
+          <%= form_for @course, :url => {:action => "parse_file"} do |form| %>
+            <%= form.file_field :file %>
+            <%= form.submit "Upload", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row project-row">
+      <div class = "project-info">
+        <div class="project-title">
+          <h5>
+            Projects List
+          </h5>
+        </div>
+        <div class="project-stats">
+          <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
+        </div>
       </div>
     </div>
-
-  </div>
-  <div class="projects-list" style="margin-left:140px; margin-right:100px;">
-    <%= render partial: "project", course:@course %>
+    <div class="row project-row">
+      <%= render partial: "project", course:@course %>
+    </div>
   </div>
 </body>

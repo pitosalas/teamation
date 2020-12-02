@@ -14,11 +14,31 @@ module GroupCreationManager
       def getStudents(course)
         students = []
         course.students.each do |student|
-          course.students.each do |student|
-            students << student.id
-          end
+          students << student.id
         end
         return students
+      end
+
+      def getPreferences(course)
+        preferences = []
+        course.preferences.each do |preference|
+          preference_hash = {student_id: preference.student_id,
+                             codingProficiency: preference.subject_matter_proficiency,
+                             time_zone: preference.time_zone,
+                             dream_partner: preference.dream_partner,
+                             schedule: preference.schedule}
+          preferences << preference_hash
+        end
+        return preferences
+      end
+
+      def getProfessorPreferences(course)
+        pro_preference = course.preference_weight
+        return ({subject_proficiency: pro_preference.subject_proficiency,
+                 dream_partner: pro_preference.dream_partner,
+                 time_zone: pro_preference.time_zone,
+                 schedule: pro_preference.schedule,
+                 project_voting: pro_preference.project_voting})
       end
 
       def getStudentsAndProjects(course)
@@ -49,9 +69,20 @@ module GroupCreationManager
         students, projects = getStudentsAndProjects(course)
         votes = getVotes(course)
         algorithm = params[:algo]
+        puts algorithm
         if algorithm == "project_only"
           matching_object = ProjectMatching.new
           matching_object.initAndProjectMatch(projects, votes, students, course)
+        elsif algorithm == "holistic"
+          preferences = getPreferences(course)
+          professor_preferences = getProfessorPreferences(course)
+          matching_object = HolisticMatching.new
+          matching_object.initAndHolisticMatch(projects, votes, students, course, preferences, professor_preferences)
+        elsif algorithm == "preference_only"
+          preferences = getPreferences(course)
+          professor_preferences = getProfessorPreferences(course)
+          matching_object = PreferenceMatching.new
+          matching_object.initAndPreferenceMatch(projects, students, course, preferences, professor_preferences)
         end
         assign_groups(matching_object.matched_groups, course)
       end

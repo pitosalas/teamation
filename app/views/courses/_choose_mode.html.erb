@@ -1,17 +1,25 @@
-<div class='col course-profile-column'>
-  <div id="choose-mode">
-    <%= form_for @course, method: :put do |form|%>
-      <%= form.hidden_field :withProject, value: true %>
-      <%= form.submit "Create Groups with Project", class: "btn btn-primary"%>
-<!--      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>-->
-    <% end %>
-  </div>
-
-  <div id="choose-mode">
-    <%= form_for @course, method: :put do |form|%>
-      <%= form.hidden_field :withProject, value: true %>
-      <%= form.submit "Create Groups without Project", class: "btn btn-primary"%>
-      <!--      <button class="btn btn-primary"><i class="fas fa-list"></i> Create Groups with Project</button>-->
-    <% end %>
+<div class="mode">
+  <div class="row choose-mode">
+    <div class="col col-sm-4 with-project">
+      <% id = @course.id %>
+      <%= form_with(url: "/courses/" + id.to_s+"/update_mode", method: "patch") do |form|%>
+        <%= form.hidden_field :withProject, value: true %>
+        <%= form.submit "Create Groups with Project", class: "btn btn-primary" %>
+        <%#= button_tag 'submit', class: "btn btn-primary" do %>
+<!--          <h1 style="text-align: center"><i class="fas fa-project-diagram" aria-hidden="true"></i></h1>-->
+<!--          <p>Create Groups with Project</p>-->
+        <%# end %>
+      <% end %>
+    </div>
+    <div class="col col-sm-4 without-project">
+      <%= form_with(url: "/courses/" + id.to_s+"/update_mode", method: "patch") do |form|%>
+        <%= form.hidden_field :withProject, value: false %>
+        <%= form.submit "Create Groups without Project", class: "btn btn-primary" %>
+        <%#= button_tag 'submit', class: "btn btn-primary" do %>
+<!--          <h1 style="text-align: center"><i class="fas fa-users" aria-hidden="true"></i></h1>-->
+<!--          <p>Create Groups without Project</p>-->
+        <%# end %>
+      <% end %>
+    </div>
   </div>
 </div>

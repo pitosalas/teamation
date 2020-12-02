@@ -3,7 +3,7 @@
     <% if !project.id.nil? %>
 <!--    <div class = 'add-project-container'>-->
       <div class="card project-card-active" style="width: 320px; height: 220px;">
-        <div class="card-body">
+        <div class="card-body" style="width: 300px; height: 230px;">
           <div class="row">
             <h4 class='col project-name-text'>
               <%= project.project_name %>
@@ -15,8 +15,8 @@
           <div class='form-control project-description-text'>
             <p><%= project.description %></p>
           </div>
-          <div class="row" id="project-list-buttons" style="margin-top: 20px;">
-            <div class ="col" id="edit-project">
+          <div class="row" id="project-list-buttons">
+            <div class ="col-sm-2" id="edit-project">
               <%= link_to ('<i class="fas fa-edit"> </i>').html_safe, edit_course_project_path(@course, project), {:method => :get, :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#edit-project-modal'}  %>
               <div id="edit-project-modal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -24,18 +24,18 @@
                 </div>
               </div>
             </div>
-            <div class ="col" id="mark-project-active" style="font-size: 8px;">
+            <div class ="col-sm-8" id="mark-project-active" style="font-size: 8px; text-align: center">
               <% if project.is_active %>
                 <div>
-                  <%= link_to "Not Active", course_project_path(@course, project, project: {is_active: false}), :method => :patch, class: "btn btn-primary btn-sm"%>
+                  <%= link_to "Remove from Active", course_project_path(@course, project, project: {is_active: false}), :method => :patch, class: "btn btn-primary btn-sm"%>
                 </div>
               <% else %>
                 <div>
-                  <%= link_to "Mark Active", course_project_path(@course, project, project: {is_active: true}), :method => :patch, class: "btn btn-primary btn-sm"%>
+                  <%= link_to "Mark as Active", course_project_path(@course, project, project: {is_active: true}), :method => :patch, class: "btn btn-primary btn-sm"%>
                 </div>
               <% end %>
             </div>
-            <div class ="col" id="like-project" style="text-align: right">
+            <div class ="col-sm-2" id="like-project" style="text-align: right">
               <i class="fas fa-heart"></i>
             </div>
           </div>

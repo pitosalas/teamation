@@ -12,8 +12,8 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
-    puts @course.name
-    puts @course.file.nil?
+    # puts @course.name
+    # puts @course.file.nil?
     if current_user.type == 'Professor'
       current_user.current_course_id = @course.id
       current_user.save
@@ -120,26 +120,38 @@ class CoursesController < ApplicationController
     end
   end
 
+  def update_mode
+    @course = Course.find_by_id(params[:id])
+    @course.withProject = params[:withProject]
+    @course.state = "fill_question"
+    @course.save
+    respond_to do |format|
+      format.html { redirect_to fill_question_course_path(@course) }
+    end
+  end
+
 
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
     @course = Course.find_by_id(params[:id])
-    @course.build_preference_weight unless @course.preference_weight
+    if @course.withProject
+      @course.build_preference_weight unless @course.preference_weight
+    end
     respond_to do |format|
       if @course.update(course_params)
-          if @course.withProject && !@course.minimum_group_member.nil?
-            format.html { redirect_to project_brainstorm_course_path(@course), notice: 'Form Submitted'}
-            format.json { render :show, status: :ok, location: @course }
-          elsif @course.withProject
-            format.html { redirect_to fill_question_course_path(@course), notice: 'Form Submitted'}
-            format.json { render :show, status: :ok, location: @course }
-          else
-            format.html { redirect_to project_brainstorm_course_path(@course), notice: 'Form Submitted'}
-            format.json { render :show, status: :ok, location: @course }
-          end
+        if @course.withProject && !@course.minimum_group_member.nil?
+          format.html { redirect_to project_brainstorm_course_path(@course), notice: 'Form Submitted'}
+          format.json { render :show, status: :ok, location: @course }
+        elsif @course.withProject
+          format.html { redirect_to fill_question_course_path(@course), notice: 'Form Submitted'}
+          format.json { render :show, status: :ok, location: @course }
+        else
+          format.html { redirect_to grouping_course_path(@course), notice: 'Form Submitted'}
+          format.json { render :show, status: :ok, location: @course }
+        end
       else
-        format.html { redirect_to fill_question_course_path(@course) }
+        format.html { redirect_to fill_question_course_path(@course), notice: 'Update Error'}
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -175,7 +187,7 @@ class CoursesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:id, :name, :pin, :professor_id, :withProject, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, :file, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes], preference_weight_attributes:[:id, :subject_proficiency, :dream_partner, :time_zone, :schedule], votes_attributes:[:student_id, :course_id, :vote_first, :vote_second, :vote_third])
+      params.require(:course).permit(:id, :name, :pin, :professor_id, :withProject, :maximum_group_member, :minimum_group_member, :has_group, :is_voting, :file, projects_attributes:[:project_name, :course_id, :description, :is_active, :number_of_likes], preference_weight_attributes:[:id, :subject_proficiency, :dream_partner, :time_zone, :schedule, :project_voting], votes_attributes:[:student_id, :course_id, :vote_first, :vote_second, :vote_third])
       # params.permit(:id, :name, :pin, :professor_id, :has_project, :maximum_group_member, :minimum_group_member, :has_group, :is_voting)
     end
 end

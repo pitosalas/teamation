@@ -14,34 +14,6 @@
     <hr style="background: black; height: 3px;">
   </div>
   <div class="col">
-      <%= link_to project_brainstorm_course_path(@course) do %>
-      <% if controller_name == 'courses' && action_name == 'project_brainstorm' %>
-        <h3 style="color: green"><i class="fas fa-lightbulb"></i></h3>
-        <p style="color: green">Project Brainstorm</p>
-      <% else %>
-        <h3><i class="fas fa-lightbulb"></i></h3>
-        <p>Project Brainstorm</p>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col" style="width: 15px; margin-right:10px;">
-    <hr style="background: black; height: 3px;">
-  </div>
-  <div class="col">
-    <%= link_to project_voting_course_path(@course) do %>
-      <% if controller_name == 'courses' && action_name == 'project_voting' %>
-        <h3 style="color: green"><i class="fas fa-thumbs-up"></i></h3>
-        <p style="color: green">Project Voting</p>
-      <% else %>
-        <h3><i class="fas fa-thumbs-up"></i></h3>
-        <p>Project Voting</p>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col" style="width: 15px; margin-right:10px;">
-    <hr style="background: black; height: 3px;">
-  </div>
-  <div class="col">
     <%= link_to grouping_course_path(@course) do %>
       <% if controller_name == 'courses' && action_name == 'grouping' %>
         <h3 style="color: green"><i class="fas fa-divide"></i></h3>

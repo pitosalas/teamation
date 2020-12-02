@@ -1,6 +1,6 @@
 class PreferencesController < ApplicationController
   before_action :set_course
-  before_action :set_preference, only: [:show, :edit, :update, :destroy]
+  # before_action :set_preference, only: [:show, :edit, :update, :destroy]
 
   # GET /preferences
   # GET /preferences.json
@@ -37,7 +37,7 @@ class PreferencesController < ApplicationController
     @preference = @course.preferences.new(preference_params.merge(schedule: schedule_j))
     respond_to do |format|
       if @preference.save
-        format.html { redirect_to course_preference_path(@course.id), notice: 'Preference was successfully created.' }
+        format.html { redirect_to course_path(@course), notice: 'Preference was successfully created.' }
         format.json { render :show, status: :created, location: @preference }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class PreferencesController < ApplicationController
     schedule_j = schedule_arr.to_json
     respond_to do |format|
       if @preference.update(preference_params.merge(schedule: schedule_j))
-        format.html { redirect_to course_preference_path(@course.id), notice: 'Preference was successfully updated.' }
+        format.html { redirect_to course_path(@course), notice: 'Preference was successfully updated.' }
         format.json { render :show, status: :ok, location: @preference }
       else
         format.html { render :edit }

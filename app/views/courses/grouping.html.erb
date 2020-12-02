@@ -9,12 +9,14 @@
     <div class="choose_algorithm" style="margin-top: 20px;">
       <%= link_to 'Create Groups with Preferences', course_groups_path(@course, algo: "preference_only"), class:"btn btn-primary" %>
     </div>
-    <div class="choose_algorithm" style="margin-top: 20px;">
-        <%= link_to 'Create Groups with Projects Voting', course_groups_path(@course, algo: "project_only"), class:"btn btn-primary" %>
-    </div>
-    <div class="choose_algorithm" style="margin-top: 20px;">
-      <%= link_to 'Create Groups with Preferences and Voting', course_groups_path(@course, algo: "project_and_preference"), class:"btn btn-primary" %>
-    </div>
+    <% if @course.withProject %>
+      <div class="choose_algorithm" style="margin-top: 20px;">
+          <%= link_to 'Create Groups with Projects Voting', course_groups_path(@course, algo: "project_only"), class:"btn btn-primary" %>
+      </div>
+      <div class="choose_algorithm" style="margin-top: 20px;">
+        <%= link_to 'Create Groups with Preferences and Voting', course_groups_path(@course, algo: "holistic"), class:"btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
 </div>
 </body>

@@ -1,14 +1,32 @@
-class HolisticMatching < ProjectMatching
-
-  def initAndHolisticMatch(projects, votes, students, course, preferences, professor_preferences)
-    initProjects(projects, votes, students, course)
-    add_professor_preferences(professor_preferences)
+class PreferenceMatching < Matching
+  def initAndPreferenceMatch(projects, students, course, preferences, professor_preferences)
+    add_projects(projects)
+    add_students(students)
     add_preferences(preferences)
-    holistic_algorithm()
+    add_professor_preferences(professor_preferences)
+    @course = course
+    preference_algorithm()
   end
 
-  def holistic_algorithm
-    match()
+  def random_match()
+    @group_size_min = @course.minimum_group_member
+    @group_size_max = @course.maximum_group_member
+    result = {}
+    @projects.each do |p|
+      result[p] = []
+    end
+    #(1)populate the result hash by assigning students's first choice
+    @students.each do |s|
+      project = @projects.sample
+      project = @projects.sample while result[project].size >= @group_size_max
+      result[project] << s
+    end
+    @matched_groups = result
+    puts @matched_groups
+  end
+  
+  def preference_algorithm
+    random_match()
     initial_team = @matched_groups
     result = initial_team
     if result.keys.size == 1
@@ -51,9 +69,7 @@ class HolisticMatching < ProjectMatching
   def swap_member(team)
     team1 = team.keys.sample
     team2 = team.keys.sample
-    while team1 == team2
-      team2 = team.keys.sample
-    end
+    team2 = team.keys.sample while team1 == team2
     student1_index = check_for_empty_teams(team, team1)
     student2_index = check_for_empty_teams(team, team2)
     temp = student1_index.nil? ? nil : team[team1][student1_index]
@@ -94,10 +110,9 @@ class HolisticMatching < ProjectMatching
     lowest_score = Float::MAX
     formation.each do |project_id, teamArr|
       score = @professor_preferences[:schedule] * get_schedule_score(teamArr) +
-      @professor_preferences[:subject_proficiency] * get_subject_proficiency_score(teamArr)
+          @professor_preferences[:subject_proficiency] * get_subject_proficiency_score(teamArr)
       + @professor_preferences[:dream_partner] * get_partner_score(teamArr)
-      + @professor_preferences[:time_zone] * get_time_zone_score(teamArr) +
-      @professor_preferences[:project_voting] * get_project_score(teamArr, project_id)
+      + @professor_preferences[:time_zone] * get_time_zone_score(teamArr)
       if score < lowest_score
         lowest_score = score
       end
@@ -180,24 +195,6 @@ class HolisticMatching < ProjectMatching
       end
     end
     puts "partner score"
-    puts counter.to_f / teamArr.size
-    return counter.to_f / teamArr.size
-  end
-
-  def get_project_score(teamArr, proj_id)
-    counter = 0
-    teamArr.each do |x|
-      if proj_id == @preferences_hash[x][:vote_first]
-        counter += 4
-      elsif proj_id == @preferences_hash[x][:vote_second]
-        counter += 2
-      elsif proj_id == @preferences_hash[x][:vote_third]
-        counter += 1
-      else
-        counter -= 1
-      end
-    end
-    puts "project score"
     puts counter.to_f / teamArr.size
     return counter.to_f / teamArr.size
   end

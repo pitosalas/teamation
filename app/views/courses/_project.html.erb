@@ -10,23 +10,16 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
-      <h5 class='project-title' style="text-align: center">
-        Projects List
-      </h5>
-      <div id="project-stats" style="text-align: center">
-        <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
-      </div>
-      <%= render 'projects/projects'%>
-      <div class="col project-card-archive">
-        <h5 class='project-title'>
-          Add a New Project
-        </h5>
+    <div class="project-cards">
+        <%= render 'projects/projects'%>
         <div class = 'add-project-container'>
-          <div class= 'container project-container project-container-input'>
+          <div class= "new-project-input">
+            <h5 class='project-title'>
+              Add a New Project
+            </h5>
             <%= render 'projects/form', project: @course.projects.build %>
           </div>
         </div>
-      </div>
-<!--    </div>-->
+    </div>
 <!--  </div>-->
 <!--</div>-->

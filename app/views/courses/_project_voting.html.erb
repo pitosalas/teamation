@@ -1,9 +1,4 @@
-<div class = "wrapper overflow projects-container" id="project-brainstorm">
-  <div class="row project-row">
-    <div class="col projects-box">
-      <h5 class='project-title' style="text-align: left">
-        Active Projects
-      </h5>
+<div class = "wrapper overflow projects-list">
       <div class="error_message">
           <% if @course.errors.any? %>
             <% @course.errors.full_messages.each do |message| %>
@@ -12,10 +7,13 @@
           <% end %>
       </div>
       <div class="project-voting" style="margin-bottom: 15px;">
+        <div class="active-projects">
+        <div>
+          <h4>Active Projects</h4>
+        </div>
           <% @course.projects.active.each do |project|%>
-            <%#= render 'single_project', project: project %>
             <% if !project.id.nil? %>
-              <div class="card project-card-active" style="width: 25rem; height: 20rem; margin-top: 10px;">
+              <div class="card project-card-active">
                 <div class="card-body">
                   <div class="archive-button" style="text-align: right">
                     <%= label_tag do %>
@@ -33,12 +31,10 @@
                   <!--                <i class="fas fa-heart"></i>-->
                   <!--              </div>-->
                 </div>
-                <div id="vote-buttons" class="row vote-button-rows" style="margin-left: 5px; margin-bottom: 10px; margin-right: 5px;">
-                  <div class="col-lg-4 vote-button">
+                <div id="vote-buttons" class="row vote-button-rows" style="margin-left: 5px; margin-bottom: 10px; margin-right: 5px; text-align: center">
+                  <div class="col-lg-3 vote-button">
                     <% if !@current_user_vote.nil? and @current_user_vote.vote_first == project.id %>
                       <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteFirst", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
-
-
                         <%= form.fields_for :votes, @course.votes do |vote_form| %>
                           <%= vote_form.hidden_field :id %>
                         <% end %>
@@ -55,7 +51,7 @@
                         <% end %>
                     <% end %>
                   </div>
-                  <div class="col-lg-4 vote-button">
+                  <div class="col-lg-4 vote-button" style="text-align: center">
                     <% if !@current_user_vote.nil? and @current_user_vote.vote_second == project.id %>
                       <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteSecond", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
                         <%= form.fields_for :votes, @course.votes do |vote_form| %>
@@ -74,7 +70,7 @@
                       <% end %>
                     <% end %>
                   </div>
-                  <div class="col-lg-4 vote-button">
+                  <div class="col-lg-3 vote-button" style="text-align: left">
                     <% if !@current_user_vote.nil? and @current_user_vote.vote_third == project.id %>
                       <%= form_with model: @course, data: { reflex: "submit->CourseReflex#unvoteThird", course_id: @course.id, user_id: current_user.id, project_id: project.id } do |form| %>
                         <%= form.fields_for :votes, @course.votes do |vote_form| %>
@@ -95,13 +91,12 @@
               </div>
             <% end %>
           <% end %>
-      </div>
-    </div>
-    <div class="col projects-box">
-      <h5 class='project-title' style="text-align: left">
-        On-hold Projects
-      </h5>
-      <% @course.projects.onhold.each do |project|%>
+        </div>
+        <div class="inactive-projects">
+        <div>
+          <h4>On-hold Projects</h4>
+        </div>
+        <% @course.projects.onhold.each do |project|%>
         <% if !project.id.nil? %>
           <div class="card project-card-archive">
             <div class="card-body">
@@ -117,13 +112,11 @@
               <div class='form-control project-description-text'>
                 <p><%= project.description %></p>
               </div>
-              <!--              <div class ="col" id="like-project">-->
-              <!--                <i class="fas fa-heart"></i>-->
-              <!--              </div>-->
             </div>
           </div>
         <% end %>
       <% end %>
-    </div>
-  </div>
+
+      </div>
+      </div>
 </div>

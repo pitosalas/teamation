@@ -7,6 +7,7 @@
     <td>Email</td>
     <td>Group</td>
     <td>Current Status</td>
+    <td>Time Zone</td>
   </tr>
   </thead>
   <tbody>
@@ -25,6 +26,10 @@
         <% end %>
         <% count += 1 %>
         <td><%= get_status_with_state(s.takings.where(course_id: @course.id).first.state) %></td>
+        <% preference = Preference.where(course_id: @course.id, student_id: s.id).first %>
+        <% if preference %>
+          <td><%= preference.time_zone %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
