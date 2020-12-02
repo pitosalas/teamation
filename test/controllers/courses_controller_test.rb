@@ -1,14 +1,18 @@
-# require 'test_helper'
+require 'test_helper'
 
-# class CoursesControllerTest < ActionDispatch::IntegrationTest
-#   setup do
-#     @course = courses(:one)
-#   end
+class CoursesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    get '/professors/sign_in'
+    sign_in users(:one)
+    # @current_user = users(:one)
+    post professor_session_url
+    @course = courses(:one)
+  end
 
-#   test "should get index" do
-#     get courses_url
-#     assert_response :success
-#   end
+  test "should get index" do
+    get courses_url
+    assert_response :success
+  end
 
 #   test "should get new" do
 #     get new_course_url
@@ -45,4 +49,4 @@
 
 #     assert_redirected_to courses_url
 #   end
-# end
+end
