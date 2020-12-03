@@ -5,6 +5,16 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
+
+    <div>
+      <h5>Import Students Lists From CSV</h5>
+      <p>* Please download the <%= link_to "Student List Sample CSV", download_student_list_path, target: "_blank" %> for format</p>
+      <%= form_for @course, :url => {:action => "parse_file"} do |form| %>
+        <%= form.file_field :file %>
+        <%= form.submit "Upload", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
     <div class="col-md-6 col-md-offset-3" style="margin-left: 20px; margin-top: 30px">
         <%= simple_form_for @course, wrapper_mappings: { radio_buttons:  :vertical_collection } do |f| %>
           <% if notice %>

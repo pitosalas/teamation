@@ -11,7 +11,7 @@
       <div class="row project-row">
         <div>
           <h5>Import Project Lists From CSV</h5>
-          <p>* Please download the <%= link_to "Sample CSV", download_path, target: "_blank" %> for format</p>
+          <p>* Please download the <%= link_to "Project List Sample CSV", download_project_list_path, target: "_blank" %> for format</p>
           <%= form_for @course, :url => {:action => "parse_file"} do |form| %>
             <%= form.file_field :file %>
             <%= form.submit "Upload", class: "btn btn-primary" %>
