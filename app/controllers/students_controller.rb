@@ -1,6 +1,9 @@
 class StudentsController < ApplicationController  
     before_action :authenticate_student!
 
+    def index
+    end
+
     def edit
         @user = User.find(params[:id])
     end
@@ -46,6 +49,6 @@ class StudentsController < ApplicationController
     
     protected
     def student_params
-        params.require(:student).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+        params.require(:student).permit(:firstname, :lastname, :email, :password, :password_confirmation, :time_zone)
     end
 end
