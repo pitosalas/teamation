@@ -1,0 +1,36 @@
+<div class='row profile-row'>
+  <div class='col course-profile-column'>
+    <p class="course-title">
+      <strong><%= @course.name %></strong>
+    </p>
+
+    <p class="secondary-title">
+      <strong>Pin:</strong>
+      <%= @course.pin %>
+    </p>
+
+    <p class="secondary-title">
+      <strong>Professor:</strong>
+      <% professor = @course.professor %>
+      <%= professor.firstname + ' '+ professor.lastname  %>
+    </p>
+    <% if current_user.type == 'Professor' %>
+      <% unless controller_name == 'courses' && action_name == 'show' %>
+        <p class="secondary-title">
+          <strong>Course Status:</strong>
+        </p>
+        <% if @course.withProject %>
+          <%=  render partial: 'layouts/prof_project_progress'  %>
+        <% else %>
+          <%=  render partial: 'layouts/prof_no_project_progress'  %>
+        <% end %>
+      <%  end %>
+    <% else %>
+      <% if @course.withProject %>
+        <%= render partial: 'layouts/stu_project_progress' %>
+      <% else %>
+        <%= render partial: 'layouts/stu_no_project_progress' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

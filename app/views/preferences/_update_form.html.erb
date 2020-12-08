@@ -1,0 +1,24 @@
+<%= simple_form_for @perference do |form| %>
+    <%= form.error_notification %>
+  <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <%= form.input :subject_matter_proficiency, :label => "Subject Matter Proficiency: ",  as: :radio_buttons, collection: Preference::LEVELS, required: true %>
+  <%= form.hidden_field :student_id, :value => current_user.id %>
+  <%= form.hidden_field :course_id, :value => @course.id %>
+
+  <%= form.input :time_zone, label: "Time Zone", required: true %>
+
+  <%= form.label 'Dream Partner' %>
+  <%= form.collection_select :dream_partner, @course.students.order(firstname: :asc, lastname: :asc), :id, :full_name, {:include_blank => true} %>
+  <br>
+  <%= form.label 'Select Your Prefered Time for Group Meeting'%>
+
+  <div>
+    <%= form.input :schedule, label: false, as: :check_boxes, collection: [['Monday Morning', 'mondayM'], ['Monday Night', 'mondayN'], ['Tuesday Morning', 'tuesdayM'], ['Tuesday Night', 'tuesdayN'], ], :include_hidden => false, :multiple => true %>
+    <!-- <%= form.input :schedule, label: false, as: :check_boxes, collection: Preference::TIME_SLOT, :include_hidden => false, :multiple => true %> -->
+  </div>
+
+  <div class="form-actions">
+    <%= form.button :submit, label: "Update Preference", class: "btn btn-primary" %>
+  </div>
+<% end %>

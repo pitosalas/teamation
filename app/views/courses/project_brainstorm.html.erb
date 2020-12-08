@@ -1,0 +1,38 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+<body class='view4'>
+  <div class='container profile-container' id="classroom" >
+    <%= render partial: "course_info" %>
+  </div>
+  <div class="projects-list">
+    <% if current_user.type == 'Professor' %>
+      <div class="row project-row">
+        <div>
+          <h5>Import Project Lists From CSV</h5>
+          <p>* Please download the <%= link_to "Project List Sample CSV", download_project_list_path, target: "_blank" %> for format</p>
+          <%= form_for @course, :url => {:action => "parse_project_file"} do |form| %>
+            <%= form.file_field :file %>
+            <%= form.submit "Upload", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row project-row">
+      <div class = "project-info">
+        <div class="project-title">
+          <h5>
+            Projects List
+          </h5>
+        </div>
+        <div class="project-stats">
+          <p>Total Projects: <%= @course.projects.count %>  | Active Projects: <%= @course.projects.active.count %>   | Onhold Projects: <%= @course.projects.onhold.count %> </p>
+        </div>
+      </div>
+    </div>
+    <div class="row project-row">
+      <%= render partial: "project", course: @course %>
+    </div>
+  </div>
+</body>

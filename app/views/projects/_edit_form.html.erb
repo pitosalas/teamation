@@ -1,0 +1,7 @@
+<%= bootstrap_form_with model: [@course, project], remote: true do |f| %>
+  <%= f.text_field :project_name, required:true%>
+  <%= f.text_field :description, required:true %>
+  <div class="container add-projects-button">
+    <%= f.submit "Save", class: "btn btn-primary addButton addProjectBtn" %>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<div class="row prof-project-progress">
+  <div class="col">
+    <%= link_to fill_question_course_path(@course) do %>
+      <% if controller_name == 'courses' && action_name == 'fill_question' %>
+        <h3 style="color: green"><i class="fas fa-user-cog"></i></h3>
+        <p style="color: green">Settings</p>
+      <% else %>
+        <h3><i class="fas fa-user-cog"></i></h3>
+        <p>Settings</p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col" style="width: 15px; margin-right:10px;">
+    <hr style="background: black; height: 3px;">
+  </div>
+  <div class="col">
+    <%= link_to grouping_course_path(@course) do %>
+      <% if controller_name == 'courses' && action_name == 'grouping' %>
+        <h3 style="color: green"><i class="fas fa-divide"></i></h3>
+        <p style="color: green">Choose Algorithm</p>
+      <% else %>
+        <h3><i class="fas fa-divide"></i></h3>
+        <p>Choose Algorithm</p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col" style="width: 15px; margin-right:10px;">
+    <hr style="background: black; height: 3px;">
+  </div>
+  <div class="col">
+    <%= link_to course_groups_path(@course) do %>
+      <% if controller_name == 'groups' && action_name == 'index' %>
+        <h3 style="color: green"><i class="fas fa-users"></i></h3>
+        <p style="color: green">Groups Created</p>
+      <% else %>
+        <h3><i class="fas fa-users"></i></h3>
+        <p>Groups Created</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

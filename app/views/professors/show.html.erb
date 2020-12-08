@@ -1,0 +1,40 @@
+<body class='view4'>
+  <div class='container profile-container'>
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if flash[:success]%>
+      <div class="alert alert-success">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+
+      <div class='row profile-row'>
+        <div class='col profile-column'>
+          <div class='row'>
+            <div class='column'>
+              <span class="fa-stack fa-3x">
+                <i class="fas fa-circle fa-stack-2x" id="profile-icon"></i>
+                <i class="fas fa-user-graduate fa-stack-1x fa-inverse"></i>
+              </span>
+            </div>
+            <div class='column'>
+              <p class='profile-name'><%= @user.firstname%> <%= @user.lastname %></p>
+              <p class='profile-email'><%= @user.email %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class = "courses-info-row" id="professor-course-info-row">
+        <%= render partial: "course", course: @courses%>
+      </div>
+  </div>
+</body>
+
+<script>
+
+</script>
+

@@ -1,0 +1,17 @@
+
+<%= simple_form_for(@course, vote) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :student_id %>
+    <%= f.input :course_id %>
+    <%= f.input :vote_first %>
+    <%= f.input :vote_second %>
+    <%= f.input :vote_third %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

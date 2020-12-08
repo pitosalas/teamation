@@ -1,0 +1,76 @@
+// Place all the styles related to the Professors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.add-course-button-p{
+    position: absolute;
+    left: 150px;
+  }
+
+.add-course-field {
+  width: 260px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.course-column-box-professor{
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    box-sizing: border-box;
+    width: 320px;
+    min-height: 220px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    > h4 {
+        font-size: bold;
+    }
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+    #drop-course-button {
+      height:10px;
+      margin-left: 10px;
+    }
+}
+
+
+.add-course-column-box{
+  box-sizing: border-box;
+  width: 320px;
+  min-height: 220px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  > h4 {
+    font-size: bold;
+  }
+}
+
+.course-column-box-professor:hover{
+    box-shadow: 0px 4px 8px 0 rgb(77, 131, 203), 0px 6px 15px 0 rgb(77, 131, 203);
+}
+
+.not-assigned-text-professor{
+  height: 80px;
+  margin-top: 20px;
+  margin-left: 15px;
+  //display: flex;
+  align-items: center; 
+  //margin-left: 10px;
+  color:grey;
+  #course-status-prof {
+    color: darkgrey;
+  }
+}
+
+.assigned-text-professor{
+  height: 80px;
+  margin-top: 20px;
+  margin-left: 15px;
+  //display: flex;
+  align-items: center; 
+  //margin-left: 10px;
+  color:black;
+  #course-status-prof {
+    color: darkgrey;
+  }
+}

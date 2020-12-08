@@ -1,0 +1,61 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+<body class='view4'>
+  <div class='container profile-container' id="classroom" >
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% end %>
+    <%= render partial: "course_info" %>
+
+  
+    <% if current_user.type == 'Professor' %>
+      <%= render partial: "choose_mode"%>
+    <% end %>
+    <% if current_user.type == 'Student' %>
+      <div class='container profile-container'>
+        <div class='row profile-row'>
+          <div class='col'>
+            <ul class="nav nav-tabs" id="course-nav">
+              <li class="nav-item">
+                <a href="#preference_form" class="nav-link tab-projects active" data-toggle="tab" >Preference Form</a>
+              </li>
+              <li class="nav-item">
+                <a href="#students" class="nav-link tab-students" data-toggle="tab" >Students</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <% if Preference.find_by(student_id: current_user.id, course_id: @course.id).nil? %>
+                <div class="tab-pane fade show active" id="preference_form">
+                  <div class="container projects-box">
+                    <%= render "preferences/form", preference: @preference, locals: {course: @course} %>
+                  </div>
+                </div>
+
+              <% else %>
+                <div class="tab-pane fade show active" id="preference_form">
+                  <div class="container projects-box">
+                    <%= render "preferences/form", preference: @preference, locals: {course: @course} %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="tab-pane fade" id="students">
+                <div class="container projects-box">
+                  <%= render partial: 'students', course: @course %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+
+</body>
