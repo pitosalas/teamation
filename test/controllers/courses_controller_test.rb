@@ -14,10 +14,10 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-#   test "should get new" do
-#     get new_course_url
-#     assert_response :success
-#   end
+  test "should get new" do
+    get add_course_professor_url(users(:one))
+    assert_response :success
+  end
 
 #   test "should create course" do
 #     assert_difference('Course.count') do

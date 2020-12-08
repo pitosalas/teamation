@@ -39,6 +39,7 @@ class CoursesController < ApplicationController
           Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
         end
       end
+      flash[:notice] = 'Successfully Uploaded the Project list.'
       redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
   end
 

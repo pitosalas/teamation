@@ -6,7 +6,7 @@
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
 
-    <div>
+    <div class="col-md-6 col-md-offset-3" style="margin-left: 20px; margin-top: 30px">
       <h5>Import Students Lists From CSV</h5>
       <p>* Please download the <%= link_to "Student List Sample CSV", download_student_list_path, target: "_blank" %> for format</p>
       <%= form_for @course, :url => {:action => "parse_student_file"} do |form| %>
