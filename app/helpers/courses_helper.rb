@@ -8,4 +8,8 @@ module CoursesHelper
     end
     return nil
   end
+
+  def check_settings_fulfilled? course
+    return course.maximum_group_member.nil? || course.minimum_group_member.nil?
+  end
 end

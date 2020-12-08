@@ -28,4 +28,8 @@ class Course < ApplicationRecord
     #       end
     #     end
     # end
+
+    def has_enough_project? course
+        return course.projects.size >= 3
+    end
 end

@@ -5,6 +5,11 @@
 <body class='view4'>
 <div class='container profile-container' id="classroom" >
   <%= render partial: "course_info" %>
+  <% if notice %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
 </div>
 <div id="projects-list">
   <%= render partial: "project_voting", course:@course %>

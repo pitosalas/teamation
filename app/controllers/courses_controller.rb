@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  include CoursesHelper
 
   # GET /courses
   # GET /courses.json
@@ -78,6 +79,11 @@ class CoursesController < ApplicationController
 
   def project_brainstorm
     @course = Course.find(params[:id])
+    if check_settings_fulfilled? @course
+      respond_to do |format|
+        format.html { redirect_to fill_question_course_path(@course), notice: 'You must fill all course settings before next step' }
+      end
+    end
     @course.state = 'project_brainstorm'
     @course.save
     if current_user.type == 'Professor'
@@ -88,6 +94,11 @@ class CoursesController < ApplicationController
 
   def project_voting
     @course ||= Course.find(params[:id])
+    if @course.projects.size < 3
+      respond_to do |format|
+        format.html { redirect_to project_brainstorm_course_path(@course), notice: 'You must have at least 3 projects before voting' }
+      end
+    end
     @current_user_vote = @course.votes.where(student_id: current_user.id).first.nil? ? nil : @course.votes.where(student_id: current_user.id).first
     @course.state = 'project_voting'
     @course.save
@@ -99,6 +110,11 @@ class CoursesController < ApplicationController
 
   def grouping
     @course = Course.find(params[:id])
+    if @course.projects.active < 3
+      respond_to do |format|
+        format.html { redirect_to project_voting_course_path(@course), notice: 'You must have at least 2 active projects before creating groups' }
+      end
+    end
     @course.state = 'choose_algo'
     @course.save
     if current_user.type == 'Professor'

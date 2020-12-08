@@ -5,7 +5,13 @@
 <body class='view4'>
   <div class='container profile-container' id="classroom" >
     <%= render partial: "course_info" %>
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% end %>
   </div>
+  <div style="margin-left:20px;">
   <div class="projects-list">
     <% if current_user.type == 'Professor' %>
       <div class="row project-row">
@@ -34,5 +40,6 @@
     <div class="row project-row">
       <%= render partial: "project", course: @course %>
     </div>
+  </div>
   </div>
 </body>
