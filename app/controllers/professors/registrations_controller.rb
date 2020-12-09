@@ -57,7 +57,7 @@ class Professors::RegistrationsController < Devise::RegistrationsController
   # end
 
   def professor_params
-    params.require(:professor).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+    params.require(:professor).permit(:firstname, :lastname, :email, :password, :password_confirmation, :time_zone)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

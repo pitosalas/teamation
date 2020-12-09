@@ -8,5 +8,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://redistogo:11cb8571cd762119baf11800d619a216@scat.redistogo.com:10771/" } %>
+  url: <%= ENV.fetch("REDIS_URL") { "redis://redistogo:c20614cd04fd84e4170582636d23b838@tarpon.redistogo.com:10181/" } %>
   channel_prefix: team_formation_production

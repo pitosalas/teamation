@@ -19,8 +19,10 @@ Rails.application.routes.draw do
       get "project_voting"
       get "grouping"
       patch "update_mode"
-      patch "parse_file"
+      patch "parse_project_file"
+      patch "parse_student_file"    
     end
+    
     resources :projects
     resources :votes
     resources :groups do

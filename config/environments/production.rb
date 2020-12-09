@@ -61,19 +61,20 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "team_formation_production"
 
   config.action_mailer.perform_caching = false
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'teamation-brandeis.herokuapp.com' }
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "brandeis-teamation.herokuapp.com",
-    authentication: "plain",
+    address: "smtp.sendgrid.net",
+    port: '465',
+    domain: "herokuapp.com",
+    authentication: :plain,
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password:ENV["GMAIL_PASSWORD"]
+    user_name: 'apikey',
+    password:ENV["SENDGRID_API_KEY"],
+    tls: true
   }
 
-  # doesn't have to be Heroku, but you get the idea.
-  config.action_mailer.default_url_options = { :host => 'brandeis-teamation.herokuapp.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
