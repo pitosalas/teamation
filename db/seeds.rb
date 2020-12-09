@@ -76,13 +76,13 @@ def seed_course profs, students
           project = Project.create!(project_name: Faker::Team.name, course_id: course.id, description: Faker::Game.genre,
                                     is_active: [true, false].sample, number_of_likes: 0, added_by: added_by)
           if project.is_active
-            projects << project
+            projects << project.id
           end
         end
         PreferenceWeight.create(course_id: course.id, subject_proficiency: rand(5), dream_partner: rand(5), time_zone: rand(5), schedule: rand(5), project_voting: rand(5))
         puts "projects and Preference Weight created"
         course.students.each do |s|
-          vote_first = projects.active.sample
+          vote_first = projects.sample
           vote_second = projects.sample
           while vote_second == vote_first
             vote_second = projects.sample
