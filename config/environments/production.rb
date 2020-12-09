@@ -75,8 +75,6 @@ Rails.application.configure do
     tls: true
   }
 
-  # doesn't have to be Heroku, but you get the idea.
-  config.action_mailer.default_url_options = { :host => 'brandeis-teamation.herokuapp.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
