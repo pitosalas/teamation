@@ -6,8 +6,9 @@
 
   <%= form.hidden_field :student_id, :value => current_user.id %>
   <%= form.hidden_field :course_id, :value => @course.id %>
+  <%= form.hidden_field :time_zone, :value => current_user.time_zone %>
 
-  <%= form.input :time_zone, label: "Time Zone", required: true %>
+  <!-- <%= form.input :time_zone, label: "Time Zone", required: true %> -->
 
   <%= form.input :dream_partner, collection: @course.students.all_except(current_user).order(firstname: :asc, lastname: :asc), include_blank: false, input_html: { multiple: true } %>
 
