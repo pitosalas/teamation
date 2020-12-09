@@ -11,14 +11,19 @@ class PreferenceMatching < Matching
   def random_match()
     @group_size_min = @course.minimum_group_member
     @group_size_max = @course.maximum_group_member
+    puts @group_size_max
+    puts @group_size_min
     result = {}
     @projects.each do |p|
       result[p] = []
     end
     #(1)populate the result hash by assigning students's first choice
     @students.each do |s|
+      puts s
       project = @projects.sample
-      project = @projects.sample while result[project].size >= @group_size_max
+      while result[project].size >= @group_size_max
+        project = @projects.sample
+      end
       result[project] << s
     end
     @matched_groups = result
@@ -117,6 +122,7 @@ class PreferenceMatching < Matching
         lowest_score = score
       end
     end
+    puts lowest_score
     return lowest_score
   end
 

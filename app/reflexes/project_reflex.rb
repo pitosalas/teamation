@@ -7,6 +7,15 @@ class ProjectReflex < ApplicationReflex
 
   def archive
     @project.update(is_active: false)
+    Vote.where(vote_first: @project.id).each do |v|
+      v.update(vote_first: -1)
+    end
+    Vote.where(vote_second: @project.id).each do |v|
+      v.update(vote_second: -1)
+    end
+    Vote.where(vote_third: @project.id).each do |v|
+      v.update(vote_third: -1)
+    end
   end
 
   def unarchive

@@ -8,12 +8,13 @@ class ProjectMatching < Matching
   def match()
     @group_size_min = @course.minimum_group_member
     @group_size_max = @course.maximum_group_member
-    # group_size_float = @students.length.to_f / @projects.length
     result = {}
     @projects.each do |p|
       result[p] = []
     end
+    puts @projects
     #(1)populate the result hash by assigning students's first choice
+    puts @votes
     @votes.each do |v|
       temp_project_choice = v[:vote_first]
       result[temp_project_choice] << v[:student_id]
