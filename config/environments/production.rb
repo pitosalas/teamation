@@ -64,6 +64,7 @@ Rails.application.configure do
 
   # doesn't have to be Heroku, but you get the idea.
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'teamation-brandeis.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     address: "smtp.sendgrid.com",
