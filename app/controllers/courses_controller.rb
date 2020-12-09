@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def parse_file
+  def parse_project_file
     @course = Course.find(params[:id])
     file_path = params[:course][:file].path
     puts file_path
@@ -40,7 +40,24 @@ class CoursesController < ApplicationController
         Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
       end
     end
+    flash[:notice] = 'Successfully Uploaded the Project list.'
     redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
+  end
+
+  def parse_student_file
+    @course = Course.find(params[:id])
+    file_path = params[:course][:file].path
+    CSV.foreach(file_path, :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+      row_hash = row.to_h
+      if User.find_by(email: row_hash["Email"]).nil?
+        User.create(firstname: row_hash["First_Name"], lastname: row_hash["Last_Name"], email: row_hash["Email"], password: row_hash["Email"], type: "Student")
+      end
+      user = User.find_by(email: row_hash["Email"])
+      if Taking.find_by(student_id: user.id, course_id: @course.id).nil?
+        Taking.create(student_id: user.id, course_id: @course.id)
+      end
+    end
+    redirect_back(fallback_location: fill_question_course_path(@course.id))
   end
 
   def project_download
