@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'teamation-brandeis.herokuapp.com' }
   config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.com",
+    address: "smtp.sendgrid.net",
     port: 587,
     domain: "herokuapp.com",
     authentication: "plain",
