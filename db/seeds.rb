@@ -68,45 +68,47 @@ def seed_course profs, students
       projects = []
       if course.withProject
         8.times do
-          if !course.students.all.sample.nil?
-            added_by = course.students.all.sample.id
+          r = course.students.all.sample
+          added_by = nil
+          unless r.nil?
+            added_by = r.id
           end
           project = Project.create!(project_name: Faker::Team.name, course_id: course.id, description: Faker::Game.genre,
                                     is_active: [true, false].sample, number_of_likes: 0, added_by: added_by)
           projects << project.id
         end
-        PreferenceWeight.create(course_id: course.id, subject_proficiency: (0..5).to_a.sample, dream_partner: (0..5).to_a.sample, time_zone: (0..5).to_a.sample, schedule: (0..5).to_a.sample, project_voting: (0..5).to_a.sample)
+        PreferenceWeight.create(course_id: course.id, subject_proficiency: rand(5), dream_partner: rand(5), time_zone: rand(5), schedule: rand(5), project_voting: rand(5))
         puts "projects and Preference Weight created"
-      end
-      course.students.each do |s|
-        vote_first = projects.sample
-        vote_second = projects.sample
-        while vote_second == vote_first
+        course.students.each do |s|
+          vote_first = projects.sample
           vote_second = projects.sample
-        end
-        vote_third = projects.sample
-        while vote_second == vote_third || vote_third == vote_first
+          while vote_second == vote_first
+            vote_second = projects.sample
+          end
           vote_third = projects.sample
-        end
-        Vote.create!(student_id: s.id, course_id: course.id, vote_first: vote_first, vote_second: vote_second, vote_third: vote_third)
+          while vote_second == vote_third || vote_third == vote_first
+            vote_third = projects.sample
+          end
+          Vote.create!(student_id: s.id, course_id: course.id, vote_first: vote_first, vote_second: vote_second, vote_third: vote_third)
 
-        # create preference form
-        dream_partner = seed_partner(course.students, course.maximum_group_member)
-        schedule = seed_schedule
-        time_zone = s.time_zone
-        Preference.create!(student_id: s.id, course_id: course.id, subject_matter_proficiency: (1..5).to_a.sample, time_zone: time_zone, dream_partner: dream_partner, schedule: schedule)
+          # create preference form
+          dream_partner = seed_partner(course.students, course.maximum_group_member)
+          schedule = seed_schedule
+          time_zone = s.time_zone
+          Preference.create!(student_id: s.id, course_id: course.id, subject_matter_proficiency: (1..5).to_a.sample, time_zone: time_zone, dream_partner: dream_partner, schedule: schedule)
+        end
+        puts "votes and preferences created"
       end
-      puts "votes and preferences created"
     end
+    puts "courses created"
   end
-  puts "courses created"
 end
 
 def seed_partner students, maximum
   partners = []
   random_partner_number = (0..maximum).to_a.sample
   random_partner_number.times do
-    if !students.all.sample.nil?
+    unless students.all.sample.nil?
       partners << students.all.sample.id
     end
   end
@@ -115,7 +117,7 @@ end
 
 def seed_schedule
   seed_schedule = []
-  n = rand(10)
+  n = rand(5)
   schedule = ["mondayM", "mondayA", "mondayE", "tuesdayM", "tuesdayA", "tuesdayE", "wednesdayM", "wednesdayA", "wednesdayE", "thursdayM", "thursdayA", "thursdayE", "fridayM", "fridayA", "fridayE", "saturdayM", "saturdayA", "saturdayE", "sundayM", "sundayA", "sundayE"]
   n.times do
     seed_schedule << schedule.sample
