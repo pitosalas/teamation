@@ -73,3 +73,4 @@ gem "bootstrap_form", "~> 4.0"
 gem "view_component", require: "view_component/engine"
 gem "stimulus_reflex", "~> 3.3"
 gem 'dotenv-rails'
+gem 'tzinfo'

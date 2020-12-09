@@ -6,119 +6,141 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-(1..60).each do
-  first = Faker::Name.first_name
-  last = Faker::Name.last_name
-  User.create(firstname: first,
-                     lastname: last,
-                     email: last + "@brandeis.edu",
-                     password: "password", type: "Student")
+require 'tzinfo'
 
-end
+def seed_student
+  students = []
+  (1..200).each do
+    first = Faker::Name.first_name
+    last = Faker::Name.last_name
+    student = User.create!(firstname: first,
+                       lastname: last,
+                       email: last + Faker::Number.number(digits: 6).to_s + "@brandeis.edu",
+                       password: "password", type: "Student", time_zone: seed_time_zone)
+    students << student.id
 
-(1..20).each do
-  first = Faker::Name.first_name
-  last = Faker::Name.last_name
-  User.create(firstname: first,
-                  lastname: last,
-                  email: last + "@brandeis.edu",
-                  password: "password", type: "Professor")
-
-end
-
-#Create an admin student for development use
-admin_student = User.create(firstname: "student_admin", lastname: "admin",
-                               email: "student_admin@admin.com",
-                               password: "password",
-                               type: "Student")
-
-#Create an admin professor for development use
-admin_professor = User.create(firstname: "admin",
-                                   lastname: "admin",
-                                   email: "admin@admin.com",
-                                   password: "password",
-                                   type: "Professor")
-
-#Create 10 courses taught by the admin for demo use
-10.times do
-  Course.create(name: Faker::Educator.course_name,
-                    pin: Faker::Number.number(digits: 6),
-                    professor_id: admin_professor.id)
-end
-
-#Create a consistent course taught by the admin professor for demo use
-Course.create(name: Faker::Educator.course_name,
-                                  pin: 111111, professor_id: admin_professor.id)
-
-#Add 30 courses into the database
-30.times do
-  Course.create(name: Faker::Educator.course_name,
-                    pin: Faker::Number.number(digits: 6),
-                    professor_id: Professor.all.sample.id)
-end
-
-#Add 30 projects into database
-30.times do
-  Project.create(course_id: Course.all.sample.id,
-               project_name: Faker::Team.name, description: Faker::Game.genre)
-end
-
-#Add 60 groups into the database
-# 60.times do
-#   Group.create(course_id: Course.all.sample.id,
-#                    project_id: Project.all.sample.id, description: Faker::Game.genre)
-# end
-
-#Add 4 groups into each of the professor's classes for demo purposes
-Course.where(professor_id: admin_professor.id).each do |course|
-  projects = Project.where(course_id: course.id)
-  4.times do
-    Group.create(course_id: course.id, project_id: projects.all.sample.id, description: Faker::Game.genre)
   end
+  puts "Finish seeding students"
+  return students
 end
 
-#Add 30 students into the admin professor's courses for demo uses
-# 100.times do
-#   courses = Course.where(professor_id: admin_professor.id)
-#   n = courses.all.sample.id
-#   s = Student.all.sample.id
-#   Taking.create(student_id: s, course_id: n)
-# end
+def seed_prof
+  profs = []
+  (1..5).each do
+    first = Faker::Name.first_name
+    last = Faker::Name.last_name
+    prof = User.create!(firstname: first,
+                    lastname: last,
+                    email: last + + Faker::Number.number(digits: 6).to_s + "@brandeis.edu",
+                    password: "password", type: "Professor", time_zone: seed_time_zone)
+    profs << prof.id
+  end
+  puts "Finish seeding profs"
+  return profs
+end
 
-#Enroll random students in a random class 200 times
-# 200.times do
-#   n = Course.all.sample.id
-#   s = Student.all.sample.id
-#   Taking.create(student_id: s, course_id: n)
-# end
 
-#Add a preference for each student in all of the admin professor's
-#courses for demo purposes
-# admin_professor.courses.each do |course|
-#   groups = course.groups.pluck(:id)
-#   if groups.size > 2
-#     students = course.students
-#     students.each do |student|
-#       first = groups.sample
+#Create 10 courses for each professor
+def seed_course profs, students
+  profs.each do |p|
+    3.times do
+      course = Course.create!(name: Faker::Educator.course_name,
+                        pin: Faker::Number.number(digits: 6),
+                        professor_id: p,
+                    minimum_group_member: (1..3).to_a.sample,
+                    maximum_group_member: (4..8).to_a.sample,
+                    has_group: false,
+                    is_voting: false,
+                    state: "created",
+                    withProject: [true, false].sample)
+      30.times do
+        s = students.sample
+        n = 0
+        while !Taking.where(student_id: s, course_id: course.id).nil? && n < 5
+          s = students.sample
+          n += 1
+        end
+        if Taking.where(student_id: s, course_id: course.id).nil?
+          Taking.create!(student_id: s, course_id: course.id, state: "created")
+        end
+      end
+      puts "30 takings created"
+      projects = []
+      if course.withProject
+        8.times do
+          if !course.students.all.sample.nil?
+            added_by = course.students.all.sample.id
+          end
+          project = Project.create!(project_name: Faker::Team.name, course_id: course.id, description: Faker::Game.genre,
+                                    is_active: [true, false].sample, number_of_likes: 0, added_by: added_by)
+          projects << project
+        end
+        PreferenceWeight.create(course_id: course.id, subject_proficiency: (0..5).to_a.sample, dream_partner: (0..5).to_a.sample, time_zone: (0..5).to_a.sample, schedule: (0..5).to_a.sample, project_voting: (0..5).to_a.sample)
+        puts "projects and Preference Weight created"
+      end
+      course.students.each do |s|
+        vote_first = projects.sample
+        vote_second = projects.sample
+        while vote_second == vote_first
+          vote_second = projects.sample
+        end
+        vote_third = projects.sample
+        while vote_second == vote_third || vote_third == vote_first
+          vote_third = projects.sample
+        end
+        Vote.create!(student_id: s.id, course_id: course.id, vote_first: vote_first, vote_second: vote_second, vote_third: vote_third)
+
+        # create preference form
+        dream_partner = seed_partner(course.students, course.maximum_group_member)
+        schedule = seed_schedule
+        time_zone = s.time_zone
+        Preference.create!(student_id: s.id, course_id: course.id, subject_matter_proficiency: (1..5).to_a.sample, time_zone: time_zone, dream_partner: dream_partner, schedule: schedule)
+      end
+      puts "votes and preferences created"
+    end
+  end
+  puts "courses created"
+end
+
+def seed_partner students, maximum
+  partners = []
+  random_partner_number = (0..maximum).to_a.sample
+  random_partner_number.times do
+    if !students.all.sample.nil?
+      partners << students.all.sample.id
+    end
+  end
+  return partners
+end
+
+def seed_schedule
+  seed_schedule = []
+  n = rand(10)
+  schedule = ["mondayM", "mondayA", "mondayE", "tuesdayM", "tuesdayA", "tuesdayE", "wednesdayM", "wednesdayA", "wednesdayE", "thursdayM", "thursdayA", "thursdayE", "fridayM", "fridayA", "fridayE", "saturdayM", "saturdayA", "saturdayE", "sundayM", "sundayA", "sundayE"]
+  n.times do
+    seed_schedule << schedule.sample
+  end
+  return seed_schedule
+end
+
+def seed_time_zone
+  return TZInfo::Timezone.all_identifiers.sample
+end
+
+students = seed_student
+profs = seed_prof
+seed_course(profs, students)
+#Create an admin student for development use
+# def seed_admin
+#   admin_student = User.create(firstname: "student_admin", lastname: "admin",
+#                                  email: "student_admin@admin.com",
+#                                  password: "password",
+#                                  type: "Student")
 #
-#       second = groups.sample
-#       while (first == second)
-#         second = groups.sample
-#       end
-#
-#       third = groups.sample
-#       while (third == first || third == second)
-#         third = groups.sample
-#       end
-#       p = Preference.create(course_id: course.id,
-#                             student_id: student.id,
-#                             first: first,
-#                             second: second,
-#                             third: third,
-#                             codingProficiency: 5,
-#                             dreampartner: students.sample.id,
-#                             schedule: "{\"mondayD\":\"0\",\"mondayN\":\"1\",\"tuesdayD\":\"1\",\"tuesdayN\":\"0\",\"wednesdayD\":\"0\",\"wednesdayN\":\"0\",\"thursdayD\":\"1\",\"thursdayN\":\"0\",\"fridayD\":\"0\"
-#                                     ,\"fridayN\":\"1\",\"saturdayD\":\"0\",\"saturdayN\":\"0\",\"sundayD\":\"0\",\"sundayN\":\"0\"}")
-#     end
-#   end
+#   #Create an admin professor for development use
+#   admin_professor = User.create(firstname: "admin",
+#                                      lastname: "admin",
+#                                      email: "admin@admin.com",
+#                                      password: "password",
+#                                      type: "Professor")
 # end
