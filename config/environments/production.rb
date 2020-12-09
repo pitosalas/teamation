@@ -68,12 +68,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'teamation-brandeis.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     address: "smtp.sendgrid.net",
-    port: 587,
+    port: 465,
     domain: "herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["SENDGRID_USERNAME"],
-    password:ENV["SENDGRID_PASSWORD"]
+    user_name: 'apikey',
+    password:ENV["SENDGRID_API_KEY"]
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
