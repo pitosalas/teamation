@@ -145,6 +145,10 @@ class PreferenceMatching < Matching
     team_calendar["sundayA"]=0
     team_calendar["sundayE"]=0
 
+    puts "team arr"
+    puts teamArr
+    puts "preference hash"
+    puts @preferences_hash
     teamArr.each do |student|
       schedule = @preferences_hash[student][:schedule]
       schedule.delete!("\n")
@@ -158,8 +162,10 @@ class PreferenceMatching < Matching
 
     counter = 0
     team_calendar.each do |time,team_c|
-      if team_c / teamArr.size == 1
-        counter += 1
+      if teamArr.size > 0
+        if team_c / teamArr.size == 1
+          counter += 1
+        end
       end
     end
 

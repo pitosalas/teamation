@@ -10,6 +10,13 @@
       <%= notice %>
     </div>
   <% end %>
+  <div class="error_message">
+    <% if @course.errors.any? %>
+      <% @course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 <div id="projects-list">
   <%= render partial: "project_voting", course: @course %>

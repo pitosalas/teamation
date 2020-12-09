@@ -143,8 +143,10 @@ class HolisticMatching < ProjectMatching
 
     counter = 0
     team_calendar.each do |time,team_c|
-      if team_c / teamArr.size == 1
-        counter += 1
+      if teamArr.size != 0
+        if team_c / teamArr.size == 1
+          counter += 1
+        end
       end
     end
 

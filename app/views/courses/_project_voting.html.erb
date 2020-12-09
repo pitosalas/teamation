@@ -1,11 +1,4 @@
 <div class = "wrapper overflow projects-list">
-      <div class="error_message">
-          <% if @course.errors.any? %>
-            <% @course.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          <% end %>
-      </div>
       <div class="project-voting" style="margin-bottom: 15px;">
         <div>
           <h4>Active Projects</h4>

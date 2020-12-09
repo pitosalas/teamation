@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   # before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :set_course
+  include GroupsHelper
 
   # GET /groups
   # GET /groups.json
@@ -10,10 +11,18 @@ class GroupsController < ApplicationController
         format.html { redirect_to grouping_course_path(@course), notice: "Your course has no students enrolled yet"}
       end
     end
-    if @course.groups.size.zero? && @course.students.size.positive? && @course.projects.size.positive?
-      group_service = GroupCreationManager::GroupMatcher.new
-      group_service.determine_algo_and_match(@course, params)
-      @course.update(has_group: true)
+    if @course.groups.size.zero? && @course.students.size.positive? && @course.projects.active.size >= 2
+      if params[:algo] == "preference_only" || params[:algo] == "holistic"
+        if (students_fill_preference_form? @course) == false
+          respond_to do |format|
+            format.html { redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"}
+          end
+        else
+          group_service = GroupCreationManager::GroupMatcher.new
+          group_service.determine_algo_and_match(@course, params)
+          @course.update(has_group: true)
+        end
+      end
     end
     if @course.has_group && @course.state != "view_groups"
       @course.update(state: "view_groups")

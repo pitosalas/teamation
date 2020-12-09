@@ -71,13 +71,13 @@ class ProjectMatching < Matching
       #if the group is still overpopulated, use random algo to move students out
       while result[most_popular_project].length > @group_size_max
         poor_student = result[most_popular_project].delete(result[most_popular_project].sample)
-        result[result.find{ |key, value| key != most_popular_project && value.length <= @group_size_min}[0]] << poor_student
+        result[result.find{ |key, value| key != most_popular_project && value.length <= @group_size_min }[0]] << poor_student
       end
       index = index + 1
     end
 
     # check if a group has too little students
-    unfilled = result.find{|key, value| value.length < @group_size_min}
+    unfilled = result.find{ |key, value| value.length < @group_size_min}
     while (!unfilled.nil?) do
       most_p = find_most_popular_project(result)
       poor_student = result[most_p].delete_at(result[most_p].size - 1)
