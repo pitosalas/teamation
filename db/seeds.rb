@@ -26,7 +26,7 @@ end
 
 def seed_prof
   profs = []
-  (1..5).each do
+  (1..3).each do
     first = Faker::Name.first_name
     last = Faker::Name.last_name
     prof = User.create!(firstname: first,
@@ -56,11 +56,11 @@ def seed_course profs, students
       30.times do
         s = students.sample
         n = 0
-        while !Taking.where(student_id: s, course_id: course.id).nil? && n < 5
+        while !Taking.where(student_id: s, course_id: course.id).first.nil? && n < 5
           s = students.sample
           n += 1
         end
-        if Taking.where(student_id: s, course_id: course.id).nil?
+        if Taking.where(student_id: s, course_id: course.id).first.nil?
           Taking.create!(student_id: s, course_id: course.id, state: "created")
         end
       end
@@ -73,7 +73,7 @@ def seed_course profs, students
           end
           project = Project.create!(project_name: Faker::Team.name, course_id: course.id, description: Faker::Game.genre,
                                     is_active: [true, false].sample, number_of_likes: 0, added_by: added_by)
-          projects << project
+          projects << project.id
         end
         PreferenceWeight.create(course_id: course.id, subject_proficiency: (0..5).to_a.sample, dream_partner: (0..5).to_a.sample, time_zone: (0..5).to_a.sample, schedule: (0..5).to_a.sample, project_voting: (0..5).to_a.sample)
         puts "projects and Preference Weight created"
