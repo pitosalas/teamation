@@ -16,15 +16,17 @@ class GroupsController < ApplicationController
         format.html { redirect_to grouping_course_path(@course), notice: "You need at least #{enough_projects} active projects to divide students into groups"}
       end
     elsif @course.groups.size.zero?
-      if params[:algo] == "preference_only" || params[:algo] == "holistic"
-        if (students_fill_preference_form? @course) == false
-          respond_to do |format|
-            format.html { redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"}
-          end
-        else
-          group_service = GroupCreationManager::GroupMatcher.new
-          group_service.determine_algo_and_match(@course, params)
-          @course.update(has_group: true)
+      if params[:algo] == "preference_only" && !(students_fill_preference_form? @course)
+        respond_to do |format|
+          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"}
+        end
+      elsif params[:algo] == "project_only" && !(students_all_vote? @course)
+        respond_to do |format|
+          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote"}
+        end
+      elsif params[:algo] == "holistic" && (!(students_fill_preference_form? @course) || !(students_all_vote? @course))
+        respond_to do |format|
+          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"}
         end
       else
         group_service = GroupCreationManager::GroupMatcher.new
@@ -43,7 +45,7 @@ class GroupsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.csv {send_data @groups.to_csv, filename: "groups-#{Date.today}.csv"}
+      format.csv { send_data @groups.to_csv, filename: "groups-#{Date.today}.csv"}
     end
   end
 
