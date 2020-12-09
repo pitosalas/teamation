@@ -24,6 +24,7 @@ class CoursesController < ApplicationController
     else
       @preference = @course.preferences.find_by(course_id:params[:id])
     end
+    head :ok
   end
 
   def parse_project_file
