@@ -115,10 +115,11 @@ class CoursesController < ApplicationController
 
   def project_voting
     @course ||= Course.find(params[:id])
+    enough_projects = (@course.students.size / @course.maximum_group_member).ceil
     if @course.withProject
-      if @course.projects.size < 3
+      if @course.projects.size < enough_projects
         respond_to do |format|
-          format.html { redirect_to project_brainstorm_course_path(@course), notice: 'You must have at least 3 projects before voting' }
+          format.html { redirect_to project_brainstorm_course_path(@course), notice: "You must have at least #{enough_projects} projects before voting" }
         end
       end
     end

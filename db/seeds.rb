@@ -80,14 +80,14 @@ def seed_course profs, students
         PreferenceWeight.create(course_id: course.id, subject_proficiency: rand(5), dream_partner: rand(5), time_zone: rand(5), schedule: rand(5), project_voting: rand(5))
         puts "projects and Preference Weight created"
         course.students.each do |s|
-          vote_first = projects.sample
-          vote_second = projects.sample
+          vote_first = projects.active.sample
+          vote_second = projects.active.sample
           while vote_second == vote_first
-            vote_second = projects.sample
+            vote_second = projects.active.sample
           end
-          vote_third = projects.sample
+          vote_third = projects.active.sample
           while vote_second == vote_third || vote_third == vote_first
-            vote_third = projects.sample
+            vote_third = projects.active.sample
           end
           Vote.create!(student_id: s.id, course_id: course.id, vote_first: vote_first, vote_second: vote_second, vote_third: vote_third)
 
@@ -132,17 +132,3 @@ end
 students = seed_student
 profs = seed_prof
 seed_course(profs, students)
-#Create an admin student for development use
-# def seed_admin
-#   admin_student = User.create(firstname: "student_admin", lastname: "admin",
-#                                  email: "student_admin@admin.com",
-#                                  password: "password",
-#                                  type: "Student")
-#
-#   #Create an admin professor for development use
-#   admin_professor = User.create(firstname: "admin",
-#                                      lastname: "admin",
-#                                      email: "admin@admin.com",
-#                                      password: "password",
-#                                      type: "Professor")
-# end
