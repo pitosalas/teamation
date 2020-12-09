@@ -1,42 +1,36 @@
 <div class='view3'>
-    <div class='container' id='signup-container'>
-            <div class='signup-form'>
-              <div class="row" id="signup-row" >
-                <h1 id="signup-title">Edit Account</h1>
-                
-                <div id="signup-form-content">
-                <%= simple_form_for(@user) do |form| %>
-            
-                <%= form.error_notification %>
-            
-                <div class="form-inputs">
-                    <%= form.label :First_name, "First Name", class:'signup-label' %>
-                    <%= form.text_field :firstname, required: true, class: 'form-control signup-input'%>
-                    
-                    <%= form.label :Last_name, "Last Name", class:'signup-label'%>
-                    <%= form.text_field :lastname, required: true, class: 'form-control signup-input'%>
-            
-                    <%= form.label :email, class: 'signup-label' %>
-                    <%= form.email_field :email, required: true, class: 'form-control signup-input' %>
-            
-                    <!-- <%= form.label :password, class: 'signup-label' %> -->
-                    <!-- <%= form.password_field :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), class: 'form-control signup-input' %> -->
-                    
-                    <!-- <%= form.label :password_confirmation, "Password Confirmation", class: 'signup-label' %> -->
-                    <!-- <%= form.password_field :password_confirmation, required: true, class: 'form-control signup-input' %> -->
-                </div>
-            
-                <div class="form-actions">
-                    <%= form.submit "Update Student Account", class: "btn btn-outline-primary", id:"signup-Button" %>
-                </div>
-            
-                <% end %>
-            
+  <div class='container' id='signup-container'>
+          <div class='signup-form'>
+            <div class="row" id="signup-row" >
+              <h1 id="signup-title">Edit Account</h1>
+
+              <div id="signup-form-content">
+              <%= simple_form_for(@user) do |form| %>
+
+              <%= form.error_notification %>
+
+              <div class="form-inputs">
+                  <%= form.label :First_name, "First Name", class:'signup-label' %>
+                  <%= form.text_field :firstname, required: true, class: 'form-control signup-input'%>
+
+                  <%= form.label :Last_name, "Last Name", class:'signup-label'%>
+                  <%= form.text_field :lastname, required: true, class: 'form-control signup-input'%>
+
+                  <%= form.label :email, class: 'signup-label' %>
+                  <%= form.email_field :email, required: true, class: 'form-control signup-input' %>
+
+                  <%= form.input :time_zone, label: "Time Zone", required: true %>
+              </div>
+
+              <div class="form-actions">
+                  <%= form.submit "Update Student Account", class: "btn btn-outline-primary", id:"signup-Button" %>
+              </div>
+
+              <% end %>
+
             </div>
 
-              </div>
             </div>
-        </div>
-        
-    </div> 
+          </div>
+      </div>
 </div>

@@ -27,20 +27,20 @@ class CoursesController < ApplicationController
   end
 
   def parse_file
-      @course = Course.find(params[:id])
-      file_path = params[:course][:file].path
-      puts file_path
-      CSV.foreach(file_path, :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
-        row_hash = row.to_h
-        if !Project.find_by(project_name: row_hash["Project_Name"], course_id: @course.id).nil?
-          time = Time.now
-          project_name = row_hash["Project_Name"] + "_" + time.strftime("%Y%m%d%H%M%S")
-          Project.create(project_name: project_name, course_id: @course.id, description: row_hash["Description"], is_active: true)
-        else
-          Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
-        end
+    @course = Course.find(params[:id])
+    file_path = params[:course][:file].path
+    puts file_path
+    CSV.foreach(file_path, :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+      row_hash = row.to_h
+      if !Project.find_by(project_name: row_hash["Project_Name"], course_id: @course.id).nil?
+        time = Time.now
+        project_name = row_hash["Project_Name"] + "_" + time.strftime("%Y%m%d%H%M%S")
+        Project.create(project_name: project_name, course_id: @course.id, description: row_hash["Description"], is_active: true)
+      else
+        Project.create(project_name: row_hash["Project_Name"], course_id: @course.id, description: row_hash["Description"], is_active: true)
       end
-      redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
+    end
+    redirect_back(fallback_location: project_brainstorm_course_path(@course.id))
   end
 
   def project_download
@@ -79,9 +79,11 @@ class CoursesController < ApplicationController
 
   def project_brainstorm
     @course = Course.find(params[:id])
-    if check_settings_fulfilled? @course
-      respond_to do |format|
-        format.html { redirect_to fill_question_course_path(@course), notice: 'You must fill all course settings before next step' }
+    if @course.withProject
+      if check_settings_fulfilled? @course
+        respond_to do |format|
+          format.html { redirect_to fill_question_course_path(@course), notice: 'You must fill all course settings before next step' }
+        end
       end
     end
     @course.state = 'project_brainstorm'
@@ -94,9 +96,11 @@ class CoursesController < ApplicationController
 
   def project_voting
     @course ||= Course.find(params[:id])
-    if @course.projects.size < 3
-      respond_to do |format|
-        format.html { redirect_to project_brainstorm_course_path(@course), notice: 'You must have at least 3 projects before voting' }
+    if @course.withProject
+      if @course.projects.size < 3
+        respond_to do |format|
+          format.html { redirect_to project_brainstorm_course_path(@course), notice: 'You must have at least 3 projects before voting' }
+        end
       end
     end
     @current_user_vote = @course.votes.where(student_id: current_user.id).first.nil? ? nil : @course.votes.where(student_id: current_user.id).first
@@ -110,9 +114,11 @@ class CoursesController < ApplicationController
 
   def grouping
     @course = Course.find(params[:id])
-    if @course.projects.active < 3
-      respond_to do |format|
-        format.html { redirect_to project_voting_course_path(@course), notice: 'You must have at least 2 active projects before creating groups' }
+    if @course.withProject
+      if @course.projects.active.size < 2
+        respond_to do |format|
+          format.html { redirect_to project_voting_course_path(@course), notice: 'You must have at least 2 active projects before creating groups' }
+        end
       end
     end
     @course.state = 'choose_algo'
@@ -167,7 +173,7 @@ class CoursesController < ApplicationController
           format.html { redirect_to fill_question_course_path(@course), notice: 'Form Submitted'}
           format.json { render :show, status: :ok, location: @course }
         else
-          format.html { redirect_to grouping_course_path(@course), notice: 'Form Submitted'}
+          format.html { redirect_to fill_question_course_path(@course), notice: 'Form Submitted'}
           format.json { render :show, status: :ok, location: @course }
         end
       else

@@ -26,7 +26,8 @@
               <%= form.label :password_confirmation, "Password Confirmation", class: 'signup-label' %>
               <%= form.password_field :password_confirmation, required: true, class: 'form-control signup-input' %>
 
-              <%= form.input :time_zone, label: "Time Zone", required: true %>
+              <%= form.label :time_zone, "Time Zone", class:'signup-label' %>
+              <%= form.input :time_zone, label: false, required: true, class: 'form-control signup-input' %>
           </div>
 
           <div class="form-actions">

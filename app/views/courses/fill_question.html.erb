@@ -22,8 +22,8 @@
               <%= notice %>
             </div>
           <% end %>
-          <%= f.input :minimum_group_member, collection: (1..10).to_a %>
-          <%= f.input :maximum_group_member, collection: (1..10).to_a %>
+          <%= f.input :minimum_group_member, collection: (1..@course.students.size).to_a %>
+          <%= f.input :maximum_group_member, collection: (1..@course.students.size).to_a %>
           <br>
           <% if @course.withProject %>
             <p>How much weight would you like to assign to different preferences in grouping students? </p>

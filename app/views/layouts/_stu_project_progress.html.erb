@@ -53,3 +53,19 @@
     <% end %>
   </div>
 </div>
+
+<div>
+  <div class="next-step-button">
+    <% if controller_name == 'courses' && action_name == 'show' %>
+      <%= link_to "Next Step", project_brainstorm_course_path(@course), class: "btn btn-outline-success" %>
+    <% end %>
+    <% if controller_name == 'courses' && action_name == 'project_brainstorm' %>
+      <%= link_to "Back", course_path(@course), class: "btn btn-outline-info" %>
+      <%= link_to "Next Step", project_voting_course_path(@course), class: "btn btn-outline-success" %>
+    <% end %>
+    <% if controller_name == 'courses' && action_name == 'project_voting' %>
+      <%= link_to "Back", project_voting_course_path(@course), class: "btn btn-outline-info" %>
+      <%= link_to "Next Step", course_groups_path(@course), class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+</div>

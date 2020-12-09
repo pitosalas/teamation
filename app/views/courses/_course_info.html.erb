@@ -14,6 +14,12 @@
       <% professor = @course.professor %>
       <%= professor.firstname + ' '+ professor.lastname  %>
     </p>
+
+    <p class="secondary-title">
+      <strong>Enrolled Students: </strong>
+      <%= @course.students.size %>
+    </p>
+
     <% if current_user.type == 'Professor' %>
       <% unless controller_name == 'courses' && action_name == 'show' %>
         <p class="secondary-title">

@@ -24,21 +24,11 @@ a.active {
   .project-description-text {
     background-color: #D3D3D2;
   }
-  //background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
-  //box-sizing: border-box;
-  //width: 320px;
-  //min-height: 220px;
-  //margin-top: 0px;
-  //margin-bottom: 25px;
-  //> h4 {
-  //  font-size: bold;
-  //}
-  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  //border-radius: 5px;
   background-color: #D3D3D3;
   width: 320px;
   height: 220px;
   margin-top: 10px;
+  margin-right: 20px;
 }
 
 #course-info-box{
@@ -143,58 +133,21 @@ a.active {
   margin-right: 20px;
   margin-bottom: 20px;
 }
-//border-radius: 5px;
-//margin-left: 205px;
-//margin-right: 205px;
-//margin-top: 10px;
-//.projects-box{
-//  .project-title{
-//    text-align: center;
-//    margin-top: 10px;
-//  }
-//  background: rgb(193, 213, 250);
-//  border-radius: 3px;
-//}
-//.editbox {
-//  height: 300px;
-//}
-//.editbox-name {
-//  height: 50px;
-//}
-//.editbox-description {
-//  height: 250px;
-//  margin-top: 10px;
-//}
+
 .add-projects-button {
   position:relative;
   bottom: 10px;
   left: 100px;
-
-  //background-color:rgb(193, 213, 250) ;
-  ////margin-top: 20px;
-  //color: black;
-  //text-align: center;
 }
 .addProjectBtn{
   border: 1.0px solid rgb(193, 213, 250);
-  //font-weight: bold;
   color: rgb(255, 255, 255);
   opacity: 0.8;
 }
-//.addProjectBtn:hover{
-//  background-color:rgb(193, 213, 250) ;
-//  color: black;
-//}
-//#delete-project {
-//  text-align: right;
-//}
 #project-list-buttons {
   position: relative;
   top:100px;
 }
-//.project-description-text {
-//  min-height: 10rem;
-//}
 .mode {
   margin-left: 150px;
   text-align: center;

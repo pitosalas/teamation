@@ -7,10 +7,10 @@
           <% end %>
       </div>
       <div class="project-voting" style="margin-bottom: 15px;">
-        <div class="active-projects">
         <div>
           <h4>Active Projects</h4>
         </div>
+        <div class="project-cards">
           <% @course.projects.active.each do |project|%>
             <% if !project.id.nil? %>
               <div class="card project-card-active">
@@ -92,10 +92,10 @@
             <% end %>
           <% end %>
         </div>
-        <div class="inactive-projects">
         <div>
           <h4>On-hold Projects</h4>
         </div>
+        <div class="project-cards">
         <% @course.projects.onhold.each do |project|%>
         <% if !project.id.nil? %>
           <div class="card project-card-archive">

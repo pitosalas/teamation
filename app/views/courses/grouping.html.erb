@@ -5,6 +5,11 @@
 <body class='view4'>
 <div class='container profile-container' id="classroom" >
   <%= render partial: "course_info" %>
+  <% if notice %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
   <div id="choose_algorithm" style="margin-top: 20px; margin-left: 200px;">
     <div class="choose_algorithm" style="margin-top: 20px;">
       <%= link_to 'Create Groups with Preferences', course_groups_path(@course, algo: "preference_only"), class:"btn btn-primary" %>

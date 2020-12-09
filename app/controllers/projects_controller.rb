@@ -46,10 +46,10 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     @project = @course.projects.find(params[:id])
-    if @project.added_by = current_user.id
+    if current_user.type == "professor" || @project.added_by = current_user.id
       if @project.update(project_params)
         respond_to do |format|
-            format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'Project was successfully updated.'}
+          format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'Project was successfully updated.'}
         end
       else
         respond_to do |format|
@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'Project was not updated.'}
+        format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'You cannot edit this project.'}
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -77,7 +77,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'Project did not get deleted.' }
+        format.html { redirect_to project_brainstorm_course_path(@project.course_id), notice: 'You cannot delete this project.' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

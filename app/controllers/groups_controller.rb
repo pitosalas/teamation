@@ -5,6 +5,11 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
+    if @course.students.size <= 0
+      respond_to do |format|
+        format.html { redirect_to grouping_course_path(@course), notice: "Your course has no students enrolled yet"}
+      end
+    end
     if @course.groups.size.zero? && @course.students.size.positive? && @course.projects.size.positive?
       group_service = GroupCreationManager::GroupMatcher.new
       group_service.determine_algo_and_match(@course, params)

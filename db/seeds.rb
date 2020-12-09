@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-(1..50).each do
+(1..60).each do
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   User.create(firstname: first,
@@ -16,7 +16,7 @@
 
 end
 
-(1..50).each do
+(1..20).each do
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   User.create(firstname: first,

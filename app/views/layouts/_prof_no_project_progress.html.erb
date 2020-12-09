@@ -39,3 +39,16 @@
     <% end %>
   </div>
 </div>
+
+<div>
+  <div class="next-step-button">
+    <% if controller_name == 'courses' && action_name == 'fill_question' %>
+      <%= link_to "Back", course_path(@course), class: "btn btn-outline-info" %>
+      <%= link_to "Next Step", grouping_course_path(@course), class: "btn btn-outline-success" %>
+    <% end %>
+    <% if controller_name == 'courses' && action_name == 'grouping' %>
+      <%= link_to "Back", fill_question_course_path(@course), class: "btn btn-outline-info" %>
+      <%= link_to "Next Step",  course_groups_path(@course), class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+</div>
