@@ -24,9 +24,11 @@
             <div class="container projects-box">
               <div class="group">
                 <% if @groups.size > 0 %>
-                  <div class="group" style="margin-left: 80px; margin-top: 50px; margin-bottom: 50px;">
-                    <div class="dismiss_button" style="text-align: right; margin-right: 50px">
-                      <%= link_to "Dismiss all Groups", destroy_all_course_groups_path(@course), method: :delete, class:"btn btn-outline-primary" %>
+                  <div class="group" style="margin-left: 50px; margin-top: 50px; margin-bottom: 50px;">
+
+                    <div class="dismiss_button">
+                      <%= link_to "Export Students Group Into Zoom Breakout Rooms", course_groups_path(@course.id, format: "csv"), class:"btn btn-outline-success", style: "float: left; margin-left: 50px"  %>
+                      <%= link_to "Dismiss all Groups", destroy_all_course_groups_path(@course), method: :delete, class:"btn btn-outline-primary", style: "float: right; margin-right: 50px" %>
                     </div>
                     <div class="group" style="margin-top:50px; text-align: center">
                       <table class="table table-striped">
