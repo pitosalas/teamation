@@ -5,6 +5,7 @@ class PreferenceMatching < Matching
     add_preferences(preferences)
     add_professor_preferences(professor_preferences)
     @course = course
+    random_match()
     preference_algorithm()
   end
 
@@ -27,11 +28,9 @@ class PreferenceMatching < Matching
       result[project] << s
     end
     @matched_groups = result
-    puts @matched_groups
   end
   
   def preference_algorithm
-    random_match()
     initial_team = @matched_groups
     result = initial_team
     if result.keys.size == 1
