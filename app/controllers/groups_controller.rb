@@ -15,22 +15,14 @@ class GroupsController < ApplicationController
       redirect_to grouping_course_path(@course), notice: "You need at least #{enough_projects} active projects to divide students into groups"
     elsif @course.groups.size.zero?
       if params[:algo] == "preference_only" && (students_fill_preference_form? @course) == false
-        respond_to do |format|
-          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"}
-        end
-      elsif params[:algo] == "project_only" && (students_all_vote? @course)  == false
-        respond_to do |format|
-          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote"}
-        end
+        redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"
+      elsif params[:algo] == "project_only" && (students_all_vote? @course) == false
+        redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote"
       elsif params[:algo] == "holistic" && ((students_fill_preference_form? @course) == false || (students_all_vote? @course) == false)
-        respond_to do |format|
-          format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"}
-        end
+        redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"
       else
         if params[:algo].nil?
-          respond_to do |format|
-            format.html { redirect_to grouping_course_path(@course), notice: "This course has no groups yet"}
-          end
+          redirect_to grouping_course_path(@course), notice: "This course has no groups yet"
         else
           group_service = GroupCreationManager::GroupMatcher.new
           group_service.determine_algo_and_match(@course, params)
