@@ -19,12 +19,11 @@ class ProfessorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should create professor" do
-  #   assert_difference('Professor.count') do
-  #     post professor_registration_url, params: {:user=> {email: "professor@brandeis.edu", firstname: "admin", 
-  #                                                 lastname: "admin", password: "password", password_confirmation: "password", type: "Professor"}}
-  #   end
-
-  #   # assert_redirected_to professor_url(Professor.last)
-  # end
+  test "should create professor" do
+    post professor_registration_url, params: {email: "professor@brandeis.edu", firstname: "admin", 
+                                                  lastname: "admin", password: "password", password_confirmation: "password", type: "Professor"}
+    assert_response :redirect
+    follow_redirect!                                          
+    # assert_redirected_to professor_url(Professor.last.id)
+  end
 end
