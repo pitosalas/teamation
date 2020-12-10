@@ -6,25 +6,23 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    enough_projects = (@course.students.size / @course.maximum_group_member).ceil
+    enough_projects = (@course.students.size / @course.maximum_group_member.to_f).ceil
+    puts "enough"
+    puts enough_projects
     if @course.students.size <= 0 && @course.groups.size.zero?
-      respond_to do |format|
-        format.html { redirect_to grouping_course_path(@course), notice: "Your course has no students enrolled yet"}
-      end
+      redirect_to grouping_course_path(@course), notice: "Your course has no students enrolled yet"
     elsif @course.projects.active.size < enough_projects && @course.groups.size.zero?
-      respond_to do |format|
-        format.html { redirect_to grouping_course_path(@course), notice: "You need at least #{enough_projects} active projects to divide students into groups"}
-      end
+      redirect_to grouping_course_path(@course), notice: "You need at least #{enough_projects} active projects to divide students into groups"
     elsif @course.groups.size.zero?
-      if params[:algo] == "preference_only" && !(students_fill_preference_form? @course)
+      if params[:algo] == "preference_only" && (students_fill_preference_form? @course) == false
         respond_to do |format|
           format.html { redirect_to grouping_course_path(@course), notice: "All Students need to fill out their preference forms"}
         end
-      elsif params[:algo] == "project_only" && !(students_all_vote? @course)
+      elsif params[:algo] == "project_only" && (students_all_vote? @course)  == false
         respond_to do |format|
           format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote"}
         end
-      elsif params[:algo] == "holistic" && (!(students_fill_preference_form? @course) || !(students_all_vote? @course))
+      elsif params[:algo] == "holistic" && ((students_fill_preference_form? @course) == false || (students_all_vote? @course) == false)
         respond_to do |format|
           format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"}
         end

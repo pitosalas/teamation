@@ -115,7 +115,7 @@ class CoursesController < ApplicationController
 
   def project_voting
     @course ||= Course.find(params[:id])
-    enough_projects = (@course.students.size / @course.maximum_group_member).ceil
+    enough_projects = (@course.students.size / @course.maximum_group_member.to_f).ceil
     if @course.withProject
       if @course.projects.size < enough_projects
         respond_to do |format|
