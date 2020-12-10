@@ -30,7 +30,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "should show course" do
     get course_url(@course.id)
-    assert_response :success
+    assert_template "courses/show"
   end
 
   test "should download the student example file" do
@@ -39,21 +39,21 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     # wait_for_
   end
 
-#   test "should get edit" do
-#     get edit_course_url(@course)
-#     assert_response :success
-#   end
+  test "should get edit" do
+    get edit_course_url(@course)
+    assert_response :success
+  end
 
 #   test "should update course" do
 #     patch course_url(@course), params: { course: {  } }
 #     assert_redirected_to course_url(@course)
 #   end
 
-#   test "should destroy course" do
-#     assert_difference('Course.count', -1) do
-#       delete course_url(@course)
-#     end
+  test "should destroy course" do
+    assert_difference('Course.count', -1) do
+      delete course_url(@course)
+    end
 
-#     assert_redirected_to courses_url
-#   end
+    assert_redirected_to professor_url(@current_user.id)
+  end
 end
