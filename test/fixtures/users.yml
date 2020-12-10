@@ -3,3 +3,9 @@ one:
   lastname: Yan
   email: xyan@brandeis.edu
   type: Professor
+
+two:
+  firstname: Peter
+  lastname: John
+  email: john@brandeis.edu
+  type: Student

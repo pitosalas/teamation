@@ -1,0 +1,10 @@
+one:
+  student_id: 1
+  course_id: 1
+  subject_matter_proficiency: 1
+  time_zone: 
+  dream_partner:
+    - 1
+  schedule:
+    - MyString
+    - MyString

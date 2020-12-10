@@ -1,19 +1,20 @@
-# require 'test_helper'
+require 'test_helper'
 
-# class PreferencesControllerTest < ActionDispatch::IntegrationTest
-#   setup do
-#     @preference = preferences(:one)
-#   end
+class PreferencesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @course = courses(:one)
+    # @preference = preferences(:one)
+  end
 
-#   test "should get index" do
-#     get preferences_url
-#     assert_response :success
-#   end
+  test "should get index" do
+    get course_preferences_url(@course.id)
+    assert_template "preferences/index"
+  end
 
-#   test "should get new" do
-#     get new_preference_url
-#     assert_response :success
-#   end
+  test "should get new" do
+    get new_course_preference_url(@course.id)
+    assert_template "preferences/new"
+  end
 
 #   test "should create preference" do
 #     assert_difference('Preference.count') do
@@ -45,4 +46,4 @@
 
 #     assert_redirected_to preferences_url
 #   end
-# end
+end
