@@ -74,7 +74,7 @@ def seed_course profs, students
             added_by = r.id
           end
           project = Project.create!(project_name: Faker::Team.name, course_id: course.id, description: Faker::Game.genre,
-                                    is_active: [true, false].sample, number_of_likes: 0, added_by: added_by)
+                                    is_active: [true, true, true, false].sample, number_of_likes: 0, added_by: added_by)
           if project.is_active
             projects << project.id
           end

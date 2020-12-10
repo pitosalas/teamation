@@ -29,9 +29,15 @@ class GroupsController < ApplicationController
           format.html { redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"}
         end
       else
-        group_service = GroupCreationManager::GroupMatcher.new
-        group_service.determine_algo_and_match(@course, params)
-        @course.update(has_group: true)
+        if params[:algo].nil?
+          respond_to do |format|
+            format.html { redirect_to grouping_course_path(@course), notice: "This course has no groups yet"}
+          end
+        else
+          group_service = GroupCreationManager::GroupMatcher.new
+          group_service.determine_algo_and_match(@course, params)
+          @course.update(has_group: true)
+        end
       end
     end
     if @course.groups.size.zero? && @course.state != "view_groups"
