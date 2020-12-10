@@ -19,6 +19,13 @@ body,
   height: 200%;
 }
 
+.view4{
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)) ;
+  background-color: #becee5;
+  background-size: cover;
+  min-height: 2000px;
+}
+
 @media (max-width: 740px) {
   html,
   body,
@@ -33,7 +40,7 @@ body,
   background-color: rgb(0,52,120); 
 }
 .navbar-brand{
-  margin-left: 170px;
+  margin-left: 290px;
 }
 #logo {
     float: left;

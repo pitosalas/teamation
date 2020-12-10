@@ -7,9 +7,13 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     enough_projects = (@course.students.size / @course.maximum_group_member.to_f).ceil
-    puts "enough"
-    puts enough_projects
-    if @course.students.size <= 0 && @course.groups.size.zero?
+    if params[:algo].nil? && @course.groups.size.zero?
+      if current_user.type == "Professor"
+        redirect_to grouping_course_path(@course), notice: "This course has no groups yet"
+      else
+        redirect_to course_path(@course), notice: "This course has no groups yet"
+      end
+    elsif @course.students.size <= 0 && @course.groups.size.zero?
       redirect_to grouping_course_path(@course), notice: "Your course has no students enrolled yet"
     elsif @course.projects.active.size < enough_projects && @course.groups.size.zero?
       redirect_to grouping_course_path(@course), notice: "You need at least #{enough_projects} active projects to divide students into groups"
@@ -21,13 +25,9 @@ class GroupsController < ApplicationController
       elsif params[:algo] == "holistic" && ((students_fill_preference_form? @course) == false || (students_all_vote? @course) == false)
         redirect_to grouping_course_path(@course), notice: "All Students need to have first, second, third choices vote and fill out their prerference forms"
       else
-        if params[:algo].nil?
-          redirect_to grouping_course_path(@course), notice: "This course has no groups yet"
-        else
-          group_service = GroupCreationManager::GroupMatcher.new
-          group_service.determine_algo_and_match(@course, params)
-          @course.update(has_group: true)
-        end
+        group_service = GroupCreationManager::GroupMatcher.new
+        group_service.determine_algo_and_match(@course, params)
+        @course.update(has_group: true)
       end
     end
     if @course.groups.size.zero? && @course.state != "view_groups"

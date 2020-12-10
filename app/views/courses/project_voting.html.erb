@@ -3,22 +3,22 @@
 
 
 <body class='view4'>
-<div class='container profile-container' id="classroom" >
-  <%= render partial: "course_info" %>
-  <% if notice %>
-    <div class="alert alert-success">
-      <%= notice %>
-    </div>
-  <% end %>
-  <div class="error_message">
-    <% if @course.errors.any? %>
-      <% @course.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+  <div class='container profile-container' id="classroom" >
+    <%= render partial: "course_info" %>
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
     <% end %>
+    <div class="error_message">
+      <% if @course.errors.any? %>
+        <% @course.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="projects-list">
+      <%= render partial: "project_voting", course: @course %>
+    </div>
   </div>
-</div>
-<div id="projects-list">
-  <%= render partial: "project_voting", course: @course %>
-</div>
 </body>

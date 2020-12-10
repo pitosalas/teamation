@@ -10,7 +10,6 @@
         <%= notice %>
       </div>
     <% end %>
-  </div>
   <div style="margin-left:20px;">
   <div class="projects-list">
     <% if current_user.type == 'Professor' %>
@@ -40,6 +39,7 @@
     <div class="row project-row">
       <%= render partial: "project", course: @course %>
     </div>
+  </div>
   </div>
   </div>
 </body>

@@ -4,7 +4,7 @@ class CourseReflex < ApplicationReflex
   before_reflex do
     @course = Course.find(element.dataset[:course_id])
     @project = Project.find(element.dataset[:project_id])
-    @user = Professor.find(element.dataset[:user_id])
+    @user = Student.find(element.dataset[:user_id])
     # @course.assign_attributes(course_params)
   end
 
