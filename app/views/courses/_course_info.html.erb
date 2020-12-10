@@ -32,6 +32,9 @@
         <% end %>
       <%  end %>
     <% else %>
+      <p class="secondary-title">
+        <strong>Course Status:</strong>
+      </p>
       <% if @course.withProject %>
         <%= render partial: 'layouts/stu_project_progress' %>
       <% else %>

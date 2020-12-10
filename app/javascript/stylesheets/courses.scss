@@ -43,8 +43,8 @@ a.active {
 }
 
 .course-profile-column{
-  padding: 40px;
-  padding-left: 60px;
+  padding: 10px;
+  //padding-left: 60px;
   font-size: 25px;
   .course-title{
     font-size: 35px;
@@ -55,7 +55,7 @@ a.active {
 }
 
 #course-info-col{
-  padding: 40px;
+  padding: 20px;
   padding-top: 20px;
 }
 
@@ -74,12 +74,10 @@ a.active {
 
 // project brainstorm page
 .projects-list {
-  padding-left: 60px;
-  padding: 40px;
+  //padding-left: 60px;
+  //padding: 40px;
   display: flex;
   flex-wrap: wrap;
-  margin-left: 160px;
-  margin-right: 20px;
   flex-direction: row;
   justify-content: space-around;
   display: inline-block;

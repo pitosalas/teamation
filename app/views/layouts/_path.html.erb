@@ -1,9 +1,7 @@
-<div class="container">
-  <div class="sub-menu">
+<div class="sub-menu">
   <%= link_to full_name(current_user), current_user %>
   <% if !@course.nil? %>
     <i class="fas fa-caret-right"></i>
     <%= link_to @course.name, course_path(@course)%>
   <% end %>
-  </div>
 </div>

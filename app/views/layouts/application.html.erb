@@ -57,10 +57,11 @@
             </div>
           <% end %>
     </nav>
-    
-    <% if current_user %>
-      <%= render 'layouts/path'%>
-    <% end %>
+    <div class="path-bar" style="margin-left: 290px; margin-bottom: 20px;">
+      <% if current_user %>
+        <%= render 'layouts/path'%>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
