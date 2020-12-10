@@ -12,6 +12,7 @@ class ProjectMatching < Matching
     @projects.each do |p|
       result[p] = []
     end
+    result[-1] = []
     puts @projects
     #(1)populate the result hash by assigning students's first choice
     puts @votes
@@ -22,7 +23,16 @@ class ProjectMatching < Matching
     puts "assigning everyone to their first choice"
     puts result
     result = move_people(result)
-    @matched_groups = result
+    if result[-1].size > 0
+      result[-1].each do |unvoted_s|
+        random_group = result.keys.sample
+        while result[random_group].size >= @group_size_max
+          random_group = result.keys.sample
+        end
+        result[random_group] << unvoted_s
+      end
+    end
+    @matched_groups = result.except!(-1)
     puts "getting result"
     puts @matched_groups
   end
