@@ -5,17 +5,14 @@
 Teamation designs to make forming students into teams for a group project convenient for professors while also fair and effective for the students. 
 Teamation helps faciliate the group creation process by offering two modes: creating groups with
 project, or creating groups without project. It separates the process into following steps:
-project brainstorm, project voting, choose algorithms for dividing groups, and
+project brainstorm, project voting, choose one of the three algorithms for dividing groups, and
 view groups. It also provides some convenient ways for professors to manage the course by enrolling all students with csv, importing all projects and description 
 with csv, and exporting group zoom breakout room csv. 
-Three algorithms are available to choose: create groups based on students' preferences,
-create groups based on students' project voting, and create groups based on both 
-preferences and project voting.
 
 Link to Heroku:
 http://teamation-brandeis.herokuapp.com/
 
-**Framework & Packages**
+**Framework & Packages:**
 
 * Ruby 2.6.5
 * Ruby on Rails 6.0.3.4
@@ -106,7 +103,7 @@ Takings: id, student_id, course_id, state(keep track of student's progress in ea
     * javascript/stylesheets
     * views
     * reflexes
-* Data Model * Schema:
+* Data Model & Schema:
     * db/schema, seeds
     * models
 * Matching Algorithm:
