@@ -3,7 +3,7 @@ require 'test_helper'
 class PreferencesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @course = courses(:one)
-    # @preference = preferences(:one)
+    @preference = preferences(:one)
   end
 
   test "should get index" do
@@ -16,23 +16,23 @@ class PreferencesControllerTest < ActionDispatch::IntegrationTest
     assert_template "preferences/new"
   end
 
-#   test "should create preference" do
-#     assert_difference('Preference.count') do
-#       post preferences_url, params: { preference: { course_id: @preference.course_id, dream_partner: @preference.dream_partner, schedule: @preference.schedule, student_id: @preference.student_id, subject_matter_proficiency: @preference.subject_matter_proficiency, time_zone: @preference.time_zone } }
-#     end
+  test "should create preference" do
+    assert_difference('Preference.count') do
+      post course_preferences_url, params: { course_id: @preference.course_id, dream_partner: @preference.dream_partner, schedule: @preference.schedule, student_id: @preference.student_id, subject_matter_proficiency: @preference.subject_matter_proficiency, time_zone: @preference.time_zone }
+    end
 
-#     assert_redirected_to preference_url(Preference.last)
-#   end
+    assert_redirected_to course_url(@course)
+  end
 
-#   test "should show preference" do
-#     get preference_url(@preference)
-#     assert_response :success
-#   end
+  test "should show preference" do
+    get course_preference_url(@course.id, @preference.id)
+    assert_template "preferences/show"
+  end
 
-#   test "should get edit" do
-#     get edit_preference_url(@preference)
-#     assert_response :success
-#   end
+  test "should get edit" do
+    get edit_course_preference_url(@course.id, @preference.id)
+    assert_template "preferences/edit"
+  end
 
 #   test "should update preference" do
 #     patch preference_url(@preference), params: { preference: { course_id: @preference.course_id, dream_partner: @preference.dream_partner, schedule: @preference.schedule, student_id: @preference.student_id, subject_matter_proficiency: @preference.subject_matter_proficiency, time_zone: @preference.time_zone } }
