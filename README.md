@@ -123,6 +123,7 @@ Features we didn't have time to implement:
 4. View student tables by on different ordering (sort by first name, last name, time zone, group number/name)
 5. If professors cannot create groups because some students haven't vote / haven't fill preference form, professors can get
 notification of the student name or send a reminder to students
+6. Think about ways to make this app applicable and usable to broader users in subjects other than COSI
 
 **Team Members:**
 
