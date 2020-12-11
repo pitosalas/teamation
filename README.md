@@ -115,7 +115,7 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
     * helpers
     * controllers
 
-** Testing
+**Testing:**
     * Unit tests
         - There are more than 20 unit tests, which are mainly focused on testing each controller's behaviors.
     * Integration test
