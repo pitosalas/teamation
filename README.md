@@ -124,6 +124,10 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
  
 **Unsolved Issues && Improvements in the future:**
 
+Issues:
+1. After groups are created, it takes one or couple refreshes to display the result. It will show as no groups yet first.
+2. There might be some edge cases with the algorithm that we are unaware of. The algorithm needs thorough testing.
+
 Features we didn't have time to implement:
 1. Professor gets notification if students edit their preference form
 2. Students like a project on project brainstorm and voting page so it is easier for professors to decide which projects should be marked as active
@@ -131,7 +135,8 @@ Features we didn't have time to implement:
 4. View student tables by on different ordering (sort by first name, last name, time zone, group number/name)
 5. If professors cannot create groups because some students haven't vote / haven't fill preference form, professors can get
 notification of the student name or send a reminder to students
-6. Think about ways to make this app applicable and usable to broader users in subjects other than COSI
+6. After professors created groups, students should be redirect to the view groups page, or get notifications about viewing groups.
+7. Think about ways to make this app applicable and usable to broader users in subjects other than COSI
 
 **Team Members:**
 
