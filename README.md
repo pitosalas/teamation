@@ -25,7 +25,8 @@ http://teamation-brandeis.herokuapp.com/
 
 * cd ~/teamation
 * bundle install
-* rails db:migrate
+* rails dev:cache
+* rails db:create db:migrate db:seed
 * rails s
 
 **Core Features & Implementations:**
@@ -109,7 +110,6 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
 * Matching Algorithm:
     * Poro
     * services/group_creation_manager
-    * services/enrollment_manager
 * Backend:
     * helpers
     * controllers
