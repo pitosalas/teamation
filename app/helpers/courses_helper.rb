@@ -32,9 +32,10 @@ module CoursesHelper
   def find_project_name project_id
     if project_id == -1
       return "Not Voted"
+    else
+      project = Project.active.find(project_id)
+      return project.project_name
     end
-    project = Project.active.find(project_id)
-    return project.project_name
   end
 
   def find_first_choice_project course

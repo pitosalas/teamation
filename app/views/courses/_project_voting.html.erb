@@ -88,12 +88,15 @@
               <% else %>
                 <div class="col-lg-3 vote-button">
                   <p>First</p>
+                  <%= Vote.with_course(@course.id).with_project_as_first(project.id).count %>
 
                 </div>
                 <div class="col-lg-3 vote-button">
-
+                  <p>Second</p>
+                  <%= Vote.with_course(@course.id).with_project_as_second(project.id).count %>
                 </div>
                 <div class="col-lg-3 vote-button">
+                  <p>Second</p>
                   <%= Vote.with_course(@course.id).with_project_as_third(project.id).count %>
                 </div>
               <% end %>
