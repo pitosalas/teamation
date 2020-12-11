@@ -29,6 +29,18 @@ http://teamation-brandeis.herokuapp.com/
 * rails db:create db:migrate db:seed
 * rails s
 
+After seeding data, you can run a quick demo and try some features by logging in with following accounts:
+
+* professor
+    * username: admin_prof@brandeis.edu
+    * password: password
+* student
+    * username: admin_student@brandeis.edu
+    * password: password
+    
+These accounts have all data needed for trying three algorithms, please refer to the course title for which one to use.
+
+
 **Core Features & Implementations:**
 
 ###### _General_

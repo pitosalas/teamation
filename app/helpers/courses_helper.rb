@@ -14,7 +14,7 @@ module CoursesHelper
   end
 
   def find_current_user_vote_record course
-    course.votes.where(student_id: current_user.id).first
+    course.votes.where(student_id: current_user.id).nil?
   end
 
   def find_current_user_first_choice course

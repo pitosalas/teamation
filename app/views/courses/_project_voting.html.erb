@@ -88,7 +88,6 @@
               <% else %>
                 <div class="col-lg-3 vote-button">
                   <p>First<%= Vote.with_course(@course.id).with_project_as_first(project.id).count %></p>
-
                 </div>
                 <div class="col-lg-3 vote-button">
                   <p>Second <%= Vote.with_course(@course.id).with_project_as_second(project.id).count %></p>
