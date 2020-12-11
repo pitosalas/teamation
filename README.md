@@ -102,18 +102,18 @@ Takings: id, student_id, course_id, state(keep track of student's progress in ea
 
 **File Structure:**
 
-Design & Layout & Reactive App:
+* Design & Layout & Reactive App:
     * javascript/stylesheets
     * views
     * reflexes
-Data Model * Schema:
+* Data Model * Schema:
     * db/schema, seeds
     * models
-Matching Algorithm:
+* Matching Algorithm:
     * Poro
     * services/group_creation_manager
     * services/enrollment_manager
-Backend:
+* Backend:
     * helpers
     * controllers
  
