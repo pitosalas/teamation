@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
     before_action :authenticate_student!
 
     def index
+        @users = Student.all
     end
 
     def edit
@@ -23,7 +24,6 @@ class StudentsController < ApplicationController
     end
 
     def show
-        puts current_user.nil?
         @user = User.find(params[:id])
         @courses = @user.courses
     end

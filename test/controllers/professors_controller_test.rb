@@ -26,4 +26,22 @@ class ProfessorsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!                                          
     # assert_redirected_to professor_url(Professor.last.id)
   end
+
+  test "should show professor" do
+    get professor_url(@professor)
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get edit_professor_url(@professor)
+    assert_response :success
+  end
+
+  test "should destroy professor" do
+    assert_difference('Professor.count', -1) do
+      delete professor_registration_url(@professor)
+    end
+
+    # assert_redirected_to professors_url
+  end
 end

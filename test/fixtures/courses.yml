@@ -3,3 +3,9 @@ one:
   pin: 111111
   name: MyString
   professor_id: 1
+  minimum_group_member: 3
+  maximum_group_member: 5
+  has_group: true
+  is_voting: false
+  state: 'created'
+  withProject: true
