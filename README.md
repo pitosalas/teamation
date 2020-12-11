@@ -30,7 +30,7 @@ http://teamation-brandeis.herokuapp.com/
 
 **Core Features & Implementations:**
 
-_General_
+###### _General_
 1. Log In / Sign Up (with Devise) - only allow brandeis email to log in
 2. Matching algorithm for dividing students into groups (Services/GroupCreationManager & Poro/Matcher Object for details)
 * Matching based on Preference Matching
@@ -48,7 +48,7 @@ _General_
   3. swap members to improve group scores
 3. Keep track of current course state and last course accessed when logged in 
 
-_Professor Side:_
+###### _Professor Side_
 1. edit profile, view all courses, add a course (generate a 6 digit pin for students to use), delete a course
 2. input course settings: maximum/minimum member in a group, preference weights for group creation
 3. upload a csv with student name and email to enroll all students to a class
@@ -66,7 +66,7 @@ _Professor Side:_
    * Only Preference Match is available in this case
    * view groups
    
-_Student Side_
+###### _Student Side_
 1. Fill preference forms: subject matter proficiency, schedule, dream partner, time zone (taken from profile)
 2. course with projects
     * Project brainstorm: add a project, delete/edit a project added by the student
@@ -81,21 +81,21 @@ _Student Side_
 
 **Schema Design:**
 
-Users: id, firstname, lastname, email, password, type(Student/Professor), current_course_id(keep track of last course accessed), time zone
+_Users_: id, firstname, lastname, email, password, type(Student/Professor), current_course_id(keep track of last course accessed), time zone
 
-Courses: id, name, pin, professor_id, maximum_group_member, minimum_group_member, has_group (whether group is created), is_voting(can be deleted later), state(for professor: created, fill_question, project_brainstorm, project_voting, choose_algo, view_groups), withProject(has project or not)
+_Courses_: id, name, pin, professor_id, maximum_group_member, minimum_group_member, has_group (whether group is created), is_voting(can be deleted later), state(for professor: created, fill_question, project_brainstorm, project_voting, choose_algo, view_groups), withProject(has project or not)
 
-Projects: id, project_name, course_id, description, is_active, number_of_likes, added_by(user_id)
+_Projects_: id, project_name, course_id, description, is_active, number_of_likes, added_by(user_id)
 
-Groups: id, course_id, project_id, group_name, students_id(array of student ids)
+_Groups_: id, course_id, project_id, group_name, students_id(array of student ids)
 
-Preferences: id, student_id, course_id, subject_matter_proficiency, time_zone, dream_partner(array of student ids), schedule(M => morning, A => Afternoon, E => Evening)
+_Preferences_: id, student_id, course_id, subject_matter_proficiency, time_zone, dream_partner(array of student ids), schedule(M => morning, A => Afternoon, E => Evening)
 
-Votes: id, student_id, course_id, vote_first(project_id), vote_second, vote_third
+_Votes_: id, student_id, course_id, vote_first(project_id), vote_second, vote_third
 
-Preference_Weights(weight assigned by professor to represent the importance of this field in algorithm): id, course_id, subject_proficiency, dream_partner, time_zone, schedule, project_voting
+_Preference_Weights_(weight assigned by professor to represent the importance of this field in algorithm): id, course_id, subject_proficiency, dream_partner, time_zone, schedule, project_voting
 
-Takings: id, student_id, course_id, state(keep track of student's progress in each course)
+_Takings_: id, student_id, course_id, state(keep track of student's progress in each course)
 
 **File Structure:**
 
