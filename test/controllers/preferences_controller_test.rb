@@ -16,14 +16,6 @@ class PreferencesControllerTest < ActionDispatch::IntegrationTest
     assert_template "preferences/new"
   end
 
-  test "should create preference" do
-    assert_difference('Preference.count') do
-      post course_preferences_url, params: { course_id: @preference.course_id, dream_partner: @preference.dream_partner, schedule: @preference.schedule, student_id: @preference.student_id, subject_matter_proficiency: @preference.subject_matter_proficiency, time_zone: @preference.time_zone }
-    end
-
-    assert_redirected_to course_url(@course)
-  end
-
   test "should show preference" do
     get course_preference_url(@course.id, @preference.id)
     assert_template "preferences/show"
@@ -34,16 +26,4 @@ class PreferencesControllerTest < ActionDispatch::IntegrationTest
     assert_template "preferences/edit"
   end
 
-#   test "should update preference" do
-#     patch preference_url(@preference), params: { preference: { course_id: @preference.course_id, dream_partner: @preference.dream_partner, schedule: @preference.schedule, student_id: @preference.student_id, subject_matter_proficiency: @preference.subject_matter_proficiency, time_zone: @preference.time_zone } }
-#     assert_redirected_to preference_url(@preference)
-#   end
-
-#   test "should destroy preference" do
-#     assert_difference('Preference.count', -1) do
-#       delete preference_url(@preference)
-#     end
-
-#     assert_redirected_to preferences_url
-#   end
 end

@@ -33,7 +33,8 @@ http://teamation-brandeis.herokuapp.com/
 
 ###### _General_
 1. Log In / Sign Up (with Devise) - only allow brandeis email to log in
-2. Matching algorithm for dividing students into groups (Services/GroupCreationManager & Poro/Matcher Object for details)
+2. Users who forgot their passwords can reset their passwords. This function is implemented through SendGrid plugin.
+3. Matching algorithm for dividing students into groups (Services/GroupCreationManager & Poro/Matcher Object for details)
 * Matching based on Preference Matching
   1. randomly assigned students into projects
   2. based on students' inputs on preference forms information and professors' preference weights get group score
@@ -52,9 +53,9 @@ http://teamation-brandeis.herokuapp.com/
 ###### _Professor Side_
 1. edit profile, view all courses, add a course (generate a 6 digit pin for students to use), delete a course
 2. input course settings: maximum/minimum member in a group, preference weights for group creation
-3. upload a csv with student name and email to enroll all students to a class
+3. upload a csv with student name and email to enroll all students to a class (Attention: The uploaded files should be in specific formats. Please download the sample file for reference. The default password of student accounts is their password.)
 4. Create Groups Based on Projects
-   * Professor can upload project and its descriptions with csv
+   * Professor can upload project and its descriptions with csv. (Attention: The uploaded files should be in specific formats. Please download the sample file for reference.) 
    * Project Brainstorm: add a Project to project lists, mark projects as active projects, edit, delete projects
    * Project Voting: display onhold and active projects with number of first, second, third votes (only active projects will be used to be assigned with students)
    * Choose group division
@@ -113,6 +114,13 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
 * Backend:
     * helpers
     * controllers
+
+** Testing
+    * Unit tests
+        - There are more than 20 unit tests, which are mainly focused on testing each controller's behaviors.
+    * Integration test
+        - There are integration tests, which are focused on testing the behabiors when invoking multiple controllers.
+
  
 **Unsolved Issues && Improvements in the future:**
 
