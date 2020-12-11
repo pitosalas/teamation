@@ -119,7 +119,7 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
 
 * Unit tests:
     - There are more than 20 unit tests, which are mainly focused on testing each controller's behaviors.
-* Integration test:
+* Integration tests:
     - There are integration tests, which are focused on testing the behaviors when invoking multiple controllers.
 * CI with Github Actions
  
