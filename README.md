@@ -50,7 +50,7 @@ http://teamation-brandeis.herokuapp.com/
   3. swap members to improve group scores
 3. Keep track of current course state and last course accessed when logged in 
 
-###### _Professor Side_
+###### _Professor_
 1. edit profile, view all courses, add a course (generate a 6 digit pin for students to use), delete a course
 2. input course settings: maximum/minimum member in a group, preference weights for group creation
 3. upload a csv with student name and email to enroll all students to a class (Attention: The uploaded files should be in specific formats. Please download the sample file for reference. The default password of student accounts is their password.)
@@ -68,7 +68,7 @@ http://teamation-brandeis.herokuapp.com/
    * Only Preference Match is available in this case
    * view groups
    
-###### _Student Side_
+###### _Student_
 1. Fill preference forms: subject matter proficiency, schedule, dream partner, time zone (taken from profile)
 2. course with projects
     * Project brainstorm: add a project, delete/edit a project added by the student
@@ -120,8 +120,8 @@ _Takings_: id, student_id, course_id, state(keep track of student's progress in 
 * Unit tests:
     - There are more than 20 unit tests, which are mainly focused on testing each controller's behaviors.
 * Integration test:
-    - There are integration tests, which are focused on testing the behabiors when invoking multiple controllers.
-
+    - There are integration tests, which are focused on testing the behaviors when invoking multiple controllers.
+* CI with Github Actions
  
 **Unsolved Issues && Improvements in the future:**
 

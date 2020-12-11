@@ -34,12 +34,4 @@ class Matching
     @course = course
   end
 
-  # def initHolistic(projects, votes, students, course, preferences, professor_preferences)
-  #   add_projects(projects)
-  #   add_students(students)
-  #   add_votes(votes)
-  #   add_professor_preferences(professor_preferences)
-  #   add_preferences(preferences)
-  #   @course = course
-  # end
 end
