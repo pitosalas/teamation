@@ -4,21 +4,13 @@
       <% id = @course.id %>
       <%= form_with(url: "/courses/" + id.to_s+"/update_mode", method: "patch") do |form|%>
         <%= form.hidden_field :withProject, value: true %>
-        <%= form.submit "Create Groups with Project", class: "btn btn-primary" %>
-        <%#= button_tag 'submit', class: "btn btn-primary" do %>
-<!--          <h1 style="text-align: center"><i class="fas fa-project-diagram" aria-hidden="true"></i></h1>-->
-<!--          <p>Create Groups with Project</p>-->
-        <%# end %>
+        <%= form.submit "Create Groups With Project", class: "btn btn-primary" %>
       <% end %>
     </div>
     <div class="col col-sm-4 without-project">
       <%= form_with(url: "/courses/" + id.to_s+"/update_mode", method: "patch") do |form|%>
         <%= form.hidden_field :withProject, value: false %>
-        <%= form.submit "Create Groups without Project", class: "btn btn-primary" %>
-        <%#= button_tag 'submit', class: "btn btn-primary" do %>
-<!--          <h1 style="text-align: center"><i class="fas fa-users" aria-hidden="true"></i></h1>-->
-<!--          <p>Create Groups without Project</p>-->
-        <%# end %>
+        <%= form.submit "Create Groups Without Project", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

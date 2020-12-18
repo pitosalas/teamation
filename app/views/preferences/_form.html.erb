@@ -2,13 +2,16 @@
   <%= form.error_notification %>
   <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
+  <div class="form-actions" style="margin-top:20px;">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+  <div class="form" style="margin-top:20px;">
+
   <%= form.input :subject_matter_proficiency, :label => "Subject Matter Proficiency: ",  as: :radio_buttons, collection: Preference::LEVELS, required: true, wrapper: :vertical_collection_inline %>
 
   <%= form.hidden_field :student_id, :value => current_user.id %>
   <%= form.hidden_field :course_id, :value => @course.id %>
   <%= form.hidden_field :time_zone, :value => current_user.time_zone %>
-
-  <!-- <%= form.input :time_zone, label: "Time Zone", required: true %> -->
 
   <%= form.input :dream_partner, collection: @course.students.all_except(current_user).order(firstname: :asc, lastname: :asc), include_blank: false, input_html: { multiple: true } %>
 
@@ -163,7 +166,5 @@
       </tbody>
     </table>
   </div>
-  <div class="form-actions">
-    <%= form.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>

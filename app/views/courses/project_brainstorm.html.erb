@@ -15,7 +15,7 @@
     <% if current_user.type == 'Professor' %>
       <div class="row project-row">
         <div>
-          <h5>Import Project Lists From CSV</h5>
+          <h5>Import Project Lists from CSV</h5>
           <p>* Please download the <%= link_to "Project List Sample CSV", download_project_list_path, target: "_blank" %> for format</p>
           <%= form_for @course, :url => {:action => "parse_project_file"} do |form| %>
             <%= form.file_field :file %>

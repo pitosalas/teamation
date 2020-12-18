@@ -6,7 +6,7 @@
   <div class='container profile-container' id="classroom">
     <%= render partial: "course_info" %>
     <div class="col-md-6 col-md-offset-3" style="margin-left: 20px; margin-top: 30px">
-      <h5>Import Students Lists From CSV</h5>
+      <h5>Import Students Lists from CSV</h5>
       <p>* Please download the <%= link_to "Student List Sample CSV", download_student_list_path, target: "_blank" %> for format</p>
       <%= form_for @course, :url => {:action => "parse_student_file"} do |form| %>
         <%= form.file_field :file %>
@@ -22,8 +22,8 @@
               <%= notice %>
             </div>
           <% end %>
-          <%= f.input :minimum_group_member, collection: (1..@course.students.size).to_a %>
-          <%= f.input :maximum_group_member, collection: (1..@course.students.size).to_a %>
+          <%= f.input :minimum_group_member, label: "Minimum number of students in a group", collection: (1..@course.students.size).to_a %>
+          <%= f.input :maximum_group_member, label: "Maximum number of students in a group", collection: (1..@course.students.size).to_a %>
           <br>
           <% if @course.withProject %>
             <p>How much weight would you like to assign to different preferences in grouping students? </p>
