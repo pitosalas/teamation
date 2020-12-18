@@ -7,6 +7,10 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
+    if Preference.find_by(student_id: current_user.id, course_id: @course.id).nil?
+      flash[:notice] = 'Please Enter the Preference Form First to Proceed.'
+      redirect_back(fallback_location: course_path(@course.id)) and return
+    end
     enough_projects = (@course.students.size / @course.maximum_group_member.to_f).ceil
     if params[:algo].nil? && @course.groups.size.zero?
       if current_user.type == "Professor"
